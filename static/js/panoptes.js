@@ -41,6 +41,7 @@ function WebSocketTest(server) {
             }
             if (type == 'STATUS'){
                 update_info(msg['observatory']);
+                $('.current_state').html(msg['state']);
                 refresh_images();
             }
             if (type == 'STATE'){
