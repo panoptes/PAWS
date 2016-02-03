@@ -1,0 +1,14 @@
+{% extends "site/photo.html" %}
+{% block header %}
+    <span class='current_target'></span>
+    <span class='current_time'></span>
+{% end %}
+{% block photo %}
+    <div class="img_refresh">
+        {% for img in img_list %}
+            <a href="{{ img }}" target="_blank">
+                <img class="img-responsive pad" src="{{ img }}" alt="Photo">
+            </a>
+        {% end %}
+    </div>
+{% end %}

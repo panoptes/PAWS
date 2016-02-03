@@ -1,0 +1,8 @@
+{% extends "site/panel.html" %}
+{% block title %}
+    {{ escape(handler.settings["config"]["name"]) }} Says:
+{% end %}
+{% block panel %}
+    <ul id="bot_chat" class="chat"> </ul>
+    <div id="ws_status" class="">&nbsp;</div>
+{% end %}

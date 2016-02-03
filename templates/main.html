@@ -1,0 +1,26 @@
+{% extends "site/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            {% module MountInfo() %}
+        </div>
+        <div class="col-md-4">
+            {% module StateInfo() %}
+        </div>
+        <div class="col-md-4">
+            {% module BotChat() %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {% module CurrentImage('/static/images/latest.jpg', 'Current Image') %}
+        </div>
+        <div class="col-md-4">
+            {% module CurrentImage('/static/images/drift.png', 'Mount Drift') %}
+        </div>
+        <div class="col-md-4">
+            {% module CurrentImage('/static/weather_plots/today.png', 'Weather') %}
+        </div>
+    </div>
+</div>
+{% end %}
