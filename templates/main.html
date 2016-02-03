@@ -22,5 +22,16 @@
             {% module CurrentImage('/static/weather_plots/today.png', 'Weather') %}
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+            {% module CurrentImage('http://166.122.71.162:8083/4.jpg', 'Webcam') %}
+        </div>
+        <div class="col-md-4">
+            {% module CurrentImage('/static/webcams/video0.jpeg', 'Webcam') %}
+        </div>
+        <div class="col-md-4">
+            {% module CurrentImage('/static/webcams/video1.jpeg', 'Webcam') %}
+        </div>
+    </div>
 </div>
 {% end %}
