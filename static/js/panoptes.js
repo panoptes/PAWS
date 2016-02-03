@@ -40,13 +40,13 @@ function WebSocketTest(server) {
                 add_chat_item(type, msg.message, msg.timestamp);
             }
             if (type == 'STATUS'){
+                refresh_images();
                 update_info(msg['observatory']);
                 $('.current_state').html(msg['state']);
-                refresh_images();
             }
             if (type == 'STATE'){
-                $('.current_state').html(msg['state']);
                 refresh_images();
+                $('.current_state').html(msg['state']);
             }
 
         };
