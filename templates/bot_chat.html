@@ -3,6 +3,8 @@
     {{ escape(handler.settings["config"]["name"]) }} Says:
 {% end %}
 {% block panel %}
-    <ul id="bot_chat" class="chat"> </ul>
-    <div id="ws_status" class="">&nbsp;</div>
+    <div class="chat">
+        <ul id="bot_chat" class="list-unstyled">
+        </ul>
+    </div>
 {% end %}
