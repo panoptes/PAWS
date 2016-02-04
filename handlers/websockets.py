@@ -33,13 +33,14 @@ class PanWebSocket(WebSocketHandler):
     def on_data(self, data):
         """ From the PANOPTES unit """
         msg = data[0].decode('UTF-8')
-        self.logger.info("WS Received: {}".format(msg))
+        self.logger.debug("WS Received: {}".format(msg))
         self.write_message(msg)
 
     def on_message(self, message):
         """ From the client """
-        self.logger.info("WS Sent: {}".format(message))
+        self.logger.debug("WS Sent: {}".format(message))
 
     def on_close(self):
+        """ When client closes """
         self.clients.remove(self)
         self.logger.info("WS Closed")

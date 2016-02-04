@@ -9,6 +9,93 @@ function add_chat_item(name, msg, time){
     $('#bot_chat').prepend(item);
 }
 
+
+function WebSocketTest(server) {
+    if ("WebSocket" in window) {
+        var ws = new WebSocket("ws://" + server + "/ws/");
+        ws.onopen = function() {
+            // toggle_status('on');
+            // ws.send("Connection established");
+        };
+        ws.onmessage = function (evt) {
+            var type = evt.data.split(' ', 1)[0];
+            var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
+
+            var msg = jQuery.parseJSON(received_msg);
+
+            if (type == 'PAN001'){
+                add_chat_item(type, msg.message, msg.timestamp);
+            }
+            if (type == 'STATUS'){
+                update_info(msg['observatory']);
+                change_state(msg['state']);
+            }
+        };
+        ws.onclose = function() {
+            toggle_status('off');
+        };
+    } else {
+        toggle_status('error');
+    }
+}
+
+function toggle_status(status){
+    var icon = $('.current_state i');
+    var text = $('.current_state span');
+
+    icon.removeClass().addClass('fa');
+    if (status == 'on'){
+        icon.addClass('fa-circle');
+        text.html('Online');
+    } else if (status == 'off'){
+        icon.addClass('fa-bolt').addClass('text-danger');
+        text.html('Offline').addClass('text-danger');
+    } else {
+        icon.addClass('fa-exclamation-triangle', 'text-danger').addClass('text-danger');
+        text.html('Error').addClass('text-danger');
+    }
+}
+
+function change_state(state){
+    var icon = $('.current_state i');
+    var text = $('.current_state span');
+
+    icon.removeClass().addClass('fa');
+    text.html(state);
+    switch(state) {
+        case 'Analyzing':
+            icon.addClass('fa-calculator');
+            break;
+        case 'Tracking':
+            icon.addClass('fa-binoculars');
+            break;
+        case 'Observing':
+            icon.addClass('fa-camera');
+            break;
+        case 'Pointing':
+            icon.addClass('fa-dot-circle-o');
+            break;
+        case 'Slewing':
+            icon.addClass('fa-cog fa-spin');
+            break;
+        case 'Scheduling':
+            icon.addClass('fa-tasks');
+            break;
+        case 'Ready':
+            icon.addClass('fa-thumbs-o-up');
+            break;
+        case 'Parking':
+        case 'Parked':
+            icon.addClass('fa-car');
+            break;
+        case 'Sleeping':
+            icon.addClass('fa-check-circle');
+            break;
+        default:
+            icon.addClass('fa-circle');
+    }
+}
+
 // Find all the elements with the class that matches a return value
 // and update their html
 function update_info(status){
@@ -17,45 +104,6 @@ function update_info(status){
             $(elem).html(val);
         })
     });
-}
-
-var messageContainer = document.getElementById('ws_status');
-function WebSocketTest(server) {
-    if ("WebSocket" in window) {
-        var ws = new WebSocket("ws://" + server + "/ws/");
-        ws.onopen = function() {
-            // messageContainer.innerHTML = "Connection open...";
-            ws.send("Connection established");
-        };
-        ws.onmessage = function (evt) {
-            var type = evt.data.split(' ', 1)[0];
-            var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
-
-            // console.log(type);
-            // console.log(received_msg);
-
-            var msg = jQuery.parseJSON(received_msg);
-
-            if (type == 'PAN001'){
-                add_chat_item(type, msg.message, msg.timestamp);
-            }
-            if (type == 'STATUS'){
-                refresh_images();
-                update_info(msg['observatory']);
-                $('.current_state').html(msg['state']);
-            }
-            if (type == 'STATE'){
-                refresh_images();
-                $('.current_state').html(msg['state']);
-            }
-
-        };
-        ws.onclose = function() {
-            messageContainer.innerHTML = "Connection is closed...";
-        };
-    } else {
-        messageContainer.innerHTML = "WebSocket NOT supported by your Browser!";
-    }
 }
 
 // Refresh all images with `img_refresh` container class

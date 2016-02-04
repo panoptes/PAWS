@@ -1,1 +1,8 @@
 temp/*
+
+# Compiled files
+*.py[co]
+*.a
+*.o
+*.so
+__pycache__
