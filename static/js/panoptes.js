@@ -1,10 +1,15 @@
 function add_chat_item(name, msg, time){
 
-    item = '<li><img class="avatar" alt="" src="/static/img/pan.png">';
-    item = item + '<span class="message">';
-    item = item + '<span class="label label-primary">' + time + '</span> &nbsp;';
-    item = item + '<span class="text">' + msg + '</span>';
-    item = item + '</span></li>';
+    item = '<div class="item">';
+    item = item + ' <img src="/static/img/pan.png" alt="user image" class="online">';
+    item = item + '  <p class="message">';
+    item = item + '    <a href="#" class="name">';
+    item = item + '      <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> ' + time +' UTC</small>';
+    item = item + name;
+    item = item + '    </a>';
+    item = item + msg;
+    item = item + '  </p>';
+    item = item + '</div><!-- /.item -->';
 
     $('#bot_chat').prepend(item);
 }
