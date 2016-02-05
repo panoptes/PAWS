@@ -37,7 +37,7 @@ function WebSocketTest(server) {
                 refresh_images();
             }
             if (type == 'WEATHER'){
-                console.log(msg);
+                update_weather(msg);
             }
         };
         ws.onclose = function() {
@@ -46,6 +46,18 @@ function WebSocketTest(server) {
     } else {
         toggle_status('error');
     }
+}
+
+function update_weather(info){
+    var box = $('#weather_info');
+
+    box.html();
+    $.each(info, function(name, val){
+        var item = '<dt>' + name + '</dt>';
+        item = item + '<dd>' + val + '</dd>';
+
+        box.append(item);
+    });
 }
 
 function toggle_status(status){
