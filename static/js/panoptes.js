@@ -35,6 +35,9 @@ function WebSocketTest(server) {
                 update_info(msg['observatory']);
                 change_state(msg['state']);
             }
+            if (type == 'WEATHER'){
+                console.log(msg);
+            }
         };
         ws.onclose = function() {
             toggle_status('off');
