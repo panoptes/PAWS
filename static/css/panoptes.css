@@ -7,10 +7,10 @@
 }
 
 .panel {
-    height: 250px;
+    height: 275px;
 }
 
 div.chat {
     overflow-y: scroll;
-    height: 240px
+    height: 260px
 }
