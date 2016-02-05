@@ -37,7 +37,7 @@ function WebSocketTest(server) {
                 refresh_images();
             }
             if (type == 'WEATHER'){
-                update_weather(msg);
+                update_weather(msg['data']);
             }
         };
         ws.onclose = function() {
@@ -49,15 +49,10 @@ function WebSocketTest(server) {
 }
 
 function update_weather(info){
-    var box = $('#weather_info');
-
-    box.html('');
-    $.each(info['data'], function(name, val){
-        var item = '<dt>' + name + '</dt>';
-        item = item + '<dd>' + val + '</dd>';
-
-        box.append(item);
-    });
+    $('.wind_condition').html(info['Wind Condition']);
+    $('.sky_condition').html(info['Sky Condition']);
+    $('.rain_condition').html(info['Rain Condition']);
+    $('.safe_condition').html(info['Safe']);
 }
 
 function toggle_status(status){
