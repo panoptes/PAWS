@@ -51,7 +51,7 @@ function WebSocketTest(server) {
 function update_weather(info){
     var box = $('#weather_info');
 
-    box.html();
+    box.html('');
     $.each(info['data'], function(name, val){
         var item = '<dt>' + name + '</dt>';
         item = item + '<dd>' + val + '</dd>';
