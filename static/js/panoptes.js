@@ -34,6 +34,7 @@ function WebSocketTest(server) {
             if (type == 'STATUS'){
                 update_info(msg['observatory']);
                 change_state(msg['state']);
+                refresh_images();
             }
             if (type == 'WEATHER'){
                 console.log(msg);
