@@ -10,7 +10,7 @@
     min-height: 275px;
 }
 
-#bot_chat {
-    height: 260px
+div.chat {
     overflow-y: scroll;
+    height: 260px
 }
