@@ -6,11 +6,7 @@
     margin: 2px;
 }
 
-.panel {
-    height: 275px;
-}
-
 div.chat {
-    overflow-y: scroll;
     height: 260px
+    overflow-y: scroll;
 }
