@@ -6,7 +6,11 @@
     margin: 2px;
 }
 
-div.chat {
+.panel {
+    min-height: 275px;
+}
+
+#bot_chat {
     height: 260px
     overflow-y: scroll;
 }
