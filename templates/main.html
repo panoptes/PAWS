@@ -1,36 +1,25 @@
 {% extends "site/base.html" %}
 {% block content %}
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             {% module MountInfo() %}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+            {% module TargetInfo() %}
+        </div>
+        <div class="col-md-3">
             {% module StateInfo() %}
         </div>
-        <div class="col-md-4">
-            {% module BotChat() %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            {% module CurrentImage('/static/images/latest.jpg', 'Current Image') %}
-        </div>
-        <div class="col-md-4">
-            {% module CurrentImage('/static/images/drift.png', 'Mount Drift') %}
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             {% module WeatherInfo() %}
         </div>
     </div>
     <div class="row">
+        <div class="col-md-5">
+            {% module BotChat() %}
+        </div>
         <div class="col-md-4">
             {% module CurrentImage('http://166.122.71.162:8083/4.jpg', 'Webcam') %}
-        </div>
-        <div class="col-md-4">
-            {% module CurrentImage('/static/webcams/video0.jpeg', 'Webcam') %}
-        </div>
-        <div class="col-md-4">
-            {% module CurrentImage('/static/webcams/video1.jpeg', 'Webcam') %}
         </div>
     </div>
 </div>

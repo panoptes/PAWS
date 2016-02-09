@@ -1,6 +1,5 @@
 import os
 import os.path
-import sys
 
 import tornado.escape
 import tornado.ioloop
@@ -13,12 +12,11 @@ from zmq.eventloop import ioloop
 from handlers import base, websockets
 from ui import modules
 
-ioloop.install()
-
-sys.path.append(os.getenv('POCS', os.path.join(os.path.dirname(__file__), "..")))
-
+from panoptes.utils.config import load_config
 from panoptes.utils import database
 from panoptes.utils.messaging import PanMessaging
+
+ioloop.install()
 
 tornado.options.define("port", default=8888, help="port", type=int)
 tornado.options.define("debug", default=False, help="debug mode")
@@ -41,6 +39,7 @@ class WebAdmin(tornado.web.Application):
 
         app_handlers = [
             (r"/", base.MainHandler),
+            (r"/images/(.*)", base.ImagesHandler),
             (r"/ws/(.*)", websockets.PanWebSocket),
         ]
         settings = dict(
@@ -65,6 +64,6 @@ class WebAdmin(tornado.web.Application):
 
 if __name__ == '__main__':
     tornado.options.parse_command_line()
-    http_server = tornado.httpserver.HTTPServer(WebAdmin({'name': 'PAN001'}))
+    http_server = tornado.httpserver.HTTPServer(WebAdmin(load_config()))
     http_server.listen(tornado.options.options.port)
     tornado.ioloop.IOLoop.instance().start()

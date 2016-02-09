@@ -15,18 +15,21 @@ function add_chat_item(name, msg, time){
 }
 
 
+var ws;
 function WebSocketTest(server) {
     if ("WebSocket" in window) {
-        var ws = new WebSocket("ws://" + server + "/ws/");
+        ws = new WebSocket("ws://" + server + "/ws/");
         ws.onopen = function() {
-            // toggle_status('on');
-            // ws.send("Connection established");
+            toggle_connection_icon($('#chat_connection'));
+            toggle_connection_icon($('#mount_connection'));
+            ws.send('WEB ping');
         };
         ws.onmessage = function (evt) {
             var type = evt.data.split(' ', 1)[0];
             var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
 
             var msg = jQuery.parseJSON(received_msg);
+            console.log(msg);
 
             if (type == 'PAN001'){
                 add_chat_item(type, msg.message, msg.timestamp);
@@ -39,13 +42,23 @@ function WebSocketTest(server) {
             if (type == 'WEATHER'){
                 update_weather(msg['data']);
             }
+            if (type == 'CAMERA'){
+                console.log(msg);
+            }
         };
         ws.onclose = function() {
-            toggle_status('off');
+            toggle_connection_icon($('#chat_connection'));
+            toggle_connection_icon($('#mount_connection'));
+            // toggle_status('off');
         };
     } else {
         toggle_status('error');
     }
+}
+
+function toggle_connection_icon(icon){
+    $(icon).toggleClass('text-success').toggleClass('text-danger')
+    $(icon).toggleClass('fa-check-circle-o').toggleClass('fa-exclamation-triangle')
 }
 
 function update_weather(info){
@@ -89,7 +102,7 @@ function change_state(state){
             icon.addClass('fa-camera');
             break;
         case 'Pointing':
-            icon.addClass('fa-dot-circle-o');
+            icon.addClass('fa-bullseye');
             break;
         case 'Slewing':
             icon.addClass('fa-cog fa-spin');
@@ -144,14 +157,3 @@ function reload_img(img){
 
     $(img).attr('src', new_src);
 }
-
-// Startup
-$( document ).ready(function() {
-    // Image refresh timer
-    second = 1000;
-
-    WebSocketTest(window.location.host);
-
-    // Refresh images
-    // setInterval(refresh_images, 15 * second);
-})

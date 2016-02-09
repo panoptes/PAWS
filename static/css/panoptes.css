@@ -14,3 +14,7 @@ div.chat {
     overflow-y: scroll;
     height: 260px
 }
+
+dd {
+    font-family: monospace;
+}

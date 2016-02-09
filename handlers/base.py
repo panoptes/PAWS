@@ -1,6 +1,8 @@
 import tornado.escape
 import tornado.web
 
+import glob
+
 
 class BaseHandler(tornado.web.RequestHandler):
 
@@ -37,3 +39,21 @@ class MainHandler(BaseHandler):
         user_data = self.get_current_user()
 
         self.render("main.html", user_data=user_data)
+
+
+class ImagesHandler(BaseHandler):
+
+    def get(self, target=None):
+
+        img_dir = '/var/panoptes/images/fields'
+
+        target_list = glob.glob("{}/*".format(img_dir))
+        visit_list = glob.glob("{}/**/*".format(img_dir))
+        img_list = glob.glob("{}/**/**/*.jpg".format(img_dir))
+
+        images = [img.replace('/var/panoptes/images/fields/', '') for img in img_list]
+
+        images.sort()
+        images.reverse()
+
+        self.render("images.html", targets=target_list, visits=visit_list, images=img_list)

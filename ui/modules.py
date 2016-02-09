@@ -2,7 +2,6 @@
 
 """
 import tornado
-import glob
 
 
 def listify(obj):
@@ -94,18 +93,6 @@ class ImageList(tornado.web.UIModule):
 
     """ UI modules for listing the current images """
 
-    def render(self):
+    def render(self, targets=[], visits=[], images=[]):
 
-        # image_dir = config.get('image_dir', '/var/panoptes/images/')
-
-        # Get the date
-        # date_dir = Time.now().iso.split(' ')[0].replace('-', '')
-
-        img_list = glob.glob("{}/**/*.jpg".format('/var/panoptes/images'))
-
-        images = [img.replace('/var/panoptes/images', '') for img in img_list]
-
-        images.sort()
-        images.reverse()
-
-        return self.render_string("image_list.html", img_list=images)
+        return self.render_string("image_list.html", target_list=targets, visit_list=visits, img_list=images)

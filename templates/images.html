@@ -1,0 +1,14 @@
+{% extends "site/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            {% module ImageList(targets=targets, visits=visits, images=images) %}
+        </div>
+    </div>
+</div>
+{% end %}
+{% block bottom %}
+  $(function() {
+    $("#target_list").DataTable();
+  });
+{% end %}
