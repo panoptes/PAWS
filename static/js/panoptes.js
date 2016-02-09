@@ -66,6 +66,7 @@ function update_weather(info){
     $('.sky_condition').html(info['Sky Condition']);
     $('.rain_condition').html(info['Rain Condition']);
     $('.safe_condition').html(info['Safe']);
+    $('.temp_info').html(info['Ambient Temperature (C)']);
 }
 
 function toggle_status(status){
