@@ -1,16 +1,16 @@
 {% extends "site/panel.html" %}
 {% block title %}
-      Weather Station
+  Weather Station
 {% end %}
 {% block panel %}
-    <dl id="weather_info" class="dl-horizontal">
-      <dt>Temp (c):</dt> <dd> <span class="temp_info">N/A</span></dd>
-      <dt>Wind (km/h):</dt> <dd> <span class="wind_condition">N/A</span> <span class="wind_speed">N/A</span></dd>
-      <dt>Sky:</dt> <dd> <span class="sky_condition">N/A</span> </dd>
-      <dt>Rain:</dt> <dd> <span class="rain_condition">N/A</span> </dd>
-      <dt>Safe:</dt> <dd> <span class="safe_condition">N/A</span> </dd>
-    </dl>
-    <a href="/static/weather_plots/today.png" target="_blank">
-      <img class="img-responsive pad" src="/static/weather_plots/today.png" alt="Today's Weather">
-    </a>
+  <dl id="weather_info" class="dl-horizontal">
+    <dt>Temp (c):</dt> <dd> <span class="temp_info">N/A</span></dd>
+    <dt>Wind (km/h):</dt> <dd> <span class="wind_speed">N/A</span> (<span class="wind_condition">N/A</span> )</dd>
+    <dt>Sky:</dt> <dd> <span class="sky_condition">N/A</span> </dd>
+    <dt>Rain:</dt> <dd> <span class="rain_condition">N/A</span> </dd>
+    <dt>Safe:</dt> <dd> <span class="safe_condition">N/A</span> </dd>
+  </dl>
+  <a href="/static/weather_plots/today.png" target="_blank">
+    <img class="img-responsive pad" src="/static/weather_plots/today.png" alt="Today's Weather">
+  </a>
 {% end %}
