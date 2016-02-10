@@ -3,9 +3,10 @@ from tornado.websocket import WebSocketHandler
 from zmq.eventloop.zmqstream import ZMQStream
 import logging
 
+clients = []
+
 
 class PanWebSocket(WebSocketHandler):
-    clients = []
     logger = logging.getLogger('PAWS')
 
     def open(self, channel):
@@ -26,7 +27,7 @@ class PanWebSocket(WebSocketHandler):
             self.logger.info("WS opened for channel {}".format(channel))
 
             # Add this client to our list
-            self.clients.append(self)
+            clients.append(self)
         except Exception as e:
             self.logger.warning("Problem establishing websocket for {}: {}".format(self, e))
 
@@ -42,5 +43,5 @@ class PanWebSocket(WebSocketHandler):
 
     def on_close(self):
         """ When client closes """
-        self.clients.remove(self)
+        clients.remove(self)
         self.logger.info("WS Closed")
