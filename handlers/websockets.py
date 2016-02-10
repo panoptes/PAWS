@@ -39,7 +39,7 @@ class PanWebSocket(WebSocketHandler):
 
     def on_message(self, message):
         """ From the client """
-        self.logger.debug("WS Sent: {}".format(message))
+        self.logger.info("WS Sent: {}".format(message))
 
     def on_close(self):
         """ When client closes """
