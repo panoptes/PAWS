@@ -85,11 +85,12 @@
     <script src="/static/js/panoptes.js"></script>
     <script type="text/javascript">
       // Startup
+      var ws;
       $( document ).ready(function() {
           // Image refresh timer
           second = 1000;
 
-          WebSocketTest(window.location.host);
+          ws = WebSocketTest(window.location.host);
 
           // Refresh images
           setInterval(refresh_images, 60 * second);

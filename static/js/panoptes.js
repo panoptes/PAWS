@@ -17,6 +17,7 @@ function add_chat_item(name, msg, time){
 
 var ws;
 function WebSocketTest(server) {
+    var ws;
     if ("WebSocket" in window) {
         ws = new WebSocket("ws://" + server + "/ws/");
         ws.onopen = function() {
@@ -54,6 +55,8 @@ function WebSocketTest(server) {
     } else {
         toggle_status('error');
     }
+
+    return ws;
 }
 
 function toggle_connection_icon(icon){
