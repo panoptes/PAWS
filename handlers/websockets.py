@@ -9,11 +9,11 @@ clients = []
 class PanWebSocket(WebSocketHandler):
     logger = logging.getLogger('PAWS')
 
-    def open(self, channel):
+    def open(self, channel=''):
         """ Client opening connection to unit """
         if not channel:
             channel = self.settings['name']
-        channel = ''
+
         self.logger.info("Setting up listener for channel: {}".format(channel))
 
         try:
