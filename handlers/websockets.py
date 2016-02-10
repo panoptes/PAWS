@@ -19,7 +19,7 @@ class PanWebSocket(WebSocketHandler):
         try:
             messaging = self.settings['messaging']
 
-            self.socket = messaging.create_subscriber(channel=channel)
+            self.socket = messaging.register_listener(channel=channel)
             self.stream = ZMQStream(self.socket)
 
             # Register the callback
