@@ -151,6 +151,26 @@ function update_cameras(cameras){
                 // Start the progress bar
                 var pb = $('#' + cam_name + ' .progress-bar');
                 pb.width('100%');
+
+                var exptime = $('#' + cam_name + ' .exptime');
+                exptime.html(val);
+
+                var total_time = val;
+                var count_time = val;
+
+                var exp_count = $('#' + cam_name + ' .exp_count');
+                exp_count.timer({
+                    duration: '1s',
+                    callback: function(){
+                        --count_time;
+                        var perc = count_time/total_time;
+                        console.log(perc);
+                        pb.width(perc + '%');
+                    },
+                    repeat: true,
+                });
+
+
                 var pb_count = function(cb, count){
                     var width_perc = (count / val) * 100;
                     pb.width(width_perc + '%');
