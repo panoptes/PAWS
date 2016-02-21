@@ -153,9 +153,9 @@ function update_cameras(cameras){
         var pb = $('#' + cam_name + ' .progress-bar');
         pb.width('100%');
         var pb_count = function(cb, count){
-            var width_perc = count / 120;
+            var width_perc = (count / 120) * 100;
             pb.width(width_perc + '%');
-            setTimeout(cb, 1000);
+            setTimeout(cb, 1000, cb, --count);
         };
 
         setTimeout(pb_count, 1000, pb_count, 120);
