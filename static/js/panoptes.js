@@ -31,6 +31,7 @@ function WebSocketTest(server) {
 
             var msg = jQuery.parseJSON(received_msg);
             console.log(msg);
+            console.log(msg);
 
             if (type == 'PAN001'){
                 add_chat_item(type, msg.message, msg.timestamp);
@@ -143,13 +144,13 @@ function update_info(status){
 function update_cameras(cameras){
     $.each(cameras, function(cam_name, props){
         $.each(props, function(prop, val){
-            $('.' + cam_name + ' .' + prop).each(function(idx, elem){
+            $('#' + cam_name + ' .' + prop).each(function(idx, elem){
                 $(elem).html(val);
             });
         });
 
         // Start the progress bar
-        var pb = $('.' + cam_name + ' .progress-bar');
+        var pb = $('#' + cam_name + ' .progress-bar');
         var pb_count = function(cb, count){
             var width_perc = count / 120;
             pb.width(width_perc + '%');
