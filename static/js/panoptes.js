@@ -30,8 +30,6 @@ function WebSocketTest(server) {
             var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
 
             var msg = jQuery.parseJSON(received_msg);
-            console.log(msg);
-            console.log(msg);
 
             if (type == 'PAN001'){
                 add_chat_item(type, msg.message, msg.timestamp);
@@ -161,12 +159,13 @@ function update_cameras(cameras){
                 var exp_count = $('#' + cam_name + ' .exp_count');
                 exp_count.timer('remove');
                 exp_count.timer({
-                    duration: '1s',
+                    duration: '2s',
                     callback: function(){
-                        --count_time;
-                        var perc = count_time/total_time;
+                        count_time = count_time - 2;
+                        var perc = (count_time/total_time) * 100;
                         console.log(perc);
                         pb.width(perc + '%');
+
                     },
                     repeat: true,
                 });
