@@ -164,8 +164,14 @@ function update_cameras(cameras){
                         count_time = count_time - 2;
                         var perc = (count_time/total_time) * 100;
                         console.log(perc);
-                        pb.width(perc + '%');
 
+                        if (perc < 0){
+                            pb.width('0%');
+                        } else {
+                            pb.width(perc + '%');
+                        }
+
+                        exp_count.timer('pause');
                     },
                     repeat: true,
                 });
