@@ -159,6 +159,7 @@ function update_cameras(cameras){
                 var count_time = val;
 
                 var exp_count = $('#' + cam_name + ' .exp_count');
+                exp_count.timer('remove');
                 exp_count.timer({
                     duration: '1s',
                     callback: function(){
