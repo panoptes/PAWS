@@ -44,7 +44,7 @@ function WebSocketTest(server) {
                 update_weather(msg['data']);
             }
             if (type == 'CAMERA'){
-                console.log(msg);
+                update_cameras(msg);
             }
         };
         ws.onclose = function() {
@@ -139,6 +139,28 @@ function update_info(status){
         })
     });
 }
+
+function update_cameras(cameras){
+    $.each(cameras, function(cam_name, props){
+        $.each(props, function(prop, val){
+            $('.' + cam_name + ' .' + prop).each(function(idx, elem){
+                $(elem).html(val);
+            });
+        });
+
+        // Start the progress bar
+        var pb = $('.' + cam_name + ' .progress-bar');
+        var pb_count = function(cb, count){
+            var width_perc = count / 120;
+            pb.width(width_perc + '%');
+            setTimeout(cb, 1000);
+        };
+
+        setTimeout(pb_count, 1000, pb_count, 120);
+    });
+
+}
+
 
 // Refresh all images with `img_refresh` container class
 function refresh_images(){

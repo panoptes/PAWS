@@ -36,6 +36,14 @@ class WeatherInfo(tornado.web.UIModule):
         return self.render_string("weather_info.html")
 
 
+class CameraInfo(tornado.web.UIModule):
+
+    """ Displays information about the mount """
+
+    def render(self):
+        return self.render_string("camera_info.html")
+
+
 class StateInfo(tornado.web.UIModule):
 
     """ Displays information about the mount """
