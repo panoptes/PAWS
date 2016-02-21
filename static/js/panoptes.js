@@ -147,18 +147,20 @@ function update_cameras(cameras){
             $('#' + cam_name + ' .' + prop).each(function(idx, elem){
                 $(elem).html(val);
             });
+            if (prop == 'exptime'){
+                // Start the progress bar
+                var pb = $('#' + cam_name + ' .progress-bar');
+                pb.width('100%');
+                var pb_count = function(cb, count){
+                    var width_perc = (count / val) * 100;
+                    pb.width(width_perc + '%');
+                    setTimeout(cb, 1000, cb, --count);
+                };
+
+                setTimeout(pb_count, 1000, pb_count, val);
+            }
         });
 
-        // Start the progress bar
-        var pb = $('#' + cam_name + ' .progress-bar');
-        pb.width('100%');
-        var pb_count = function(cb, count){
-            var width_perc = (count / 120) * 100;
-            pb.width(width_perc + '%');
-            setTimeout(cb, 1000, cb, --count);
-        };
-
-        setTimeout(pb_count, 1000, pb_count, 120);
     });
 
 }
