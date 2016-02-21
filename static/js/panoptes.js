@@ -151,6 +151,7 @@ function update_cameras(cameras){
 
         // Start the progress bar
         var pb = $('#' + cam_name + ' .progress-bar');
+        pb.width('100%');
         var pb_count = function(cb, count){
             var width_perc = count / 120;
             pb.width(width_perc + '%');
