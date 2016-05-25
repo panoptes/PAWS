@@ -25,8 +25,23 @@
   <script src="/static/js/vendor/what-input.js"></script>
   <script src="/static/js/vendor/foundation.min.js"></script>
   <script src="/static/js/app.js"></script>
-  <script>
-  $(document).foundation();
+  <script src="/static/js/panoptes.js"></script>
+  <script type="text/javascript">
+    // Startup
+    var ws;
+    $(document).foundation();
+    $( document ).ready(function() {
+        // Image refresh timer
+        second = 1000;
+
+        ws = WebSocketTest(window.location.host);
+
+        // Refresh images
+        setInterval(refresh_images, 60 * second);
+
+        // Block for include js per page
+        {% block bottom %}{% end %}
+    })
   </script>
 </body>
 </html>
