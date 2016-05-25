@@ -29,7 +29,6 @@
   <script type="text/javascript">
     // Startup
     var ws;
-    $(document).foundation();
     $( document ).ready(function() {
         // Image refresh timer
         second = 1000;
@@ -41,7 +40,8 @@
 
         // Block for include js per page
         {% block bottom %}{% end %}
-    })
+    });
+    $(document).foundation();
   </script>
 </body>
 </html>

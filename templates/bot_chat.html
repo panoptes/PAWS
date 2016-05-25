@@ -1,6 +1,6 @@
 {% extends "site/panel.html" %}
 {% block title %}
-    <i id="chat_connection" class="fa fa-exclamation-triangle text-danger"></i> {{ escape(handler.settings["config"]["name"]) }} Says:
+    <i id="chat_connection" class="fa fa-exclamation-triangle"></i> {{ escape(handler.settings["config"]["name"]) }} Says:
 {% end %}
 {% block panel %}
     <div class="box-body chat" id="bot_chat"> </div>

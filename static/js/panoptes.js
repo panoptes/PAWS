@@ -21,15 +21,16 @@ function WebSocketTest(server) {
     if ("WebSocket" in window) {
         ws = new WebSocket("ws://" + server + "/ws/");
         ws.onopen = function() {
-            toggle_connection_icon($('#chat_connection'));
-            toggle_connection_icon($('#mount_connection'));
             ws.send('WEB ping');
+            toggle_connection_icon($('#mount_connection'));
+            toggle_connection_icon($('#chat_connection'));
         };
         ws.onmessage = function (evt) {
             var type = evt.data.split(' ', 1)[0];
             var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
 
             var msg = jQuery.parseJSON(received_msg);
+            console.log(msg);
 
             if (type == 'PAN001'){
                 add_chat_item(type, msg.message, msg.timestamp);
@@ -59,8 +60,9 @@ function WebSocketTest(server) {
 }
 
 function toggle_connection_icon(icon){
-    $(icon).toggleClass('text-success').toggleClass('text-danger')
-    $(icon).toggleClass('fa-check-circle-o').toggleClass('fa-exclamation-triangle')
+    console.log('Should toggle status here');
+    // $(icon).toggleClass('success').toggleClass('danger');
+    // $(icon).toggleClass('fa-check-circle-o').toggleClass('fa-exclamation-triangle');
 }
 
 function update_weather(info){
