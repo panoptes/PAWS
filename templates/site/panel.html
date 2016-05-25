@@ -1,11 +1,6 @@
 <div class="primary callout">
-  <div class="callout clearfix">
-    <p class="float-left"><strong>{% block title %}{% end %}</strong></p>
-    <button class="close-button float-right" aria-label="Close alert" type="button">
-    <span aria-hidden="true"><i class="fa fa-times"></i></span>
-    </button>
-  </div>
-  <div class="callout">
-  {% block panel %}{% end %}
-</div>
+    <div class="title-bar"><strong>{% block title %}{% end %}</strong></div>
+    <div class="callout padded">
+        {% block panel %}{% end %}
+    </div>
 </div>

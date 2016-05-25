@@ -1,0 +1,8 @@
+div.padded {
+    margin: 0.25rem;
+    padding: 0.5rem;
+}
+
+.callout>:last-child {
+    margin-bottom: 0.05rem;
+}

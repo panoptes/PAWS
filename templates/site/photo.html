@@ -1,13 +1,6 @@
-<div class="primary callout" data-equalizer-watch>
-  <div class="callout clearfix">
-    <p class="float-left"><strong>{% block title %}{{ title }}{% end %}</strong></p>
-    <div class="float-right">
-      <button class="close-button" aria-label="Close alert" type="button">
-        <span aria-hidden="true"><i class="fa fa-times"></i></span>
-      </button>
+<div class="primary callout">
+    <div class="title-bar"><strong>{% block title %}{{ title }}{% end %}</strong></div>
+    <div class="callout padded">
+        {% block photo %}{% end %}
     </div>
-  </div>
-  <div class="primary callout">
-      {% block photo %}{% end %}
-  </div>
 </div>
