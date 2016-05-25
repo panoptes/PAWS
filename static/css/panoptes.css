@@ -18,3 +18,8 @@ div.chat {
 dd {
     font-family: monospace;
 }
+
+.content-wrapper,
+.right-side {
+  background-color: #222222;
+}
