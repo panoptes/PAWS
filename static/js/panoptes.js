@@ -19,11 +19,14 @@ function WebSocketTest(server) {
                     change_state(msg['state']);
                     break;
                 case 'STATUS':
-                    update_info(msg['observatory']);
                     change_state(msg['state']);
+                    update_info(msg['observatory']);
                     refresh_images();
                     break;
+                case 'ENVIRONMENT':
+                    update_environment(msg['data']);
                 case 'WEATHER':
+                    update_info(msg['data']);
                     update_weather(msg['data']);
                     break;
                 case 'CAMERA':
@@ -72,26 +75,30 @@ function toggle_connection_icon(icon){
     // $(icon).toggleClass('fa-check-circle-o').toggleClass('fa-exclamation-triangle');
 }
 
+function update_environment(info){
+    var computer_info = info['computer_box'];
+    var camera_info = info['camera_box'];
+
+    $('.computer_box_humidity_01').html(computer_info['humidity']);
+    $('.camera_box_humidity_01').html(camera_info['humidity']);
+
+    $('.camera_box_temp_01').html(camera_info['temp_01']);
+    $('.computer_box_temp_01').html(computer_info['temp_01']);
+    $('.computer_box_temp_02').html(computer_info['temp_02']);
+    $('.computer_box_temp_03').html(computer_info['temp_03']);
+    $('.computer_box_temp_04').html(computer_info['temp_04']);
+}
+
 function update_weather(info){
     if(info['safe']){
         $('.safe_condition').html('Safe');
-        $('.title-bar').removeClass('unsafe');
-        $('.callout').removeClass('unsafe_borders');
+        $('.title-bar').removeClass('unsafe').addClass('safe');
+        $('.callout').removeClass('unsafe_borders').addClass('safe_borders');
     } else {
         $('.safe_condition').html('Unsafe');
-        $('.title-bar').addClass('unsafe');
-        $('.callout').addClass('unsafe_borders');
+        $('.title-bar').addClass('unsafe').removeClass('safe');
+        $('.callout').addClass('unsafe_borders').removeClass('safe_borders');
     }
-
-    $('.wind_condition').html(info['wind_condition']);
-    $('.sky_condition').html(info['sky_condition']);
-    $('.rain_condition').html(info['rain_condition']);
-    $('.wind_speed').html(info['wind_speed_KPH']);
-    $('.temp_info').html(info['ambient_temp_C']);
-
-    $('.sky_temp_C').html(info['sky_temp_C']);
-    $('.rain_sensor_temp_C').html(info['rain_sensor_temp_C']);
-    $('.rain_frequency').html(info['rain_frequency']);
 }
 
 function toggle_status(status){
