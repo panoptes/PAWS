@@ -74,10 +74,10 @@ function toggle_connection_icon(icon){
 function update_weather(info){
     if(info['safe']){
         $('.safe_condition').html('Safe');
-        $('.callout').removeClass('unsafe');
+        $('.title-bar').removeClass('unsafe');
     } else {
         $('.safe_condition').html('Unsafe');
-        $('.callout').addClass('unsafe');
+        $('.title-bar').addClass('unsafe');
     }
 
     $('.wind_condition').html(info['wind_condition']);
