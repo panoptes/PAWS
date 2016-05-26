@@ -4,13 +4,14 @@ from zmq.eventloop.zmqstream import ZMQStream
 from pocs.utils.logger import get_logger
 
 clients = []
-logger = get_logger()
 
 
 class PanWebSocket(WebSocketHandler):
 
     def open(self, channel):
         """ Client opening connection to unit """
+        self.logger = get_logger(self)
+
         if channel is None:
             channel = self.settings['name']
 
