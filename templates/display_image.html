@@ -1,8 +1,5 @@
 {% extends "site/photo.html" %}
-{% block header %}
-    <span class='current_target'></span>
-    <span class='current_time'></span>
-{% end %}
+{% block title %}{{title}}{% end %}
 {% block photo %}
     <div class="img_refresh">
         {% for img in img_list %}

@@ -8,19 +8,25 @@
             {% module MountInfo() %}
         </div>
         <div class="columns">
-            {% module BotChat() %}
-        </div>
-        <div class="columns">
             {% module StateInfo() %}
-        </div>
-        <div class="columns">
-            {% module CameraInfo() %}
         </div>
         <div class="columns">
             {% module TargetInfo() %}
         </div>
         <div class="columns">
-            {% module CurrentImage('http://166.122.71.162:8083/4.jpg', 'Webcam') %}
+            {% module CameraInfo() %}
+        </div>
+        <div class="columns">
+            {% module BotChat() %}
+        </div>
+        <div class="columns">
+            {% module CurrentImage('http://166.122.71.162:8083/4.jpg', 'VYSOS Webcam') %}
+        </div>
+        <div class="columns">
+            {% module CurrentImage('http://166.122.71.162:8083/4.jpg', 'Webcam 01') %}
+        </div>
+            <div class="columns">
+            {% module CurrentImage('http://166.122.71.162:8083/4.jpg', 'Webcam 02') %}
         </div>
     </div>
 {% end %}
