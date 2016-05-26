@@ -18,7 +18,7 @@ class PanWebSocket(WebSocketHandler):
         self.logger.info("Setting up listener for channel: {}".format(channel))
 
         try:
-            self.stream = ZMQStream(self.settings['listener'])
+            self.stream = ZMQStream(self.settings['messaging'].listener)
 
             # Register the callback
             self.stream.on_recv(self.on_data)
