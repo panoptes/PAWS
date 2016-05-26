@@ -4,9 +4,7 @@ function WebSocketTest(server) {
     if ("WebSocket" in window) {
         ws = new WebSocket("ws://" + server + "/ws/");
         ws.onopen = function() {
-            ws.send('WEB ping');
-            toggle_connection_icon($('#mount_connection'));
-            toggle_connection_icon($('#chat_connection'));
+            ws.send('get_status');
         };
         ws.onmessage = function (evt) {
             var type = evt.data.split(' ', 1)[0];
@@ -43,8 +41,6 @@ function WebSocketTest(server) {
 
         };
         ws.onclose = function() {
-            toggle_connection_icon($('#chat_connection'));
-            toggle_connection_icon($('#mount_connection'));
             // toggle_status('off');
         };
     } else {
@@ -108,14 +104,14 @@ function toggle_status(status){
 
     icon.removeClass().addClass('fa');
     if (status == 'on'){
-        icon.addClass('fa-circle');
+        icon.addClass('fa-circle').addClass('success');
         text.html('Online');
     } else if (status == 'off'){
-        icon.addClass('fa-bolt').addClass('text-danger');
-        text.html('Offline').addClass('text-danger');
+        icon.addClass('fa-bolt').addClass('danger');
+        text.html('Offline').addClass('danger');
     } else {
-        icon.addClass('fa-exclamation-triangle', 'text-danger').addClass('text-danger');
-        text.html('Error').addClass('text-danger');
+        icon.addClass('fa-exclamation-triangle', 'danger').addClass('danger');
+        text.html('Error').addClass('danger');
     }
 }
 
@@ -123,7 +119,7 @@ function change_state(state){
     var icon = $('.current_state i');
     var text = $('.current_state span');
 
-    icon.removeClass().addClass('fa');
+    icon.removeClass().addClass('fa').addClass('success');
     text.html(state.toUpperCase());
     switch(state) {
         case 'analyzing':

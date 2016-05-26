@@ -1,53 +1,84 @@
-div.padded {
-    margin: 0.25rem;
-    padding: 0.5rem;
+div.padded
+{
+    margin: .25rem;
+    padding: .5rem;
 }
 
-.callout>:last-child {
-    margin-bottom: 0.05rem;
+.callout > :last-child
+{
+    margin-bottom: .05rem;
 }
 
-img.avatar {
+img.avatar
+{
     width: 45px;
+    margin: 2px;
+
+    vertical-align: top;
+
     border: 1px solid lightgray;
     border-radius: 18%;
-    vertical-align: top;
-    margin: 2px;
 }
 
-div.chat {
+div.chat
+{
     overflow-y: scroll;
-    height: 260px
+
+    height: 260px;
 }
 
-.dl-horizontal dt {
+.dl-horizontal dt
+{
     display: block;
     float: left;
-    height: 2rem;
+
     width: 49%;
+    height: 2rem;
     margin-bottom: 0;
 }
 
-.dl-horizontal dd {
+.dl-horizontal dd
+{
     font-family: monospace;
+
     display: block;
     float: left;
-    height: 2rem;
+
     width: 49%;
+    height: 2rem;
 }
 
-.safe {
-    color: #088263;
-}
-
-.unsafe {
-    color: #C16363;
-}
-
-.safe_borders {
+.safe_borders
+{
     border: 1px solid #088263;
 }
 
-.unsafe_borders {
-    border: 1px solid #C16363;
+.unsafe_borders
+{
+    border: 1px solid #c16363;
+}
+
+.primary
+{
+    color: #477fd2;
+}
+.secondary
+{
+    color: #f67e7d;
+}
+.success
+{
+    color: #088263;
+}
+.info
+{
+    color: #3498db;
+}
+.warning
+{
+    color: #f39c12;
+}
+.danger
+{
+    color: #c16363;
 }
