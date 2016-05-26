@@ -25,6 +25,7 @@ function WebSocketTest(server) {
                     break;
                 case 'ENVIRONMENT':
                     update_environment(msg['data']);
+                    break;
                 case 'WEATHER':
                     update_info(msg['data']);
                     update_weather(msg['data']);
