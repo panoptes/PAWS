@@ -119,8 +119,6 @@ function toggle_status(status){
 }
 
 function change_state(state){
-    console.log(state);
-
     var icon = $('.current_state i');
     var text = $('.current_state span');
 
