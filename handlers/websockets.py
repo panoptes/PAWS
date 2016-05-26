@@ -1,14 +1,13 @@
 from tornado.websocket import WebSocketHandler
-
-import logging
-
 from zmq.eventloop.zmqstream import ZMQStream
 
+from pocs.utils.logger import get_logger
+
 clients = []
+logger = get_logger()
 
 
 class PanWebSocket(WebSocketHandler):
-    logger = logging.getLogger('PAWS')
 
     def open(self, channel):
         """ Client opening connection to unit """
@@ -20,8 +19,9 @@ class PanWebSocket(WebSocketHandler):
         try:
             messaging = self.settings['messaging']
 
-            self.socket = messaging.register_listener(channel=channel, port=6501, connect=True)
-            self.stream = ZMQStream(self.socket)
+            self.listener = messaging.register_listener(channel=channel, port=6501, connect=True)
+            self.publisher = messaging.create_publisher(channel=channel, port=6500, connect=True)
+            self.stream = ZMQStream(self.listener)
 
             # Register the callback
             self.stream.on_recv(self.on_data)
@@ -41,6 +41,8 @@ class PanWebSocket(WebSocketHandler):
     def on_message(self, message):
         """ From the client """
         self.logger.info("WS Sent: {}".format(message))
+        messaging = self.settings['messaging']
+        messaging.send_message('PAWS', message)
 
     def on_close(self):
         """ When client closes """

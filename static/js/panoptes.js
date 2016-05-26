@@ -41,7 +41,7 @@ function WebSocketTest(server) {
 
         };
         ws.onclose = function() {
-            // toggle_status('off');
+            toggle_status('off');
         };
     } else {
         toggle_status('error');
@@ -88,12 +88,12 @@ function update_environment(info){
 
 function update_weather(is_safe){
     if(is_safe){
-        $('.safe_condition').html('Safe');
-        $('.title-bar').removeClass('unsafe');
+        $('.safe_condition').html('Safe').addClass('success');
+        $('.title-bar').removeClass('danger');
         $('.callout').removeClass('unsafe_borders').addClass('safe_borders');
     } else {
         $('.safe_condition').html('Unsafe');
-        $('.title-bar').addClass('unsafe');
+        $('.title-bar').addClass('danger');
         $('.callout').addClass('unsafe_borders').removeClass('safe_borders');
     }
 }
