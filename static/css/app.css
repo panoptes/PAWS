@@ -1508,10 +1508,10 @@ kbd {
       background-color: #c77e0a;
       color: #fefefe; }
   .button.alert {
-    background-color: #E74C3C;
+    background-color: #C16363;
     color: #fefefe; }
     .button.alert:hover, .button.alert:focus {
-      background-color: #cf2b1a;
+      background-color: #a74242;
       color: #fefefe; }
   .button.hollow {
     border: 1px solid #303030;
@@ -1546,11 +1546,11 @@ kbd {
         border-color: #7c4f06;
         color: #7c4f06; }
     .button.hollow.alert {
-      border: 1px solid #E74C3C;
-      color: #E74C3C; }
+      border: 1px solid #C16363;
+      color: #C16363; }
       .button.hollow.alert:hover, .button.hollow.alert:focus {
-        border-color: #821b10;
-        color: #821b10; }
+        border-color: #682a2a;
+        color: #682a2a; }
   .button.disabled, .button[disabled] {
     opacity: 0.25;
     cursor: not-allowed; }
@@ -1771,11 +1771,11 @@ select {
     background-image: none; }
 
 .is-invalid-input:not(:focus) {
-  background-color: rgba(231, 76, 60, 0.1);
-  border-color: #E74C3C; }
+  background-color: rgba(193, 99, 99, 0.1);
+  border-color: #C16363; }
 
 .is-invalid-label {
-  color: #E74C3C; }
+  color: #C16363; }
 
 .form-error {
   display: none;
@@ -1783,7 +1783,7 @@ select {
   margin-bottom: 1.11111rem;
   font-size: 0.83333rem;
   font-weight: bold;
-  color: #E74C3C; }
+  color: #C16363; }
   .form-error.is-visible {
     display: block; }
 
@@ -1861,7 +1861,7 @@ select {
     background: #F39C12;
     color: #fefefe; }
   .badge.alert {
-    background: #E74C3C;
+    background: #C16363;
     color: #fefefe; }
 
 .breadcrumbs {
@@ -1961,10 +1961,10 @@ select {
       background-color: #c77e0a;
       color: #fefefe; }
   .button-group.alert .button {
-    background-color: #E74C3C;
+    background-color: #C16363;
     color: #fefefe; }
     .button-group.alert .button:hover, .button-group.alert .button:focus {
-      background-color: #cf2b1a;
+      background-color: #a74242;
       color: #fefefe; }
   .button-group.stacked .button, .button-group.stacked-for-small .button, .button-group.stacked-for-medium .button {
     width: 100%;
@@ -2009,7 +2009,7 @@ select {
   .callout.warning {
     background-color: #f4a11e; }
   .callout.alert {
-    background-color: #e85546; }
+    background-color: #c46b6b; }
   .callout.small {
     padding-top: 0.5rem;
     padding-right: 0.5rem;
@@ -2513,7 +2513,7 @@ select {
     background: #F39C12;
     color: #fefefe; }
   .label.alert {
-    background: #E74C3C;
+    background: #C16363;
     color: #fefefe; }
 
 .media-object {
@@ -2776,7 +2776,7 @@ body {
   .progress.warning .progress-meter {
     background-color: #F39C12; }
   .progress.alert .progress-meter {
-    background-color: #E74C3C; }
+    background-color: #C16363; }
 
 .progress-meter {
   position: relative;

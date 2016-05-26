@@ -1,20 +1,3 @@
-function add_chat_item(name, msg, time){
-
-    item = '<div class="item">';
-    item = item + ' <img src="/static/img/pan.png" alt="user image" class="online">';
-    item = item + '  <p class="message">';
-    item = item + '    <a href="#" class="name">';
-    item = item + '      <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> ' + time +' UTC</small>';
-    item = item + name;
-    item = item + '    </a>';
-    item = item + msg;
-    item = item + '  </p>';
-    item = item + '</div><!-- /.item -->';
-
-    $('#bot_chat').prepend(item);
-}
-
-
 var ws;
 function WebSocketTest(server) {
     var ws;
@@ -32,20 +15,26 @@ function WebSocketTest(server) {
             var msg = jQuery.parseJSON(received_msg);
             console.log(msg);
 
-            if (type == 'PAN001'){
-                add_chat_item(type, msg.message, msg.timestamp);
+            switch(type){
+                case 'STATE':
+                    change_state(msg['state']);
+                    break;
+                case 'STATUS':
+                    update_info(msg['observatory']);
+                    change_state(msg['state']);
+                    refresh_images();
+                    break;
+                case 'WEATHER':
+                    update_weather(msg['data']);
+                    break;
+                case 'CAMERA':
+                    update_cameras(msg);
+                    break;
+                default:
+                    add_chat_item(type, msg.message, msg.timestamp);
+                    break;
             }
-            if (type == 'STATUS'){
-                update_info(msg['observatory']);
-                change_state(msg['state']);
-                refresh_images();
-            }
-            if (type == 'WEATHER'){
-                update_weather(msg['data']);
-            }
-            if (type == 'CAMERA'){
-                update_cameras(msg);
-            }
+
         };
         ws.onclose = function() {
             toggle_connection_icon($('#chat_connection'));
@@ -59,6 +48,22 @@ function WebSocketTest(server) {
     return ws;
 }
 
+function add_chat_item(name, msg, time){
+
+    item = '<div class="callout padded light-gray">';
+    item = item + ' <img src="/static/img/pan.png" alt="user image" class="avatar">';
+    item = item + ' <small class="float-right"><i class="fa fa-clock-o"></i> ' + time +' UTC</small>';
+    item = item + '  <p class="message">';
+    item = item + '    <a href="#" class="name">';
+    item = item + name;
+    item = item + '    </a>';
+    item = item + msg;
+    item = item + '  </p>';
+    item = item + '</div>';
+
+    $('#bot_chat').prepend(item);
+}
+
 function toggle_connection_icon(icon){
     console.log('Should toggle status here');
     // $(icon).toggleClass('success').toggleClass('danger');
@@ -66,12 +71,12 @@ function toggle_connection_icon(icon){
 }
 
 function update_weather(info){
-    $('.wind_condition').html(info['Wind Condition']);
-    $('.sky_condition').html(info['Sky Condition']);
-    $('.rain_condition').html(info['Rain Condition']);
-    $('.safe_condition').html(info['Safe']);
-    $('.wind_speed').html(info['Wind Speed (km/h)']);
-    $('.temp_info').html(info['Ambient Temperature (C)']);
+    $('.wind_condition').html(info['wind_condition']);
+    $('.sky_condition').html(info['sky_condition']);
+    $('.rain_condition').html(info['rain_condition']);
+    $('.safe_condition').html(info['safe']);
+    $('.wind_speed').html(info['wind_speed_KPH']);
+    $('.temp_info').html(info['ambient_temp_C']);
 }
 
 function toggle_status(status){
@@ -92,43 +97,46 @@ function toggle_status(status){
 }
 
 function change_state(state){
+    console.log(state);
+
     var icon = $('.current_state i');
     var text = $('.current_state span');
 
     icon.removeClass().addClass('fa');
-    text.html(state);
+    text.html(state.toUpperCase());
     switch(state) {
-        case 'Analyzing':
+        case 'analyzing':
             icon.addClass('fa-calculator');
             break;
-        case 'Tracking':
+        case 'tracking':
             icon.addClass('fa-binoculars');
             break;
-        case 'Observing':
+        case 'observing':
             icon.addClass('fa-camera');
             break;
-        case 'Pointing':
+        case 'pointing':
             icon.addClass('fa-bullseye');
             break;
-        case 'Slewing':
+        case 'slewing':
             icon.addClass('fa-cog fa-spin');
             break;
-        case 'Scheduling':
+        case 'scheduling':
             icon.addClass('fa-tasks');
             break;
-        case 'Ready':
+        case 'ready':
             icon.addClass('fa-thumbs-o-up');
             break;
-        case 'Parking':
-        case 'Parked':
+        case 'parking':
+        case 'parked':
             icon.addClass('fa-car');
             break;
-        case 'Sleeping':
+        case 'sleeping':
             icon.addClass('fa-check-circle');
             break;
         default:
             icon.addClass('fa-circle');
     }
+    reload_img($('.state_img img'));
 }
 
 // Find all the elements with the class that matches a return value
@@ -193,10 +201,8 @@ function update_cameras(cameras){
 
 }
 
-
 // Refresh all images with `img_refresh` container class
 function refresh_images(){
-    console.log("Refreshing images")
     $.each($('.img_refresh img'), function(idx, img){
         reload_img(img);
     });
@@ -205,6 +211,7 @@ function refresh_images(){
 // Reload individual image
 function reload_img(img){
     base = $(img).attr('src').split('?')[0];
+    console.log("Reloading image: " + $(img).attr('src'));
 
     // Hack for others
     if(base.startsWith('http')){
@@ -212,7 +219,6 @@ function reload_img(img){
     } else {
         new_src = base + '?' + Math.random()
     }
-
 
     $(img).attr('src', new_src);
 }

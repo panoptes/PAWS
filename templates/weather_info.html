@@ -1,37 +1,13 @@
 {% extends "site/panel.html" %}
-{% block title %} Weather Station {% end %}
+{% block title %}
+  Weather Station
+{% end %}
 {% block panel %}
-<table>
-  <thead>
-    <tr>
-      <th width="30%">&nbsp;</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Temp (c):</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>Wind (km/h):</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>Sky:</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>Rain:</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>Safe:</td>
-      <td>&nbsp;</td>
-    </tr>
-</tbody>
-</table>
-<a href="/static/weather_plots/today.png" target="_blank" class="text-center img_refresh">
-<img class="img-responsive pad" src="/static/weather_plots/today.png" alt="Today's Weather">
-</a>
+  <dl id="weather_info" class="dl-horizontal">
+    <dt>Temp (c):</dt> <dd> <span class="temp_info">N/A</span></dd>
+    <dt>Wind (km/h):</dt> <dd> <span class="wind_speed">N/A</span> (<span class="wind_condition">N/A</span>)</dd>
+    <dt>Sky:</dt> <dd> <span class="sky_condition">N/A</span> </dd>
+    <dt>Rain:</dt> <dd> <span class="rain_condition">N/A</span> </dd>
+    <dt>Safe:</dt> <dd> <span class="safe_condition">N/A</span> </dd>
+  </dl>
 {% end %}

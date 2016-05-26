@@ -6,3 +6,32 @@ div.padded {
 .callout>:last-child {
     margin-bottom: 0.05rem;
 }
+
+img.avatar {
+    width: 45px;
+    border: 1px solid lightgray;
+    border-radius: 18%;
+    vertical-align: top;
+    margin: 2px;
+}
+
+div.chat {
+    overflow-y: scroll;
+    height: 260px
+}
+
+.dl-horizontal dt {
+    display: block;
+    float: left;
+    height: 2rem;
+    width: 49%;
+    margin-bottom: 0;
+}
+
+.dl-horizontal dd {
+    font-family: monospace;
+    display: block;
+    float: left;
+    height: 2rem;
+    width: 49%;
+}

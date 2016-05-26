@@ -1,7 +1,8 @@
 from tornado.websocket import WebSocketHandler
 
-from zmq.eventloop.zmqstream import ZMQStream
 import logging
+
+from zmq.eventloop.zmqstream import ZMQStream
 
 clients = []
 
@@ -19,7 +20,7 @@ class PanWebSocket(WebSocketHandler):
         try:
             messaging = self.settings['messaging']
 
-            self.socket = messaging.register_listener(channel=channel)
+            self.socket = messaging.register_listener(channel=channel, port=6501, connect=True)
             self.stream = ZMQStream(self.socket)
 
             # Register the callback
