@@ -30,6 +30,7 @@ function WebSocketTest(server) {
                     update_cameras(msg);
                     break;
                 case 'SAYBOT':
+                case 'PANSHELL':
                     add_chat_item(type, msg.message, msg.timestamp);
                     break;
                 default:
