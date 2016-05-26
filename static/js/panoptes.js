@@ -13,7 +13,6 @@ function WebSocketTest(server) {
             var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
 
             var msg = jQuery.parseJSON(received_msg);
-            console.log(msg);
 
             switch(type){
                 case 'STATE':
@@ -211,7 +210,7 @@ function refresh_images(){
 // Reload individual image
 function reload_img(img){
     base = $(img).attr('src').split('?')[0];
-    console.log("Reloading image: " + $(img).attr('src'));
+    // console.log("Reloading image: " + $(img).attr('src'));
 
     // Hack for others
     if(base.startsWith('http')){
