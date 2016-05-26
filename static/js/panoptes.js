@@ -76,9 +76,11 @@ function update_weather(info){
     if(info['safe']){
         $('.safe_condition').html('Safe');
         $('.title-bar').removeClass('unsafe');
+        $('.callout').removeClass('unsafe_borders');
     } else {
         $('.safe_condition').html('Unsafe');
         $('.title-bar').addClass('unsafe');
+        $('.callout').addClass('unsafe_borders');
     }
 
     $('.wind_condition').html(info['wind_condition']);

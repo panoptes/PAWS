@@ -37,6 +37,9 @@ div.chat {
 }
 
 .unsafe {
-    border: 1px solid #C16363;
     color: #C16363;
+}
+
+.unsafe_borders {
+    border: 1px solid #C16363;
 }
