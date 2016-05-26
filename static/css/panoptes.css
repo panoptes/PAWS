@@ -35,3 +35,7 @@ div.chat {
     height: 2rem;
     width: 49%;
 }
+
+.unsafe {
+    border: 1px solid #C16363;
+}

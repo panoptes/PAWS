@@ -72,6 +72,14 @@ function toggle_connection_icon(icon){
 }
 
 function update_weather(info){
+    if(info['safe']){
+        $('.safe_condition').html('Safe');
+        $('.callout').removeClass('unsafe');
+    } else {
+        $('.safe_condition').html('Unsafe');
+        $('.callout').addClass('unsafe');
+    }
+
     $('.wind_condition').html(info['wind_condition']);
     $('.sky_condition').html(info['sky_condition']);
     $('.rain_condition').html(info['rain_condition']);
@@ -79,15 +87,8 @@ function update_weather(info){
     $('.temp_info').html(info['ambient_temp_C']);
 
     $('.sky_temp_C').html(info['sky_temp_C']);
-
     $('.rain_sensor_temp_C').html(info['rain_sensor_temp_C']);
     $('.rain_frequency').html(info['rain_frequency']);
-
-    if(info['safe']){
-        $('.safe_condition').html('Safe');
-    } else {
-        $('.safe_condition').html('Unsafe');
-    }
 }
 
 function toggle_status(status){
