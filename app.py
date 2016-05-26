@@ -32,7 +32,7 @@ class WebAdmin(tornado.web.Application):
         db = database.PanMongo()
         messaging = PanMessaging()
         messaging.listener = messaging.register_listener(port=6501, connect=True)
-        messaging.publisher = messaging.create_publisher(port=6502, connect=True)
+        messaging.publisher = messaging.create_publisher(port=6502, bind=True)
 
         self._base_dir = '{}'.format(os.getenv('PAWS', default='/var/panoptes/PAWS'))
         name = config.setdefault('name', 'PAWS')
