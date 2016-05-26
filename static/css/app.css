@@ -1484,10 +1484,10 @@ kbd {
     margin-left: 0;
     margin-right: 0; }
   .button.primary {
-    background-color: #303030;
+    background-color: #477FD2;
     color: #fefefe; }
     .button.primary:hover, .button.primary:focus {
-      background-color: #262626;
+      background-color: #2c63b5;
       color: #fefefe; }
   .button.secondary {
     background-color: #f67e7d;
@@ -1496,10 +1496,10 @@ kbd {
       background-color: #f13938;
       color: #464545; }
   .button.success {
-    background-color: #00bc8c;
+    background-color: #088263;
     color: #fefefe; }
     .button.success:hover, .button.success:focus {
-      background-color: #009670;
+      background-color: #06684f;
       color: #fefefe; }
   .button.warning {
     background-color: #F39C12;
@@ -1514,19 +1514,19 @@ kbd {
       background-color: #a74242;
       color: #fefefe; }
   .button.hollow {
-    border: 1px solid #303030;
-    color: #303030; }
+    border: 1px solid #477FD2;
+    color: #477FD2; }
     .button.hollow, .button.hollow:hover, .button.hollow:focus {
       background-color: transparent; }
     .button.hollow:hover, .button.hollow:focus {
-      border-color: #181818;
-      color: #181818; }
+      border-color: #1c3e71;
+      color: #1c3e71; }
     .button.hollow.primary {
-      border: 1px solid #303030;
-      color: #303030; }
+      border: 1px solid #477FD2;
+      color: #477FD2; }
       .button.hollow.primary:hover, .button.hollow.primary:focus {
-        border-color: #181818;
-        color: #181818; }
+        border-color: #1c3e71;
+        color: #1c3e71; }
     .button.hollow.secondary {
       border: 1px solid #f67e7d;
       color: #f67e7d; }
@@ -1534,11 +1534,11 @@ kbd {
         border-color: #ad0d0c;
         color: #ad0d0c; }
     .button.hollow.success {
-      border: 1px solid #00bc8c;
-      color: #00bc8c; }
+      border: 1px solid #088263;
+      color: #088263; }
       .button.hollow.success:hover, .button.hollow.success:focus {
-        border-color: #005e46;
-        color: #005e46; }
+        border-color: #044132;
+        color: #044132; }
     .button.hollow.warning {
       border: 1px solid #F39C12;
       color: #F39C12; }
@@ -1800,7 +1800,7 @@ select {
   padding: 1.25rem 1rem;
   line-height: 1;
   font-size: 0.83333rem;
-  color: #303030;
+  color: #477FD2;
   position: relative;
   border-bottom: 1px solid #e6e6e6; }
   .accordion-title:hover, .accordion-title:focus {
@@ -1828,7 +1828,7 @@ select {
     width: 0;
     height: 0;
     border: inset 6px;
-    border-color: #303030 transparent transparent;
+    border-color: #477FD2 transparent transparent;
     border-top-style: solid;
     border-bottom-width: 0;
     position: absolute;
@@ -1849,13 +1849,13 @@ select {
   font-size: 0.6rem;
   text-align: center;
   border-radius: 50%;
-  background: #303030;
+  background: #477FD2;
   color: #fefefe; }
   .badge.secondary {
     background: #f67e7d;
     color: #222222; }
   .badge.success {
-    background: #00bc8c;
+    background: #088263;
     color: #fefefe; }
   .badge.warning {
     background: #F39C12;
@@ -1886,7 +1886,7 @@ select {
       top: 1px;
       opacity: 1; }
   .breadcrumbs a {
-    color: #303030; }
+    color: #477FD2; }
     .breadcrumbs a:hover {
       text-decoration: underline; }
   .breadcrumbs .disabled {
@@ -1937,10 +1937,10 @@ select {
       width: 16.66667%;
       margin-right: 1px; }
   .button-group.primary .button {
-    background-color: #303030;
+    background-color: #477FD2;
     color: #fefefe; }
     .button-group.primary .button:hover, .button-group.primary .button:focus {
-      background-color: #262626;
+      background-color: #2c63b5;
       color: #fefefe; }
   .button-group.secondary .button {
     background-color: #f67e7d;
@@ -1949,10 +1949,10 @@ select {
       background-color: #f13938;
       color: #464545; }
   .button-group.success .button {
-    background-color: #00bc8c;
+    background-color: #088263;
     color: #fefefe; }
     .button-group.success .button:hover, .button-group.success .button:focus {
-      background-color: #009670;
+      background-color: #06684f;
       color: #fefefe; }
   .button-group.warning .button {
     background-color: #F39C12;
@@ -2001,11 +2001,11 @@ select {
   .callout > :last-child {
     margin-bottom: 0; }
   .callout.primary {
-    background-color: #3a3a3a; }
+    background-color: #5085d4; }
   .callout.secondary {
     background-color: #f68484; }
   .callout.success {
-    background-color: #00cc98; }
+    background-color: #099470; }
   .callout.warning {
     background-color: #f4a11e; }
   .callout.alert {
@@ -2103,7 +2103,7 @@ select {
     margin-left: 1rem; }
   .menu .active > a {
     color: #fefefe;
-    background: #303030; }
+    background: #477FD2; }
 
 .menu-text {
   font-weight: bold;
@@ -2195,7 +2195,7 @@ select {
     width: 0;
     height: 0;
     border: inset 6px;
-    border-color: transparent transparent transparent #303030;
+    border-color: transparent transparent transparent #477FD2;
     border-left-style: solid;
     border-right-width: 0;
     position: absolute;
@@ -2209,7 +2209,7 @@ select {
   width: 0;
   height: 0;
   border: inset 6px;
-  border-color: transparent #303030 transparent transparent;
+  border-color: transparent #477FD2 transparent transparent;
   border-right-style: solid;
   border-left-width: 0;
   border-left-width: 0;
@@ -2501,13 +2501,13 @@ select {
   white-space: nowrap;
   cursor: default;
   border-radius: 15;
-  background: #303030;
+  background: #477FD2;
   color: #303030; }
   .label.secondary {
     background: #f67e7d;
     color: #222222; }
   .label.success {
-    background: #00bc8c;
+    background: #088263;
     color: #fefefe; }
   .label.warning {
     background: #F39C12;
@@ -2736,7 +2736,7 @@ body {
       background: #e6e6e6; }
   .pagination .current {
     padding: 0.20833rem 0.69444rem;
-    background: #303030;
+    background: #477FD2;
     color: #fefefe;
     cursor: default; }
   .pagination .disabled {
@@ -2768,11 +2768,11 @@ body {
   margin-bottom: 1rem;
   border-radius: 15; }
   .progress.primary .progress-meter {
-    background-color: #303030; }
+    background-color: #477FD2; }
   .progress.secondary .progress-meter {
     background-color: #f67e7d; }
   .progress.success .progress-meter {
-    background-color: #00bc8c; }
+    background-color: #088263; }
   .progress.warning .progress-meter {
     background-color: #F39C12; }
   .progress.alert .progress-meter {
@@ -2783,7 +2783,7 @@ body {
   display: block;
   width: 0%;
   height: 100%;
-  background-color: #303030;
+  background-color: #477FD2;
   border-radius: 15; }
 
 .progress-meter-text {
@@ -2837,7 +2837,7 @@ body {
   display: inline-block;
   width: 1.4rem;
   height: 1.4rem;
-  background-color: #303030;
+  background-color: #477FD2;
   transition: all 0.2s ease-in-out;
   -ms-touch-action: manipulation;
       touch-action: manipulation;
@@ -2845,7 +2845,7 @@ body {
   [data-whatinput='mouse'] .slider-handle {
     outline: 0; }
   .slider-handle:hover {
-    background-color: #292929; }
+    background-color: #2f69c0; }
   .slider-handle.is-dragging {
     transition: all 0s linear; }
 
@@ -3024,7 +3024,7 @@ body.is-reveal-open {
     transform: translate3d(0, 0, 0);
     border-radius: 15; }
   input:checked ~ .switch-paddle {
-    background: #303030; }
+    background: #477FD2; }
     input:checked ~ .switch-paddle::after {
       left: 2.25rem; }
   [data-whatinput='mouse'] input:focus ~ .switch-paddle {
@@ -3165,11 +3165,11 @@ table.hover tr:nth-of-type(even):hover {
     background: transparent; }
 
 .tabs.primary {
-  background: #303030; }
+  background: #477FD2; }
   .tabs.primary > li > a {
     color: #fefefe; }
     .tabs.primary > li > a:hover, .tabs.primary > li > a:focus {
-      background: #3a3a3a; }
+      background: #3c77cf; }
 
 .tabs-title {
   float: left; }
@@ -3209,7 +3209,7 @@ table.hover tr:nth-of-type(even):hover {
   border-radius: 15;
   margin-bottom: 1rem; }
   .thumbnail:hover, .thumbnail:focus {
-    box-shadow: 0 0 6px 1px rgba(48, 48, 48, 0.5); }
+    box-shadow: 0 0 6px 1px rgba(71, 127, 210, 0.5); }
 
 .title-bar {
   background: #303030;
