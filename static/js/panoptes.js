@@ -78,10 +78,10 @@ function update_weather(info){
     $('.wind_speed').html(info['wind_speed_KPH']);
     $('.temp_info').html(info['ambient_temp_C']);
 
-    $('sky_temp_C').html(info['sky_temp_C']);
+    $('.sky_temp_C').html(info['sky_temp_C']);
 
-    $('rain_sensor_temp_C').html(info['rain_sensor_temp_C']);
-    $('rain_frequency').html(info['rain_frequency']);
+    $('.rain_sensor_temp_C').html(info['rain_sensor_temp_C']);
+    $('.rain_frequency').html(info['rain_frequency']);
 
     if(info['safe']){
         $('.safe_condition').html('Safe');
