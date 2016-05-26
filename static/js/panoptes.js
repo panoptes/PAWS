@@ -91,7 +91,7 @@ function update_environment(info){
 
 function update_weather(is_safe){
     if(is_safe){
-        $('.safe_condition').html('Safe').addClass('success');
+        $('.safe_condition').html('Safe');
         $('.title-bar').removeClass('danger');
         $('.callout').removeClass('unsafe_borders').addClass('safe_borders');
     } else {
