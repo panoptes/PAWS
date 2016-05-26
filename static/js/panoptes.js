@@ -21,7 +21,17 @@ function WebSocketTest(server) {
                     break;
                 case 'STATUS':
                     change_state(msg['state']);
-                    update_info(msg['observatory']['system']);
+
+                    system = msg['observatory']['system'];
+
+                    // Fix times
+                    system['local_evening_astro_time'] = trim_time(system['local_morning_evening_time']);
+                    system['local_morning_astro_time'] = trim_time(system['local_morning_astro_time']);
+                    system['local_sun_set_time'] = trim_time(system['local_sun_set_time']);
+                    system['local_sun_set_time'] = trim_time(system['local_sun_set_time']);
+                    system['local_sun_rise_time'] = trim_time(system['local_sun_rise_time']);
+
+                    update_info(system);
                     refresh_images();
                     break;
                 case 'ENVIRONMENT':
@@ -51,6 +61,10 @@ function WebSocketTest(server) {
     }
 
     return ws;
+}
+
+function trim_time(t){
+    return t.split(':').slice(0,-1).join(':');
 }
 
 function add_chat_item(name, msg, time){
