@@ -29,8 +29,10 @@ function WebSocketTest(server) {
                 case 'CAMERA':
                     update_cameras(msg);
                     break;
-                default:
+                case 'SAYBOT':
                     add_chat_item(type, msg.message, msg.timestamp);
+                    break;
+                default:
                     break;
             }
 
@@ -73,9 +75,31 @@ function update_weather(info){
     $('.wind_condition').html(info['wind_condition']);
     $('.sky_condition').html(info['sky_condition']);
     $('.rain_condition').html(info['rain_condition']);
-    $('.safe_condition').html(info['safe']);
     $('.wind_speed').html(info['wind_speed_KPH']);
     $('.temp_info').html(info['ambient_temp_C']);
+
+    $('weather_sensor_name').html(info['weather_sensor_name']);
+    $('weather_sensor_firmware_version').html(info['weather_sensor_firmware_version']);
+    $('weather_sensor_serial_number').html(info['weather_sensor_serial_number']);
+    $('sky_temp_C').html(info['sky_temp_C']);
+    $('ambient_temp_C').html(info['ambient_temp_C']);
+    $('internal_voltage_V').html(info['internal_voltage_V']);
+    $('ldr_resistance_Ohm').html(info['ldr_resistance_Ohm']);
+    $('rain_sensor_temp_C').html(info['rain_sensor_temp_C']);
+    $('rain_frequency').html(info['rain_frequency']);
+    $('pwm_value').html(info['pwm_value']);
+    $('errors').html(info['errors']);
+    $('wind_speed_KPH').html(info['wind_speed_KPH']);
+    $('sky_condition').html(info['sky_condition']);
+    $('wind_condition').html(info['wind_condition']);
+    $('gust_condition').html(info['gust_condition']);
+    $('rain_condition').html(info['rain_condition']);
+
+    if(info['safe']){
+        $('.safe_condition').html('Safe');
+    } else {
+        $('.safe_condition').html('Unsafe');
+    }
 }
 
 function toggle_status(status){
