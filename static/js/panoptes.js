@@ -16,6 +16,9 @@ function WebSocketTest(server) {
                 case 'STATE':
                     change_state(msg['state']);
                     break;
+                case 'SYSTEM':
+                    update_info(msg['system']);
+                    break;
                 case 'STATUS':
                     change_state(msg['state']);
                     update_info(msg['observatory']);
