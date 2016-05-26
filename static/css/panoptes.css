@@ -48,6 +48,11 @@ div.chat
     height: 2rem;
 }
 
+.dl-horizontal dt.sub {
+    font-size: 70%;
+    text-indent: 1rem;
+}
+
 .safe_borders
 {
     border: 1px solid #088263;
