@@ -22,7 +22,7 @@ function WebSocketTest(server) {
                 case 'STATUS':
                     change_state(msg['state']);
 
-                    system = msg['observatory']['system'];
+                    var system = msg['observatory']['system'];
 
                     // Fix times
                     system['local_evening_astro_time'] = trim_time(system['local_morning_evening_time']);
