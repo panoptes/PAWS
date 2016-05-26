@@ -31,6 +31,8 @@ function WebSocketTest(server) {
                     system['local_sun_rise_time'] = trim_time(system['local_sun_rise_time']);
 
                     update_info(system);
+
+                    update_info(msg['observatory']['mount']);
                     refresh_images();
                     break;
                 case 'ENVIRONMENT':
