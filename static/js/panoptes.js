@@ -79,14 +79,14 @@ function update_environment(info){
     var computer_info = info['computer_box'];
     var camera_info = info['camera_box'];
 
-    $('.computer_box_humidity_01').html(computer_info['humidity']);
-    $('.camera_box_humidity_01').html(camera_info['humidity']);
+    $('.computer_box_humidity_00').html(computer_info['humidity']);
+    $('.camera_box_humidity_00').html(camera_info['humidity']);
 
-    $('.camera_box_temp_01').html(camera_info['temp_01']);
+    $('.camera_box_temp_00').html(camera_info['temp_00']);
+    $('.computer_box_temp_00').html(computer_info['temp_00']);
     $('.computer_box_temp_01').html(computer_info['temp_01']);
     $('.computer_box_temp_02').html(computer_info['temp_02']);
     $('.computer_box_temp_03').html(computer_info['temp_03']);
-    $('.computer_box_temp_04').html(computer_info['temp_04']);
 }
 
 function update_weather(info){
