@@ -47,7 +47,6 @@ class PanWebSocket(WebSocketHandler):
             messaging.send_message('PAWS', message)
         except:
             print("Problem sending message from PAWS")
-            pass
 
     def on_close(self):
         """ When client closes """
