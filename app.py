@@ -2,19 +2,20 @@ import os
 import os.path
 
 import tornado.escape
-import tornado.ioloop
-import tornado.web
 import tornado.httpserver
+import tornado.ioloop
 import tornado.options
+import tornado.web
 
 from zmq.eventloop import ioloop
 
-from handlers import base, websockets
+from handlers import base
+from handlers import websockets
 from ui import modules
 
-from panoptes.utils.config import load_config
-from panoptes.utils import database
-from panoptes.utils.messaging import PanMessaging
+from pocs.utils import database
+from pocs.utils.config import load_config
+from pocs.utils.messaging import PanMessaging
 
 ioloop.install()
 

@@ -1,13 +1,18 @@
-.user-image, img.avatar {
-    width: 25px;
+div.padded {
+    margin: 0.25rem;
+    padding: 0.5rem;
+}
+
+.callout>:last-child {
+    margin-bottom: 0.05rem;
+}
+
+img.avatar {
+    width: 45px;
     border: 1px solid lightgray;
     border-radius: 18%;
     vertical-align: top;
     margin: 2px;
-}
-
-.panel {
-    min-height: 275px;
 }
 
 div.chat {
@@ -15,6 +20,18 @@ div.chat {
     height: 260px
 }
 
-dd {
+.dl-horizontal dt {
+    display: block;
+    float: left;
+    height: 2rem;
+    width: 49%;
+    margin-bottom: 0;
+}
+
+.dl-horizontal dd {
     font-family: monospace;
+    display: block;
+    float: left;
+    height: 2rem;
+    width: 49%;
 }

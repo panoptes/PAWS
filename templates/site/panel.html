@@ -1,12 +1,6 @@
-<div class="box box-solid">
-  <div class="box-header with-border">
-    <h2 class="box-title">{% block title %}{% end %}</h2>
-    <div class="box-tools pull-right">
-      <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-    </div><!-- /.box-tools -->
-  </div><!-- /.box-header -->
-  <div class="box-body panel">
-          {% block panel %}{% end %}
-  </div><!-- /.box-body -->
-</div><!-- /.box -->
+<div class="callout" data-equalizer-watch>
+    <div class="title-bar"><strong>{% block title %}{% end %}</strong></div>
+    <div class="padded">
+        {% block panel %}{% end %}
+    </div>
+</div>

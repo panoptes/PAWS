@@ -1,15 +1,6 @@
-<div class="box box-widget">
-  <div class="box-header with-border">
-    <h3 class="box-title">{% block title %}{{ title }}{% end %}</h3>
-    <div class='user-block'>
-      {% block header %}{% end %}
-    </div><!-- /.user-block -->
-    <div class="box-tools pull-right">
-      <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-    </div><!-- /.box-tools -->
-  </div><!-- /.box-header -->
-  <div class="box-body">
-          {% block photo %}{% end %}
-  </div><!-- /.box-body -->
-</div><!-- /.box -->
+<div class="callout">
+    <div class="title-bar"><strong>{% block title %}{{ title }}{% end %}</strong></div>
+    <div class="padded">
+        {% block photo %}{% end %}
+    </div>
+</div>
