@@ -99,6 +99,8 @@ function update_environment(info){
         var camera_info = info['camera_box'];
         $('.camera_box_humidity_00').html(camera_info['humidity']);
         $('.camera_box_temp_00').html(camera_info['temp_00']);
+    } catch(err) {
+        console.log(err);
     }
 
     try {
@@ -108,6 +110,8 @@ function update_environment(info){
         $('.computer_box_temp_01').html(computer_info['temp_01']);
         $('.computer_box_temp_02').html(computer_info['temp_02']);
         $('.computer_box_temp_03').html(computer_info['temp_03']);
+    } catch(err) {
+        console.log(err);
     }
 }
 
