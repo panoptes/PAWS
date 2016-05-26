@@ -64,7 +64,7 @@ function WebSocketTest(server) {
 
 function trim_time(t){
     var time = t;
-    if (typeof(t) == 'object'){
+    if (typeof(t) == 'string'){
         time = t.split(':').slice(0,-1).join(':');
     }
     return time;
