@@ -21,7 +21,7 @@ class PanWebSocket(WebSocketHandler):
             messaging = self.settings['messaging']
 
             self.listener = messaging.register_listener(channel=channel, port=6501, connect=True)
-            self.publisher = messaging.create_publisher(port=6500, bind=True)
+            self.publisher = messaging.create_publisher(port=6500, connect=True)
             self.stream = ZMQStream(self.listener)
 
             # Register the callback
@@ -43,7 +43,11 @@ class PanWebSocket(WebSocketHandler):
         """ From the client """
         self.logger.info("WS Sent: {}".format(message))
         messaging = self.settings['messaging']
-        messaging.send_message('PAWS', message)
+        try:
+            messaging.send_message('PAWS', message)
+        except:
+            print("Problem sending message from PAWS")
+            pass
 
     def on_close(self):
         """ When client closes """
