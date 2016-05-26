@@ -2,16 +2,22 @@
 {% block title %} System Info {% end %}
 {% block panel %}
   <dl id="mount_info" class="dl-horizontal">
-    <dt>UTC Time:</dt><dd><span class="utc_time">N/A</span></dd>
-    <dt>Local Time:</dt><dd><span class="local_time">N/A</span></dd>
-    <dt>Sidereal Time:</dt><dd><span class="sidereal_time">N/A</span></dd>
+    <dt>UTC Time:</dt><dd><span class="utctime">N/A</span></dd>
+    <dt>Local Time:</dt><dd><span class="localtime">N/A</span></dd>
+    <dt>Sidereal Time:</dt><dd><span class="siderealtime">N/A</span></dd>
     <dt>Sun:</dt><dd>
       <small>Alt: </small><span class="local_sun_alt">N/A</span>&deg;
     </dd>
-    <dt class="sub">Sunset:</dt><dd><span class="local_sun_set">N/A</span> <small>UTC</small></dd>
-    <dt class="sub">&nbsp</dt><dd><span class="local_evening_astro">N/A</span> <small>UTC</small></dd>
-    <dt class="sub">Sunrise:</dt><dd><span class="local_sun_rise">N/A</span> <small>UTC</small></dd>
-    <dt class="sub">&nbsp</dt><dd><span class="local_morning_astro">N/A</span> <small>UTC</small></dd>
+    <dt class="sub">Set:</dt>
+    <dd>
+      <small>astro</small> <span class="local_evening_astro_time">N/A</span>
+      <small>local</small> <span class="local_sun_set_time">N/A</span>
+    </dd>
+    <dt class="sub">Rise:</dt>
+    <dd>
+      <small>astro</small> <span class="local_morning_astro_time">N/A</span>
+      <small>local</small> <span class="local_sun_rise_time">N/A</span>
+    </dd>
     <dt>Moon:</dt><dd>
       <small>Alt: </small><span class="local_moon_alt">N/A</span>&deg;
       <small>Phase: </small><span class="local_moon_phase">N/A</span>
