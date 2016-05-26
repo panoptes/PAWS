@@ -14,7 +14,7 @@ function WebSocketTest(server) {
 
             var msg = jQuery.parseJSON(received_msg);
 
-            switch(type){
+            switch(type.toUpperCase()){
                 case 'STATE':
                     change_state(msg['state']);
                     break;
