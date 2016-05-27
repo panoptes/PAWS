@@ -19,6 +19,9 @@ function WebSocketTest(server) {
                 case 'SCHEDULER':
                     update_info(msg['scheduler']);
                     break;
+                case 'TARGET':
+                    update_info(msg['target']);
+                    break;
                 case 'STATUS':
                     change_state(msg['state']);
 
