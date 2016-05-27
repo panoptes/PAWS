@@ -16,21 +16,21 @@ function WebSocketTest(server) {
                 case 'STATE':
                     change_state(msg['state']);
                     break;
-                case 'SYSTEM':
-                    update_info(msg['system']);
+                case 'SCHEDULER':
+                    update_info(msg['scheduler']);
                     break;
                 case 'STATUS':
                     change_state(msg['state']);
 
-                    var system = msg['observatory']['system'];
+                    var scheduler = msg['observatory']['scheduler'];
 
                     // Fix times
-                    system['local_evening_astro_time'] = trim_time(system['local_evening_astro_time']);
-                    system['local_morning_astro_time'] = trim_time(system['local_morning_astro_time']);
-                    system['local_sun_set_time'] = trim_time(system['local_sun_set_time']);
-                    system['local_sun_rise_time'] = trim_time(system['local_sun_rise_time']);
+                    scheduler['local_evening_astro_time'] = trim_time(scheduler['local_evening_astro_time']);
+                    scheduler['local_morning_astro_time'] = trim_time(scheduler['local_morning_astro_time']);
+                    scheduler['local_evening_time'] = trim_time(scheduler['local_evening_time']);
+                    scheduler['local_morning_time'] = trim_time(scheduler['local_morning_time']);
 
-                    update_info(system);
+                    update_info(scheduler);
 
                     update_info(msg['observatory']['mount']);
                     refresh_images();
