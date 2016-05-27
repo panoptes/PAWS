@@ -46,10 +46,14 @@ div.chat
 
     width: 49%;
     height: 2rem;
+
+    text-align: right;
 }
 
-.dl-horizontal dt.sub {
+.dl-horizontal dt.sub
+{
     font-size: 70%;
+
     text-indent: 1rem;
 }
 
