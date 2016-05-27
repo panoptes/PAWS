@@ -4,7 +4,7 @@
     <div class="img_refresh">
         {% for img in img_list %}
             <a href="{{ img }}" target="_blank">
-                <img class="img-responsive pad" src="{{ img }}" alt="Photo">
+                <img class="thumbnail" src="{{ img }}" alt="{{ title }}">
             </a>
         {% end %}
     </div>

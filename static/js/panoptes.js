@@ -37,6 +37,7 @@ function WebSocketTest(server) {
 
                     update_info(msg['observatory']['mount']);
                     refresh_images();
+                    $('#system_panel .timer').timer('reset');
                     break;
                 case 'ENVIRONMENT':
                     update_environment(msg['data']);
@@ -129,6 +130,7 @@ function update_weather(is_safe){
         $('.title-bar').addClass('danger');
         $('.callout').addClass('unsafe_borders').removeClass('safe_borders');
     }
+    $('#weather_panel .timer').timer('reset');
 }
 
 function toggle_status(status){
