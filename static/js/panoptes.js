@@ -50,6 +50,7 @@ function WebSocketTest(server) {
                     break;
                 case 'SAYBOT':
                 case 'PANSHELL':
+                case 'PAN001':
                     add_chat_item(type, msg.message, msg.timestamp);
                     break;
                 default:
