@@ -34,10 +34,12 @@ function WebSocketTest(server) {
                     scheduler['local_moon_illumination'] = parseFloat(scheduler['local_moon_illumination'] * 100).toFixed(2);
 
                     update_info(scheduler);
+                    $('#system_panel .timer').timer('reset');
 
                     update_info(msg['observatory']['mount']);
+                    $('#mount_panel .timer').timer('reset');
+
                     refresh_images();
-                    $('#system_panel .timer').timer('reset');
                     break;
                 case 'ENVIRONMENT':
                     update_environment(msg['data']);
