@@ -31,7 +31,7 @@ function WebSocketTest(server) {
                     scheduler['local_evening_astro_time'] = trim_time(scheduler['local_evening_astro_time']);
                     scheduler['local_morning_astro_time'] = trim_time(scheduler['local_morning_astro_time']);
 
-                    scheduler['local_moon_illumination'] = parseFloat(scheduler['local_moon_illumination'] * 100).toFixed(2);
+                    scheduler['local_moon_illumination'] = pretty_number(scheduler['local_moon_illumination'] * 100);
 
                     update_info(scheduler);
                     $('#system_panel .timer').timer('reset');
@@ -101,22 +101,26 @@ function toggle_connection_icon(icon){
     // $(icon).toggleClass('fa-check-circle-o').toggleClass('fa-exclamation-triangle');
 }
 
+function pretty_number(num){
+    return parseFloat(num).toFixed(2);
+}
+
 function update_environment(info){
     try {
         var camera_info = info['camera_box'];
-        $('.camera_box_humidity_00').html(camera_info['humidity']);
-        $('.camera_box_temp_00').html(camera_info['temp_00']);
+        $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
+        $('.camera_box_temp_00').html(pretty_number(camera_info['temp_00']));
     } catch(err) {
         console.log(err);
     }
 
     try {
         var computer_info = info['computer_box'];
-        $('.computer_box_humidity_00').html(computer_info['humidity']);
-        $('.computer_box_temp_00').html(computer_info['temp_00']);
-        $('.computer_box_temp_01').html(computer_info['temp_01']);
-        $('.computer_box_temp_02').html(computer_info['temp_02']);
-        $('.computer_box_temp_03').html(computer_info['temp_03']);
+        $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
+        $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
+        $('.computer_box_temp_01').html(pretty_number(computer_info['temp_01']));
+        $('.computer_box_temp_02').html(pretty_number(computer_info['temp_02']));
+        $('.computer_box_temp_03').html(pretty_number(computer_info['temp_03']));
     } catch(err) {
         console.log(err);
     }
