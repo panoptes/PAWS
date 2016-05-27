@@ -27,8 +27,6 @@ function WebSocketTest(server) {
                     // Fix times
                     scheduler['local_evening_astro_time'] = trim_time(scheduler['local_evening_astro_time']);
                     scheduler['local_morning_astro_time'] = trim_time(scheduler['local_morning_astro_time']);
-                    scheduler['local_evening_time'] = trim_time(scheduler['local_evening_time']);
-                    scheduler['local_morning_time'] = trim_time(scheduler['local_morning_time']);
 
                     update_info(scheduler);
 
