@@ -31,7 +31,7 @@ function WebSocketTest(server) {
                     scheduler['local_evening_astro_time'] = trim_time(scheduler['local_evening_astro_time']);
                     scheduler['local_morning_astro_time'] = trim_time(scheduler['local_morning_astro_time']);
 
-                    scheduler['local_moon_illumination'] = scheduler['local_moon_illumination'] * 100;
+                    scheduler['local_moon_illumination'] = parseFloat(scheduler['local_moon_illumination'] * 100).toFixed(2);
 
                     update_info(scheduler);
 
