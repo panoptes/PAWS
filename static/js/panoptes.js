@@ -28,6 +28,8 @@ function WebSocketTest(server) {
                     scheduler['local_evening_astro_time'] = trim_time(scheduler['local_evening_astro_time']);
                     scheduler['local_morning_astro_time'] = trim_time(scheduler['local_morning_astro_time']);
 
+                    scheduler['local_moon_illumination'] = scheduler['local_moon_illumination'] * 100;
+
                     update_info(scheduler);
 
                     update_info(msg['observatory']['mount']);
