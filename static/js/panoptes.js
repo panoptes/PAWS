@@ -279,4 +279,7 @@ function reload_img(img){
     }
 
     $(img).attr('src', new_src);
+
+    // Update the link so not pointint at thumbnail
+    $(img.parentElement).attr('href', new_src.replace('tn_', ''));
 }
