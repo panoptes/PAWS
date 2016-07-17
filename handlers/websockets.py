@@ -15,10 +15,10 @@ class PanWebSocket(WebSocketHandler):
         if channel is None:
             channel = self.settings['name']
 
-        self.logger.info("Setting up listener for channel: {}".format(channel))
+        self.logger.info("Setting up subscriber for channel: {}".format(channel))
 
         try:
-            self.stream = ZMQStream(self.settings['messaging'].listener)
+            self.stream = ZMQStream(self.settings['msg_subscriber'].subscriber)
 
             # Register the callback
             self.stream.on_recv(self.on_data)
@@ -38,9 +38,9 @@ class PanWebSocket(WebSocketHandler):
     def on_message(self, message):
         """ From the client """
         self.logger.info("WS Sent: {}".format(message))
-        messaging = self.settings['messaging']
+        cmd_publisher = self.settings['cmd_publisher']
         try:
-            messaging.send_message('PAWS', message)
+            cmd_publisher.send_message('PAWS', message)
         except Exception as e:
             print("Problem sending message from PAWS", e)
 

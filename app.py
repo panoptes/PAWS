@@ -30,9 +30,8 @@ class WebAdmin(tornado.web.Application):
     def __init__(self, config={}):
 
         db = database.PanMongo()
-        messaging = PanMessaging()
-        messaging.listener = messaging.register_listener(port=6501, connect=True)
-        messaging.publisher = messaging.create_publisher(port=6502, bind=True)
+        msg_subscriber = PanMessaging('subscriber', 6511)
+        cmd_publisher = PanMessaging('subscriber', 6500)
 
         self._base_dir = '{}'.format(os.getenv('PAWS', default='/var/panoptes/PAWS'))
         name = config.setdefault('name', 'PAWS')
@@ -51,7 +50,8 @@ class WebAdmin(tornado.web.Application):
             static_path=os.path.join(self._base_dir, "static"),
             xsrf_cookies=True,
             db=db,
-            messaging=messaging,
+            msg_subscriber=msg_subscriber,
+            cmd_publisher=cmd_publisher,
             config=config,
             name=name,
             server_url=server_url,
