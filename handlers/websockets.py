@@ -33,15 +33,16 @@ class PanWebSocket(WebSocketHandler):
         """ From the PANOPTES unit """
         msg = data[0].decode('UTF-8')
         self.logger.debug("WS Received: {}".format(msg))
+        self.write_message(msg)
 
     def on_message(self, message):
         """ From the client """
         self.logger.info("WS Sent: {}".format(message))
-        cmd_publisher = self.settings['cmd_publisher']
-        try:
-            cmd_publisher.send_message('PAWS', message)
-        except Exception as e:
-            print("Problem sending message from PAWS", e)
+        # cmd_publisher = self.settings['cmd_publisher']
+        # try:
+            # cmd_publisher.send_message('PAWS', message)
+        # except Exception as e:
+            # print("Problem sending message from PAWS", e)
 
     def on_close(self):
         """ When client closes """
