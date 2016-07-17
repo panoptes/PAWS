@@ -33,7 +33,6 @@ class PanWebSocket(WebSocketHandler):
         """ From the PANOPTES unit """
         msg = data[0].decode('UTF-8')
         self.logger.debug("WS Received: {}".format(msg))
-        self.write_message(msg)
 
     def on_message(self, message):
         """ From the client """
