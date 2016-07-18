@@ -110,7 +110,7 @@ function update_environment(info){
     try {
         var camera_info = info['camera_box'];
         $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
-        $('.camera_box_temp_00').html(pretty_number(camera_info['temp_00']));
+        $('.camera_box_temp_00').html(pretty_number(camera_info['temp_01']));
     } catch(err) {
         console.log(err);
     }
