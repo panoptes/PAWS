@@ -129,11 +129,11 @@ function update_environment(info){
 
 function update_weather(is_safe){
     if(is_safe){
-        $('.safe_condition').html('Safe');
+        $('.safe_condition').html('Safe').addClass('success').removeClass('danger');
         $('.title-bar').removeClass('danger');
         $('.callout').removeClass('unsafe_borders').addClass('safe_borders');
     } else {
-        $('.safe_condition').html('Unsafe');
+        $('.safe_condition').html('Unsafe').addClass('danger').removeClass('success');
         $('.title-bar').addClass('danger');
         $('.callout').addClass('unsafe_borders').removeClass('safe_borders');
     }
