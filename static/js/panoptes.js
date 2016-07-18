@@ -149,8 +149,8 @@ function toggle_status(status){
         icon.addClass('fa-circle').addClass('success');
         text.html('Online');
     } else if (status == 'off'){
-        icon.addClass('fa-bolt').addClass('danger');
-        text.html('Offline').addClass('danger');
+        icon.addClass('fa-bolt').addClass('warning');
+        text.html('Offline').addClass('warning');
     } else {
         icon.addClass('fa-exclamation-triangle', 'danger').addClass('danger');
         text.html('Error').addClass('danger');
