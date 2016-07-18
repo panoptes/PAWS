@@ -46,13 +46,14 @@ function WebSocketTest(server) {
                     break;
                 case 'WEATHER':
                     update_info(msg['data']);
-                    update_weather(msg['data']);
+                    update_weather(msg['data']['safe']);
                     break;
                 case 'CAMERA':
                     update_cameras(msg);
                     break;
                 case 'SAYBOT':
-                case 'PANSHELL':
+                case 'POCS_SHELL':
+                case 'PEAS_SHELL':
                 case 'PAN001':
                     add_chat_item(type, msg.message, msg.timestamp);
                     break;
