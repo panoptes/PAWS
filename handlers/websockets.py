@@ -14,14 +14,14 @@ class PanWebSocket(WebSocketHandler):
         if channel is None:
             channel = self.settings['name']
 
-        logging.info("Setting up subscriber for channel: {}".format(channel))
+        logging.debug("Setting up subscriber for channel: {}".format(channel))
 
         try:
             self.stream = ZMQStream(self.settings['msg_subscriber'].subscriber)
 
             # Register the callback
             self.stream.on_recv(self.on_data)
-            logging.info("WS opened for channel {}".format(channel))
+            logging.debug("WS opened for channel {}".format(channel))
 
             # Add this client to our list
             clients.append(self)
@@ -38,7 +38,7 @@ class PanWebSocket(WebSocketHandler):
 
     def on_message(self, message):
         """ From the client """
-        logging.info("WS Sent: {}".format(message))
+        logging.debug("WS Sent: {}".format(message))
         # cmd_publisher = self.settings['cmd_publisher']
         # try:
         # cmd_publisher.send_message('PAWS', message)
@@ -48,4 +48,4 @@ class PanWebSocket(WebSocketHandler):
     def on_close(self):
         """ When client closes """
         clients.remove(self)
-        logging.info("WS Closed")
+        logging.debug("WS Closed")
