@@ -98,11 +98,11 @@ class CurrentImage(tornado.web.UIModule):
 
     """ UI modules for listing the current images """
 
-    def render(self, img_fn, title='', size=2):
+    def render(self, img_fn, id, title='', size=2):
 
         imgs = listify(img_fn)
 
-        return self.render_string("display_image.html", img_list=imgs, title=title)
+        return self.render_string("display_image.html", img_list=imgs, title=title, id=id)
 
 
 class ImageList(tornado.web.UIModule):

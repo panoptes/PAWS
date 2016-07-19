@@ -3,9 +3,16 @@
 {% block photo %}
     <div class="img_refresh">
         {% for img in img_list %}
-            <a href="{{ img }}" target="_blank">
+            <a data-open="modal_{{ id }}">
                 <img class="thumbnail" src="{{ img }}" alt="{{ title }}">
             </a>
         {% end %}
+    </div>
+    <div class="reveal title-bar" id="modal_{{ id }}" data-reveal>
+      <h1>{{ title }}</h1>
+        <img class="" src="{{ img }}" alt="{{ title }}">
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
 {% end %}
