@@ -97,9 +97,9 @@ function WebSocketTest(server) {
 
 function update_safety(is_safe){
     if(is_safe){
-        $('.safe_condition').html('Safe').removeClass('danger').addClass('success');
+        $('.safe_condition').html('Safe').removeClass('alert').addClass('success');
     } else {
-        $('.safe_condition').html('Unsafe').removeClass('success').addClass('danger');
+        $('.safe_condition').html('Unsafe').removeClass('success').addClass('alert');
     }
 }
 
