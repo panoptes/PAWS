@@ -62,6 +62,11 @@ div.chat
     border: 1px solid #088263;
 }
 
+.warning_borders
+{
+    border: 1px solid #f39c12;
+}
+
 .unsafe_borders
 {
     border: 1px solid #c16363;

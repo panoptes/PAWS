@@ -1,18 +1,45 @@
 var ws;
+// var heartbeat_msg = '--heartbeat--', heartbeat_interval = null, missed_heartbeats = 0;
+
 function WebSocketTest(server) {
     var ws;
     if ("WebSocket" in window) {
         ws = new WebSocket("ws://" + server + "/ws/");
         ws.onopen = function() {
-            ws.send('get_status');
+            // Setup a heartbeat
+            // if (heartbeat_interval === null) {
+            //     missed_heartbeats = 0;
+            //     heartbeat_interval = setInterval(function() {
+            //         try {
+            //             missed_heartbeats++;
+            //             if (missed_heartbeats >= 3)
+            //                 throw new Error("Too many missed heartbeats.");
+            //             ws.send(heartbeat_msg);
+            //         } catch(e) {
+            //             clearInterval(heartbeat_interval);
+            //             heartbeat_interval = null;
+            //             console.warn("Closing connection. Reason: " + e.message);
+            //             ws.close();
+            //         }
+            //     }, 5000);
+            // }
+            toggle_status('on');
+            console.log("Connection established");
         };
         ws.onmessage = function (evt) {
-            var type = evt.data.split(' ', 1)[0];
+            var channel = evt.data.split(' ', 1)[0];
             var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
 
             var msg = jQuery.parseJSON(received_msg);
 
-            switch(type.toUpperCase()){
+            // // Do heartbeat check first
+            // if (msg['message'] === heartbeat_msg) {
+            //     // reset the counter for missed heartbeats
+            //     missed_heartbeats = 0;
+            //     return;
+            // }
+
+            switch(channel.toUpperCase()){
                 case 'STATE':
                     change_state(msg['state']);
                     break;
@@ -27,7 +54,6 @@ function WebSocketTest(server) {
 
                     var scheduler = msg['observatory']['scheduler'];
 
-                    // Fix times
                     scheduler['local_evening_astro_time'] = trim_time(scheduler['local_evening_astro_time']);
                     scheduler['local_morning_astro_time'] = trim_time(scheduler['local_morning_astro_time']);
 
@@ -46,18 +72,15 @@ function WebSocketTest(server) {
                     break;
                 case 'WEATHER':
                     update_info(msg['data']);
-                    update_weather(msg['data']['safe']);
+                    update_safety(msg['data']['safe']);
+
+                    $('#weather_panel .timer').timer('reset');
                     break;
                 case 'CAMERA':
                     update_cameras(msg);
                     break;
-                case 'SAYBOT':
-                case 'POCS_SHELL':
-                case 'PEAS_SHELL':
-                case 'PAN001':
-                    add_chat_item(type, msg.message, msg.timestamp);
-                    break;
                 default:
+                    add_chat_item(channel, msg.message, msg.timestamp);
                     break;
             }
 
@@ -72,90 +95,34 @@ function WebSocketTest(server) {
     return ws;
 }
 
-function trim_time(t){
-    var time = t;
-    if (typeof(t) == 'string'){
-        time = t.split(':').slice(0,-1).join(':');
-    }
-    return time;
-}
-
-function add_chat_item(name, msg, time){
-
-    item = '<div class="callout padded light-gray">';
-    item = item + ' <img src="/static/img/pan.png" alt="user image" class="avatar">';
-    item = item + ' <small class="float-right"><i class="fa fa-clock-o"></i> ' + time +' UTC</small>';
-    item = item + '  <p class="message">';
-    item = item + '    <a href="#" class="name">';
-    item = item + name;
-    item = item + '    </a>';
-    item = item + msg;
-    item = item + '  </p>';
-    item = item + '</div>';
-
-    $('#bot_chat').prepend(item);
-}
-
-function toggle_connection_icon(icon){
-    console.log('Should toggle status here');
-    // $(icon).toggleClass('success').toggleClass('danger');
-    // $(icon).toggleClass('fa-check-circle-o').toggleClass('fa-exclamation-triangle');
-}
-
-function pretty_number(num){
-    return parseFloat(num).toFixed(2);
-}
-
-function update_environment(info){
-    try {
-        var camera_info = info['camera_box'];
-        $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
-        $('.camera_box_temp_00').html(pretty_number(camera_info['temp_01']));
-    } catch(err) {
-        console.log(err);
-    }
-
-    try {
-        var computer_info = info['computer_box'];
-        $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
-        $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
-        $('.computer_box_temp_01').html(pretty_number(computer_info['temp_01']));
-        $('.computer_box_temp_02').html(pretty_number(computer_info['temp_02']));
-        $('.computer_box_temp_03').html(pretty_number(computer_info['temp_03']));
-    } catch(err) {
-        console.log(err);
-    }
-}
-
-function update_weather(is_safe){
+function update_safety(safety_cls){
     if(is_safe){
-        $('.safe_condition').html('Safe').addClass('success').removeClass('danger');
-        $('.title-bar').removeClass('danger');
-        $('.callout').removeClass('unsafe_borders').addClass('safe_borders');
+        $('.safe_condition').html('Safe').removeClass('danger').addClass('success');
     } else {
-        $('.safe_condition').html('Unsafe').addClass('danger').removeClass('success');
-        $('.title-bar').addClass('danger');
-        $('.callout').addClass('unsafe_borders').removeClass('safe_borders');
+        $('.safe_condition').html('Unsafe').removeClass('success').addClass('danger');
     }
-    $('#weather_panel .timer').timer('reset');
 }
 
 function toggle_status(status){
-    var icon = $('.current_state i');
-    var text = $('.current_state span');
+    var safety_cls, border_cls;
 
-    icon.removeClass().addClass('fa');
+    // Update depending on status
     if (status == 'on'){
-        icon.addClass('fa-circle').addClass('success');
-        text.html('Online');
+        safety_cls = 'success';
+        border_cls = 'safe_borders';
     } else if (status == 'off'){
-        icon.addClass('fa-bolt').addClass('warning');
-        text.html('Offline').addClass('warning');
+        safety_cls = 'warning';
+        border_cls = 'warning_borders';
     } else {
-        icon.addClass('fa-exclamation-triangle', 'danger').addClass('danger');
-        text.html('Error').addClass('danger');
+        safety_cls = 'danger';
+        border_cls = 'unsafe_borders';
     }
+
+    $('.title-bar').removeClass(['warning', 'danger', 'success']).addClass(safety_cls);
+    $('.callout').removeClass(['safe_borders', 'warning_borders', 'unsafe_borders']).addClass(border_cls);
 }
+
+/******************** Update Info Methods ****************************/
 
 function change_state(state){
     var icon = $('.current_state i');
@@ -195,7 +162,7 @@ function change_state(state){
         default:
             icon.addClass('fa-circle');
     }
-    reload_img($('.state_img img'));
+    reload_img($('.state_img'));
 }
 
 // Find all the elements with the class that matches a return value
@@ -260,6 +227,45 @@ function update_cameras(cameras){
 
 }
 
+function update_environment(info){
+    try {
+        var camera_info = info['camera_box'];
+        $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
+        $('.camera_box_temp_00').html(pretty_number(camera_info['temp_01']));
+    } catch(err) {
+        console.log(err);
+    }
+
+    try {
+        var computer_info = info['computer_box'];
+        $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
+        $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
+        $('.computer_box_temp_01').html(pretty_number(computer_info['temp_01']));
+        $('.computer_box_temp_02').html(pretty_number(computer_info['temp_02']));
+        $('.computer_box_temp_03').html(pretty_number(computer_info['temp_03']));
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+function add_chat_item(name, msg, time){
+
+    item = '<div class="callout padded light-gray">';
+    item = item + ' <img src="/static/img/pan.png" alt="user image" class="avatar">';
+    item = item + ' <small class="float-right"><i class="fa fa-clock-o"></i> ' + time +' UTC</small>';
+    item = item + '  <p class="message">';
+    item = item + '    <a href="#" class="name">';
+    item = item + name;
+    item = item + '    </a>';
+    item = item + msg;
+    item = item + '  </p>';
+    item = item + '</div>';
+
+    $('#bot_chat').prepend(item);
+}
+
+/******************** Convenience Methods ****************************/
+
 // Refresh all images with `img_refresh` container class
 function refresh_images(){
     $.each($('.img_refresh img'), function(idx, img){
@@ -283,4 +289,16 @@ function reload_img(img){
 
     // Update the link so not pointint at thumbnail
     $(img.parentElement).attr('href', new_src.replace('tn_', ''));
+}
+
+function trim_time(t){
+    var time = t;
+    if (typeof(t) == 'string'){
+        time = t.split(':').slice(0,-1).join(':');
+    }
+    return time;
+}
+
+function pretty_number(num){
+    return parseFloat(num).toFixed(2);
 }
