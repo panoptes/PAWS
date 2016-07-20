@@ -79,7 +79,10 @@ function WebSocketTest(server) {
                 case 'CAMERA':
                     update_cameras(msg);
                     break;
+                case 'PANBOT':
                 case 'PANCHAT':
+                case 'PEAS_SHELL':
+                case 'POCS_SHELL':
                     add_chat_item(channel, msg.message, msg.timestamp);
                     break;
                 default:
