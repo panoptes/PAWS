@@ -98,8 +98,10 @@ function WebSocketTest(server) {
 function update_safety(is_safe){
     if(is_safe){
         $('.safe_condition').html('Safe').removeClass('alert').addClass('success');
+        toggle_status('on');
     } else {
         $('.safe_condition').html('Unsafe').removeClass('success').addClass('alert');
+        toggle_status('unsafe');
     }
 }
 
