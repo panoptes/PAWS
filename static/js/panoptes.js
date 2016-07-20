@@ -118,8 +118,8 @@ function toggle_status(status){
         border_cls = 'unsafe_borders';
     }
 
-    $('.title-bar').removeClass(['warning', 'danger', 'success']).addClass(safety_cls);
-    $('.callout').removeClass(['safe_borders', 'warning_borders', 'unsafe_borders']).addClass(border_cls);
+    $('.title-bar').removeClass('warning danger success').addClass(safety_cls);
+    $('.callout').removeClass('safe_borders warning_borders unsafe_borders').addClass(border_cls);
 }
 
 /******************** Update Info Methods ****************************/
@@ -129,7 +129,7 @@ function change_state(state){
     var text = $('.current_state span');
 
     icon.removeClass().addClass('fa').addClass('success');
-    text.html(state.toUpperCase());
+    text.removeClass('warning danger').html(state.toUpperCase());
     switch(state) {
         case 'analyzing':
             icon.addClass('fa-calculator');
