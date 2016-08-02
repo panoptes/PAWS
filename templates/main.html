@@ -4,6 +4,9 @@
         <div class="columns" id="weather_panel">
             {% module WeatherInfo() %}
         </div>
+        <div class="columns">
+            {% module CurrentImage('/static/weather_plots/today.png', 'today_weather', "Today's Weather") %}
+        </div>
         <div class="columns" id="mount_panel">
             {% module MountInfo() %}
         </div>
