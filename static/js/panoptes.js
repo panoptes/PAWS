@@ -1,6 +1,8 @@
 var ws;
 // var heartbeat_msg = '--heartbeat--', heartbeat_interval = null, missed_heartbeats = 0;
 
+var exp_num = 0;
+
 function WebSocketTest(server) {
     var ws;
     if ("WebSocket" in window) {
@@ -64,6 +66,11 @@ function WebSocketTest(server) {
                     // Update parts of the page
 
                     update_info(observation);
+                    if (observation['current_exp'] != exp_num){
+                        $('#observation_info .timer').timer('reset');
+                        exp_num = observation['current_exp'];
+                    }
+                   
                     update_info(observer);
                     $('#system_panel .timer').timer('reset');
 
