@@ -43,23 +43,28 @@ function WebSocketTest(server) {
                 case 'STATE':
                     change_state(msg['state']);
                     break;
-                case 'SCHEDULER':
-                    update_info(msg['scheduler']);
+                case 'OBSERVER':
+                    update_info(msg['observer']);
                     break;
-                case 'TARGET':
-                    update_info(msg['target']);
+                case 'FIELD':
+                    update_info(msg['field']);
                     break;
                 case 'STATUS':
                     change_state(msg['state']);
 
-                    var scheduler = msg['observatory']['scheduler'];
+                    var observer = msg['observatory']['observer'];
+                    var observation = msg['observatory']['observation'];
 
-                    scheduler['local_evening_astro_time'] = trim_time(scheduler['local_evening_astro_time']);
-                    scheduler['local_morning_astro_time'] = trim_time(scheduler['local_morning_astro_time']);
+                    observer['local_evening_astro_time'] = trim_time(observer['local_evening_astro_time']);
+                    observer['local_morning_astro_time'] = trim_time(observer['local_morning_astro_time']);
 
-                    scheduler['local_moon_illumination'] = pretty_number(scheduler['local_moon_illumination'] * 100);
+                    observer['local_moon_illumination'] = pretty_number(observer['local_moon_illumination'] * 100);
+                    observer['local_moon_alt'] = pretty_number(observer['local_moon_alt']);
 
-                    update_info(scheduler);
+                    // Update parts of the page
+
+                    update_info(observation);
+                    update_info(observer);
                     $('#system_panel .timer').timer('reset');
 
                     update_info(msg['observatory']['mount']);

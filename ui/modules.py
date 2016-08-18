@@ -60,12 +60,12 @@ class StateInfo(tornado.web.UIModule):
         return self.render_string("state_info.html")
 
 
-class TargetInfo(tornado.web.UIModule):
+class ObservationInfo(tornado.web.UIModule):
 
     """ Displays information about the target """
 
     def render(self):
-        return self.render_string("target_info.html")
+        return self.render_string("observation_info.html")
 
 
 class SensorStatus(tornado.web.UIModule):

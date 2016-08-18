@@ -7,14 +7,14 @@
         <div class="columns">
             {% module CurrentImage('/static/weather_plots/today.png', 'today_weather', "Today's Weather") %}
         </div>
+        <div class="columns" id="system_panel">
+            {% module SystemInfo() %}
+        </div>
         <div class="columns" id="mount_panel">
             {% module MountInfo() %}
         </div>
-        <div class="columns" id="target_panel">
-            {% module TargetInfo() %}
-        </div>
-        <div class="columns" id="system_panel">
-            {% module SystemInfo() %}
+        <div class="columns" id="observation_panel">
+            {% module ObservationInfo() %}
         </div>
         <div class="columns" id="state_panel">
             {% module StateInfo() %}
