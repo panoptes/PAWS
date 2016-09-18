@@ -65,10 +65,12 @@ function WebSocketTest(server) {
 
                     // Update parts of the page
 
-                    update_info(observation);
-                    if (observation['current_exp'] != exp_num){
-                        $('#observation_info .timer').timer('reset');
-                        exp_num = observation['current_exp'];
+                    if (observation){
+                        update_info(observation);
+                        if (observation['current_exp'] != exp_num){
+                            $('#observation_info .timer').timer('reset');
+                            exp_num = observation['current_exp'];
+                        }
                     }
                    
                     update_info(observer);
