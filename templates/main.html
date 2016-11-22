@@ -5,7 +5,7 @@
             {% module WeatherInfo() %}
         </div>
         <div class="col-xs-4">
-            {% module CurrentImage('/static/weather_plots/today.png', 'today_weather', "Today's Weather") %}
+            {% module Image('/static/weather_plots/today.png', 'today_weather', "Today's Weather") %}
         </div>
         <div class="col-xs-4">
             {% module SystemInfo() %}
@@ -27,7 +27,7 @@
             {% module BotChat() %}
         </div>
         <div class="col-xs-4">
-            {% module CurrentImage('/static/images/latest.jpg', 'latest_img', 'Latest Image') %}
+            {% module Image('/static/images/latest.jpg', 'latest_img', 'Latest Image') %}
         </div>
     </div>
 {% end %}

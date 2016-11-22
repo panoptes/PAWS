@@ -94,7 +94,7 @@ class Webcam(tornado.web.UIModule):
         return self.render_string("webcams.html", webcam=webcam)
 
 
-class CurrentImage(tornado.web.UIModule):
+class Image(tornado.web.UIModule):
 
     """ UI modules for listing the current images """
 
