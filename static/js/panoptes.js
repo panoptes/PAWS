@@ -1,5 +1,4 @@
 var ws;
-// var heartbeat_msg = '--heartbeat--', heartbeat_interval = null, missed_heartbeats = 0;
 
 var exp_num = 0;
 
@@ -8,23 +7,6 @@ function WebSocketTest(server) {
     if ("WebSocket" in window) {
         ws = new WebSocket("ws://" + server + "/ws/");
         ws.onopen = function() {
-            // Setup a heartbeat
-            // if (heartbeat_interval === null) {
-            //     missed_heartbeats = 0;
-            //     heartbeat_interval = setInterval(function() {
-            //         try {
-            //             missed_heartbeats++;
-            //             if (missed_heartbeats >= 3)
-            //                 throw new Error("Too many missed heartbeats.");
-            //             ws.send(heartbeat_msg);
-            //         } catch(e) {
-            //             clearInterval(heartbeat_interval);
-            //             heartbeat_interval = null;
-            //             console.warn("Closing connection. Reason: " + e.message);
-            //             ws.close();
-            //         }
-            //     }, 5000);
-            // }
             toggle_status('on');
             console.log("Connection established");
         };
@@ -33,13 +15,6 @@ function WebSocketTest(server) {
             var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
 
             var msg = jQuery.parseJSON(received_msg);
-
-            // // Do heartbeat check first
-            // if (msg['message'] === heartbeat_msg) {
-            //     // reset the counter for missed heartbeats
-            //     missed_heartbeats = 0;
-            //     return;
-            // }
 
             switch(channel.toUpperCase()){
                 case 'STATE':
@@ -139,8 +114,7 @@ function toggle_status(status){
         border_cls = 'unsafe_borders';
     }
 
-    $('.title-bar').removeClass('warning danger success').addClass(safety_cls);
-    $('.callout').removeClass('safe_borders warning_borders unsafe_borders').addClass(border_cls);
+    $('.safety-border').removeClass('safe_borders warning_borders unsafe_borders').addClass(border_cls);
 }
 
 /******************** Update Info Methods ****************************/

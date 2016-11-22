@@ -1,13 +1,10 @@
-div.padded
-{
-    margin: .25rem;
-    padding: .5rem;
+.equal, .equal > div[class*='col-'] {  
+    display: -webkit-flex;
+    display: flex;
+    flex:1 1 auto;
 }
 
-.callout > :last-child
-{
-    margin-bottom: .05rem;
-}
+.panel { width: 100% }
 
 img.avatar
 {
@@ -25,36 +22,6 @@ div.chat
     overflow-y: scroll;
 
     height: 260px;
-}
-
-.dl-horizontal dt
-{
-    display: block;
-    float: left;
-
-    width: 49%;
-    height: 2rem;
-    margin-bottom: 0;
-}
-
-.dl-horizontal dd
-{
-    font-family: monospace;
-
-    display: block;
-    float: left;
-
-    width: 49%;
-    height: 2rem;
-
-    text-align: right;
-}
-
-.dl-horizontal dt.sub
-{
-    font-size: 70%;
-
-    text-indent: 1rem;
 }
 
 .safe_borders

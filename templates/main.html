@@ -1,31 +1,32 @@
 {% extends "site/base.html" %}
 {% block content %}
-    <div class="row small-up-1 medium-up-2 large-up-3" data-equalizer data-equalize-on="medium">
-        <div class="columns" id="weather_panel">
+    <div class="row equal">
+        <div class="col-xs-4">
             {% module WeatherInfo() %}
         </div>
-        <div class="columns">
+        <div class="col-xs-4">
             {% module CurrentImage('/static/weather_plots/today.png', 'today_weather', "Today's Weather") %}
         </div>
-        <div class="columns" id="system_panel">
+        <div class="col-xs-4">
             {% module SystemInfo() %}
         </div>
-        <div class="columns" id="mount_panel">
+    </div>
+    <div class="row equal">
+        <div class="col-xs-4">
             {% module MountInfo() %}
         </div>
-        <div class="columns" id="observation_panel">
+        <div class="col-xs-4">
             {% module ObservationInfo() %}
         </div>
-        <div class="columns" id="state_panel">
+        <div class="col-xs-4">
             {% module StateInfo() %}
         </div>
-        <div class="columns" id="chat_panel">
+    </div>
+    <div class="row equal">
+        <div class="col-xs-4">
             {% module BotChat() %}
         </div>
-        <div class="columns">
-            {% module CurrentImage('http://166.122.71.162:8083/4.jpg', 'vysos', 'VYSOS Webcam') %}
-        </div>
-        <div class="columns">
+        <div class="col-xs-4">
             {% module CurrentImage('/static/images/latest.jpg', 'latest_img', 'Latest Image') %}
         </div>
     </div>

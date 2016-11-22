@@ -1,31 +1,24 @@
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ escape(handler.settings["name"]) }}</title>
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/foundation.min.css">
-    <link rel="stylesheet" href="/static/css/app.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/panoptes.css">
     <link rel="shortcut icon" href="/static/img/favicon.ico">
   {% block head %}{% end %}
 </head>
-<body class="">
+<body>
   {% include 'nav.html' %}
-  <div class="row">
-    <section class="content">
+  <div class="container">
       {% block content %}{% end %}
-    </section>
   </div>
   {% include 'footer.html' %}
-  <script src="/static/js/vendor/jquery.js"></script>
-  <script src="/static/js/vendor/what-input.js"></script>
-  <script src="/static/js/vendor/foundation.min.js"></script>
-  <script src="/static/js/vendor/timer.jquery.js"></script>
-  <script src="/static/js/app.js"></script>
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
   <script src="/static/js/panoptes.js"></script>
   <script type="text/javascript">
     // Startup
@@ -37,12 +30,11 @@
         ws = WebSocketTest(window.location.host);
 
         // Refresh images
-        setInterval(refresh_images, 60 * second);
+        // setInterval(refresh_images, 60 * second);
 
         // Block for include js per page
         {% block bottom %}{% end %}
     });
-    $(document).foundation();
   </script>
 </body>
 </html>
