@@ -3,9 +3,21 @@
 {% block photo %}
     <div>
         {% for img in img_list %}
-            <a href='#' class="thumbnail">
+            <a href='#' class="thumbnail" data-toggle="modal" data-target="#{{ id }}_modal">
                 <img src="{{ img }}" alt="{{ title }}">
             </a>
         {% end %}
     </div>
+    <div class="modal fade" id="{{ id }}_modal" tabindex="-1" role="dialog" aria-labelledby="{{ id }}_modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="{{ img }}" alt="{{ title }}">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>    
 {% end %}
