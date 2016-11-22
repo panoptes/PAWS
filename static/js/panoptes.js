@@ -271,7 +271,7 @@ function refresh_images(){
 // Reload individual image
 function reload_img(img){
     base = $(img).attr('src').split('?')[0];
-    // console.log("Reloading image: " + $(img).attr('src'));
+    console.log("Reloading image: " + $(img).attr('src'));
 
     // Hack for others
     if(base.startsWith('http')){
@@ -283,7 +283,7 @@ function reload_img(img){
     $(img).attr('src', new_src);
 
     // Update the link so not pointing at thumbnail
-    $(img.parentElement).attr('href', new_src.replace('tn_', ''));
+    // $(img.parentlEement).attr('href', new_src.replace('tn_', ''));
 }
 
 function trim_time(t){
