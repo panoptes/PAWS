@@ -245,8 +245,11 @@ function update_environment(info){
 
 function add_chat_item(name, msg, time){
 
-    item = '<div class="callout padded light-gray">';
-    item = item + ' <img src="/static/img/pan.png" alt="user image" class="avatar">';
+    item = '<div class="media">';
+    item = item + '<div class="media-left">';
+    item = item + ' <img src="/static/img/pan.png" alt="Bot Image" class="media-object">';
+    item = item + '</div>';
+    item = item + '<div class="media-body">';
     item = item + ' <small class="float-right"><i class="fa fa-clock-o"></i> ' + time +' UTC</small>';
     item = item + ' <br /><span class="message">';
     item = item + '    <a href="#" class="name">';
