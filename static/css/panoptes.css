@@ -34,8 +34,13 @@ img.avatar
 div.chat
 {
     overflow-y: scroll;
+    height: auto;
+    min-height: 100%;    
+}
 
-    height: 260px;
+.callout > :last-child
+{
+    margin-bottom: .05rem;
 }
 
 .safe_borders
