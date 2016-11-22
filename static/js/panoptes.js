@@ -43,16 +43,16 @@ function WebSocketTest(server) {
                     if (observation){
                         update_info(observation);
                         if (observation['current_exp'] != exp_num){
-                            $('#observation_info .timer').timer('reset');
+                            // $('#observation_info .timer').timer('reset');
                             exp_num = observation['current_exp'];
                         }
                     }
                    
                     update_info(observer);
-                    $('#system_panel .timer').timer('reset');
+                    // $('#system_panel .timer').timer('reset');
 
                     update_info(msg['observatory']['mount']);
-                    $('#mount_panel .timer').timer('reset');
+                    // $('#mount_panel .timer').timer('reset');
 
                     refresh_images();
                     break;
@@ -63,7 +63,7 @@ function WebSocketTest(server) {
                     update_info(msg['data']);
                     update_safety(msg['data']['safe']);
 
-                    $('#weather_panel .timer').timer('reset');
+                    // $('#weather_panel .timer').timer('reset');
                     break;
                 case 'CAMERA':
                     update_cameras(msg);
