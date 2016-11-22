@@ -246,7 +246,7 @@ function update_environment(info){
 function add_chat_item(name, msg, time){
 
     item = '<div class="media">';
-    item = item + '<div class="media-left">';
+    item = item + '<div class="media-left avatar">';
     item = item + ' <img src="/static/img/pan.png" alt="Bot Image" class="media-object">';
     item = item + '</div>';
     item = item + '<div class="media-body">';
