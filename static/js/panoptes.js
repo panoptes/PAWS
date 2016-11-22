@@ -271,7 +271,7 @@ function refresh_images(){
 // Reload individual image
 function reload_img(img){
     base = $(img).attr('src').split('?')[0];
-    console.log("Reloading image: " + $(img).attr('src'));
+    // console.log("Reloading image: " + $(img).attr('src'));
 
     // Hack for others
     if(base.startsWith('http')){
