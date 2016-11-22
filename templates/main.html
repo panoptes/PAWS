@@ -4,7 +4,7 @@
         <div class="col-xs-4">
             {% module WeatherInfo() %}
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 img_refresh">
             {% module Image('/static/weather_plots/today.png', 'today_weather', "Today's Weather") %}
         </div>
         <div class="col-xs-4">
@@ -18,7 +18,7 @@
         <div class="col-xs-4">
             {% module ObservationInfo() %}
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 img_refresh">
             {% module StateInfo() %}
         </div>
     </div>
@@ -26,7 +26,7 @@
         <div class="col-xs-4">
             {% module BotChat() %}
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 img_refresh">
             {% module Image('/static/images/latest.jpg', 'latest_img', 'Latest Image') %}
         </div>
     </div>

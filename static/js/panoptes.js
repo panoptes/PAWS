@@ -277,12 +277,12 @@ function reload_img(img){
     if(base.startsWith('http')){
         new_src = $(img).attr('src');
     } else {
-        new_src = base + '?' + Math.random()
+        new_src = base + '?' + new Date().getTime();
     }
 
     $(img).attr('src', new_src);
 
-    // Update the link so not pointint at thumbnail
+    // Update the link so not pointing at thumbnail
     $(img.parentElement).attr('href', new_src.replace('tn_', ''));
 }
 
