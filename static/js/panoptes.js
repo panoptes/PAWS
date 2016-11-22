@@ -248,7 +248,7 @@ function add_chat_item(name, msg, time){
     item = '<div class="callout padded light-gray">';
     item = item + ' <img src="/static/img/pan.png" alt="user image" class="avatar">';
     item = item + ' <small class="float-right"><i class="fa fa-clock-o"></i> ' + time +' UTC</small>';
-    item = item + '  <span class="message">';
+    item = item + ' <br /><span class="message">';
     item = item + '    <a href="#" class="name">';
     item = item + name;
     item = item + '    </a>';
