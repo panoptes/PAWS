@@ -38,7 +38,7 @@ class MainHandler(BaseHandler):
     def get(self):
         user_data = self.get_current_user()
 
-        self.render("main.html", user_data=user_data)
+        self.render("main.hbs", user_data=user_data)
 
 
 class ImagesHandler(BaseHandler):
@@ -56,4 +56,4 @@ class ImagesHandler(BaseHandler):
         images.sort()
         images.reverse()
 
-        self.render("images.html", targets=target_list, visits=visit_list, images=img_list)
+        self.render("images.hbs", targets=target_list, visits=visit_list, images=img_list)

@@ -25,7 +25,7 @@ class MountInfo(tornado.web.UIModule):
     """ Displays information about the mount """
 
     def render(self):
-        return self.render_string("mount_info.html")
+        return self.render_string("mount_info.hbs")
 
 
 class SystemInfo(tornado.web.UIModule):
@@ -33,7 +33,7 @@ class SystemInfo(tornado.web.UIModule):
     """ Displays information about the mount """
 
     def render(self):
-        return self.render_string("system_info.html")
+        return self.render_string("system_info.hbs")
 
 
 class WeatherInfo(tornado.web.UIModule):
@@ -41,7 +41,7 @@ class WeatherInfo(tornado.web.UIModule):
     """ Displays information about the mount """
 
     def render(self):
-        return self.render_string("weather_info.html")
+        return self.render_string("weather_info.hbs")
 
 
 class CameraInfo(tornado.web.UIModule):
@@ -49,7 +49,7 @@ class CameraInfo(tornado.web.UIModule):
     """ Displays information about the mount """
 
     def render(self):
-        return self.render_string("camera_info.html")
+        return self.render_string("camera_info.hbs")
 
 
 class StateInfo(tornado.web.UIModule):
@@ -57,7 +57,7 @@ class StateInfo(tornado.web.UIModule):
     """ Displays information about the mount """
 
     def render(self):
-        return self.render_string("state_info.html")
+        return self.render_string("state_info.hbs")
 
 
 class ObservationInfo(tornado.web.UIModule):
@@ -65,7 +65,7 @@ class ObservationInfo(tornado.web.UIModule):
     """ Displays information about the target """
 
     def render(self):
-        return self.render_string("observation_info.html")
+        return self.render_string("observation_info.hbs")
 
 
 class SensorStatus(tornado.web.UIModule):
@@ -74,7 +74,7 @@ class SensorStatus(tornado.web.UIModule):
 
     def render(self):
 
-        return self.render_string("sensor_status.html")
+        return self.render_string("sensor_status.hbs")
 
 
 class BotChat(tornado.web.UIModule):
@@ -83,7 +83,7 @@ class BotChat(tornado.web.UIModule):
 
     def render(self):
 
-        return self.render_string("bot_chat.html")
+        return self.render_string("bot_chat.hbs")
 
 
 class Webcam(tornado.web.UIModule):
@@ -91,7 +91,7 @@ class Webcam(tornado.web.UIModule):
     """ A module for showing the webcam """
 
     def render(self, webcam):
-        return self.render_string("webcams.html", webcam=webcam)
+        return self.render_string("webcams.hbs", webcam=webcam)
 
 
 class Image(tornado.web.UIModule):
@@ -102,7 +102,7 @@ class Image(tornado.web.UIModule):
 
         imgs = listify(img_fn)
 
-        return self.render_string("display_image.html", img_list=imgs, title=title, id=id)
+        return self.render_string("display_image.hbs", img_list=imgs, title=title, id=id)
 
 
 class ImageList(tornado.web.UIModule):
@@ -111,4 +111,4 @@ class ImageList(tornado.web.UIModule):
 
     def render(self, targets=[], visits=[], images=[]):
 
-        return self.render_string("image_list.html", target_list=targets, visit_list=visits, img_list=images)
+        return self.render_string("image_list.hbs", target_list=targets, visit_list=visits, img_list=images)
