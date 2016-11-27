@@ -1,18 +1,23 @@
 {% extends "site/photo.html" %}
 {% block title %}{{title}}{% end %}
 {% block photo %}
-    <div class="img_refresh">
+    <div>
         {% for img in img_list %}
-            <a data-open="modal_{{ id }}">
-                <img class="thumbnail" src="{{ img }}" alt="{{ title }}">
+            <a href='#' class="thumbnail" data-toggle="modal" data-target="#{{ id }}_modal">
+                <img src="{{ img }}" alt="{{ title }}">
             </a>
         {% end %}
     </div>
-    <div class="reveal large title-bar" id="modal_{{ id }}" data-reveal>
-      <h1>{{ title }}</h1>
-        <img class="" src="{{ img }}" alt="{{ title }}">
-      <button class="close-button" data-close aria-label="Close modal" type="button">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+    <div class="modal fade" id="{{ id }}_modal" tabindex="-1" role="dialog" aria-labelledby="{{ id }}_modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="{{ img }}" alt="{{ title }}">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>    
 {% end %}

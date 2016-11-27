@@ -1,13 +1,27 @@
-div.padded
-{
-    margin: .25rem;
-    padding: .5rem;
+.equal, .equal > div[class*='col-'] {  
+    display: -webkit-flex;
+    display: flex;
+    flex:1 1 auto;
 }
 
-.callout > :last-child
-{
-    margin-bottom: .05rem;
+.panel { width: 100% }
+
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
+
+.modal-content {
+  height: auto;
+  /*min-height: 100%;*/
+  border-radius: 0;
+}
+
+.navbar-nav > li > a {padding-top:5px !important; padding-bottom:5px !important;}
+.navbar {min-height:22px !important}
 
 img.avatar
 {
@@ -23,38 +37,7 @@ img.avatar
 div.chat
 {
     overflow-y: scroll;
-
-    height: 260px;
-}
-
-.dl-horizontal dt
-{
-    display: block;
-    float: left;
-
-    width: 49%;
-    height: 2rem;
-    margin-bottom: 0;
-}
-
-.dl-horizontal dd
-{
-    font-family: monospace;
-
-    display: block;
-    float: left;
-
-    width: 49%;
-    height: 2rem;
-
-    text-align: right;
-}
-
-.dl-horizontal dt.sub
-{
-    font-size: 70%;
-
-    text-indent: 1rem;
+    height: 380px;
 }
 
 .safe_borders

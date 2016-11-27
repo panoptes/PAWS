@@ -1,5 +1,4 @@
 var ws;
-// var heartbeat_msg = '--heartbeat--', heartbeat_interval = null, missed_heartbeats = 0;
 
 var exp_num = 0;
 
@@ -8,23 +7,6 @@ function WebSocketTest(server) {
     if ("WebSocket" in window) {
         ws = new WebSocket("ws://" + server + "/ws/");
         ws.onopen = function() {
-            // Setup a heartbeat
-            // if (heartbeat_interval === null) {
-            //     missed_heartbeats = 0;
-            //     heartbeat_interval = setInterval(function() {
-            //         try {
-            //             missed_heartbeats++;
-            //             if (missed_heartbeats >= 3)
-            //                 throw new Error("Too many missed heartbeats.");
-            //             ws.send(heartbeat_msg);
-            //         } catch(e) {
-            //             clearInterval(heartbeat_interval);
-            //             heartbeat_interval = null;
-            //             console.warn("Closing connection. Reason: " + e.message);
-            //             ws.close();
-            //         }
-            //     }, 5000);
-            // }
             toggle_status('on');
             console.log("Connection established");
         };
@@ -33,13 +15,6 @@ function WebSocketTest(server) {
             var received_msg = evt.data.substring(evt.data.indexOf(' ') + 1)
 
             var msg = jQuery.parseJSON(received_msg);
-
-            // // Do heartbeat check first
-            // if (msg['message'] === heartbeat_msg) {
-            //     // reset the counter for missed heartbeats
-            //     missed_heartbeats = 0;
-            //     return;
-            // }
 
             switch(channel.toUpperCase()){
                 case 'STATE':
@@ -68,16 +43,16 @@ function WebSocketTest(server) {
                     if (observation){
                         update_info(observation);
                         if (observation['current_exp'] != exp_num){
-                            $('#observation_info .timer').timer('reset');
+                            // $('#observation_info .timer').timer('reset');
                             exp_num = observation['current_exp'];
                         }
                     }
                    
                     update_info(observer);
-                    $('#system_panel .timer').timer('reset');
+                    // $('#system_panel .timer').timer('reset');
 
                     update_info(msg['observatory']['mount']);
-                    $('#mount_panel .timer').timer('reset');
+                    // $('#mount_panel .timer').timer('reset');
 
                     refresh_images();
                     break;
@@ -88,7 +63,7 @@ function WebSocketTest(server) {
                     update_info(msg['data']);
                     update_safety(msg['data']['safe']);
 
-                    $('#weather_panel .timer').timer('reset');
+                    // $('#weather_panel .timer').timer('reset');
                     break;
                 case 'CAMERA':
                     update_cameras(msg);
@@ -116,10 +91,10 @@ function WebSocketTest(server) {
 
 function update_safety(is_safe){
     if(is_safe){
-        $('.safe_condition').html('Safe').removeClass('alert').addClass('success');
+        $('.safe_condition').html('Safe').removeClass('text-danger').addClass('text-success');
         toggle_status('on');
     } else {
-        $('.safe_condition').html('Unsafe').removeClass('success').addClass('alert');
+        $('.safe_condition').html('Unsafe').removeClass('text-success').addClass('text-danger');
         toggle_status('unsafe');
     }
 }
@@ -139,8 +114,7 @@ function toggle_status(status){
         border_cls = 'unsafe_borders';
     }
 
-    $('.title-bar').removeClass('warning danger success').addClass(safety_cls);
-    $('.callout').removeClass('safe_borders warning_borders unsafe_borders').addClass(border_cls);
+    $('.safety-border').removeClass('safe_borders warning_borders unsafe_borders').addClass(border_cls);
 }
 
 /******************** Update Info Methods ****************************/
@@ -271,15 +245,18 @@ function update_environment(info){
 
 function add_chat_item(name, msg, time){
 
-    item = '<div class="callout padded light-gray">';
-    item = item + ' <img src="/static/img/pan.png" alt="user image" class="avatar">';
+    item = '<div class="media">';
+    item = item + '<div class="media-left">';
+    item = item + ' <img src="/static/img/pan.png" alt="Bot Image" class="media-object avatar">';
+    item = item + '</div>';
+    item = item + '<div class="media-body">';
     item = item + ' <small class="float-right"><i class="fa fa-clock-o"></i> ' + time +' UTC</small>';
-    item = item + '  <p class="message">';
+    item = item + ' <br /><span class="message">';
     item = item + '    <a href="#" class="name">';
     item = item + name;
     item = item + '    </a>';
     item = item + msg;
-    item = item + '  </p>';
+    item = item + '  </span>';
     item = item + '</div>';
 
     $('#bot_chat').prepend(item);
@@ -303,13 +280,13 @@ function reload_img(img){
     if(base.startsWith('http')){
         new_src = $(img).attr('src');
     } else {
-        new_src = base + '?' + Math.random()
+        new_src = base + '?' + new Date().getTime();
     }
 
     $(img).attr('src', new_src);
 
-    // Update the link so not pointint at thumbnail
-    $(img.parentElement).attr('href', new_src.replace('tn_', ''));
+    // Update the link so not pointing at thumbnail
+    // $(img.parentlEement).attr('href', new_src.replace('tn_', ''));
 }
 
 function trim_time(t){

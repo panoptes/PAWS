@@ -6,14 +6,19 @@
     <dl class="dl-horizontal metro">
         <dt>State:</dt> <dd><span class="current_state"><i class="fa fa-bolt warning"></i> <strong><span class="warning">Offline</span></strong></span></dd>
     </dl>
-    <a data-open="modal_state_img">
-        <img src="/static/images/state.svg" class="img-responsive pad thumbnail state_img" alt="State Diagram Image" />
+    <a href="#" class="thumbnail" data-toggle="modal" data-target="#state_modal">
+        <img src="/static/images/state.svg" class="thumbnail state_img" alt="State Diagram Image" />
     </a>
-    <div class="reveal large title-bar" id="modal_state_img" data-reveal>
-        <h1>State Diagram</h1>
-        <img src="/static/images/state.svg" class="state_img" alt="State Diagram Image" />
-        <button class="close-button" data-close aria-label="Close modal" type="button">
-          <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <div class="modal fade" id="state_modal" tabindex="-1" role="dialog" aria-labelledby="state_modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="/static/images/state.svg" class="" alt="State Diagram Image"  width="800" height="600" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>    
 {% end %}
