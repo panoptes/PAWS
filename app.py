@@ -21,6 +21,7 @@ ioloop.install()
 
 tornado.options.define("port", default=8888, help="port", type=int)
 tornado.options.define("debug", default=False, help="debug mode")
+tornado.options.define('log_file_prefix', default='/var/panoptes/logs/paws.log')
 
 
 class WebAdmin(tornado.web.Application):
