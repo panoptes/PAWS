@@ -7,7 +7,8 @@
     <title>{{ escape(handler.settings["name"]) }}</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/panoptes.css">
+    <link rel="stylesheet" href="/static/css/panoptes.css"> 
+    <link rel="stylesheet" href="/static/css/blueimp-gallery.min.css">    
     <link rel="shortcut icon" href="/static/img/favicon.ico">
   {% block head %}{% end %}
 </head>
@@ -20,6 +21,7 @@
   <script src="/static/js/jquery.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
   <script src="/static/js/panoptes.js"></script>
+  <script src="/static/js/blueimp-gallery.min.js"></script>
   <script type="text/javascript">
     // Startup
     var ws;
@@ -31,6 +33,16 @@
 
         // Refresh images
         setInterval(refresh_images, 60 * second);
+
+      document.getElementById('image_gallery').onclick = function (event) {
+          event = event || window.event;
+          var target = event.target || event.srcElement,
+              link = target.src ? target.parentNode : target,
+              options = {index: link, event: event},
+              links = this.getElementsByTagName('a');
+          blueimp.Gallery(links, options);
+      };
+
 
         // Block for include js per page
         {% block bottom %}{% end %}

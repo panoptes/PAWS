@@ -43,17 +43,21 @@ class MainHandler(BaseHandler):
 
 class ImagesHandler(BaseHandler):
 
-    def get(self, target=None):
+    def get(self, sequence=None):
 
-        img_dir = '/var/panoptes/images/fields'
+        if sequence > '':
 
-        target_list = glob.glob("{}/*".format(img_dir))
-        visit_list = glob.glob("{}/**/*".format(img_dir))
-        img_list = glob.glob("{}/**/**/*.jpg".format(img_dir))
+            img_dir = '/var/panoptes/images/fields'
 
-        images = [img.replace('/var/panoptes/images/fields/', '') for img in img_list]
+            # target_list = glob.glob("{}/*".format(img_dir))
+            # visit_list = glob.glob("{}/**/*".format(img_dir))
+            img_list = glob.glob("{}/{}/*.jpg".format(img_dir, sequence))
 
-        images.sort()
-        images.reverse()
+            images = [img.replace('/var/panoptes/images/fields/', '') for img in img_list]
 
-        self.render("images.hbs", targets=target_list, visits=visit_list, images=img_list)
+            images.sort()
+            images.reverse()
+
+            self.render("images.hbs", images=images)
+        else:
+            self.render("no_images.hbs")

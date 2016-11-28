@@ -1,24 +1,25 @@
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
 <div class="box box-primary box-solid">
     <div class="box-header with-border">
         <h2 class="box-title">Images</h2>
     </div>
     <div class="box-body panel">
-        <table id="target_list" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Target</th>
-                    <th>Visit</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for target in target_list %}
-                {% set t, obs = target.split('/') %}
-                    <tr>
-                        <td><a href="{{ static_url('images/fields/' + t) }}">{{ escape(t) }}</a></td>
-                        <td><a href="{{ static_url('images/fields/' + target) }}">{{ escape(obs) }}</a></td>
-                    </tr>
-                {% end %}
-            </tbody>
-        </table>
+        <div id="image_gallery">
+            {% for img in images %}
+            {% set img_date = img.split('/')[-1] %}
+            <a href="{{ static_url('images/fields/' + img) }}" title="{{ img_date }}">
+                <img src="{{ static_url('images/fields/' + img) }}" alt="{{ img_date }}" style="width:25%">
+            </a>
+            {% end %}
+        </div>
     </div>
 </div>
