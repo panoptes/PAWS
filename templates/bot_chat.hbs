@@ -1,6 +1,12 @@
 {% extends "site/panel.hbs" %}
-{% block title %} {{ escape(handler.settings["config"]["name"]) }} Says: {% end %}
+{% block title %} 
+	{{ escape(handler.settings["config"]["name"]) }} Says: 
+{% end %}
 {% block panel %}
     <div class="chat" id="bot_chat">
     </div>
+    <br />
+	<a class="btn btn-default btn-xs pull-right" href="#" id='chat_clear'>
+		<i class="fa fa-remove text-warning" title="Clear Chat"> Clear</i>
+	</a>	
 {% end %}

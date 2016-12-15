@@ -26,26 +26,21 @@
     // Startup
     var ws;
     $( document ).ready(function() {
-        // Image refresh timer
-        second = 1000;
+      // Image refresh timer
+      second = 1000;
 
-        ws = WebSocketTest(window.location.host);
+      ws = WebSocketTest(window.location.host);
 
-        // Refresh images
-        setInterval(refresh_images, 60 * second);
+      // Refresh images
+      setInterval(refresh_images, 60 * second);
 
-      document.getElementById('image_gallery').onclick = function (event) {
-          event = event || window.event;
-          var target = event.target || event.srcElement,
-              link = target.src ? target.parentNode : target,
-              options = {index: link, event: event},
-              links = this.getElementsByTagName('a');
-          blueimp.Gallery(links, options);
-      };
+      $('#chat_clear').on('click', function(){
+        event.preventDefault();
+        $('#bot_chat').empty();
+      });
 
-
-        // Block for include js per page
-        {% block bottom %}{% end %}
+      // Block for include js per page
+      {% block bottom %}{% end %}
     });
   </script>
 </body>
