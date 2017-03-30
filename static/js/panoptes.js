@@ -241,6 +241,10 @@ function update_environment(info){
             for (i = 0; i < computer_info['temperature'].length; i++){
                 $('.computer_box_temp_0' + (i + 1)).html(pretty_number(computer_info['temperature'][i]));
             }
+            $('.current_fan').html(computer_info['current']['fan']);
+            $('.current_mount').html(computer_info['current']['mount']);
+            $('.current_main').html(computer_info['current']['main']);
+            $('.current_cameras').html(computer_info['current']['cameras']);
         }
     } catch(err) {
         console.log(err);
