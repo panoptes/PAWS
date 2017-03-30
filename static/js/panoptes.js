@@ -224,20 +224,24 @@ function update_cameras(cameras){
 
 function update_environment(info){
     try {
-        var camera_info = info['camera_box'];
-        $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
-        $('.camera_box_temp_00').html(pretty_number(camera_info['temp_01']));
+        if (info['name'] == 'camera_board'){
+            var camera_info = info;
+            $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
+            $('.camera_box_temp_00').html(pretty_number(camera_info['temp_01']));
+        }
     } catch(err) {
         console.log(err);
     }
 
     try {
-        var computer_info = info['computer_box'];
-        $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
-        $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
-        $('.computer_box_temp_01').html(pretty_number(computer_info['temp_01']));
-        $('.computer_box_temp_02').html(pretty_number(computer_info['temp_02']));
-        $('.computer_box_temp_03').html(pretty_number(computer_info['temp_03']));
+        if (info['name'] == 'telemetry_board'){
+            var computer_info = info;
+            $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
+            $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
+            $('.computer_box_temp_01').html(pretty_number(computer_info['temp_01']));
+            $('.computer_box_temp_02').html(pretty_number(computer_info['temp_02']));
+            $('.computer_box_temp_03').html(pretty_number(computer_info['temp_03']));
+        }
     } catch(err) {
         console.log(err);
     }
