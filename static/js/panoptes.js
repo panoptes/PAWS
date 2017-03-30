@@ -227,7 +227,7 @@ function update_environment(info){
         if (info['name'] == 'camera_board'){
             var camera_info = info;
             $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
-            $('.camera_box_temp_00').html(pretty_number(camera_info['temp_01']));
+            $('.camera_box_temp_00').html(pretty_number(camera_info['temp_00']));
         }
     } catch(err) {
         console.log(err);
@@ -239,7 +239,7 @@ function update_environment(info){
             $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
             $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
             for (i = 0; i < computer_info['temperature'].length; i++){
-                $('.computer_box_temp_0' + i).html(pretty_number(computer_info['temperature'][i]));
+                $('.computer_box_temp_0' + (i + 1)).html(pretty_number(computer_info['temperature'][i]));
             }
         }
     } catch(err) {
