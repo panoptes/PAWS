@@ -238,7 +238,7 @@ function update_environment(info){
             var computer_info = info;
             $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
             $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
-            for (i = 0, i < computer_info['temperature'].length, i++){
+            for (i = 0; i < computer_info['temperature'].length; i++){
                 $('.computer_box_temp_0' + i).html(pretty_number(computer_info['temperature'][i]));
             }
         }
