@@ -238,9 +238,9 @@ function update_environment(info){
             var computer_info = info;
             $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
             $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
-            $('.computer_box_temp_01').html(pretty_number(computer_info['temp_01']));
-            $('.computer_box_temp_02').html(pretty_number(computer_info['temp_02']));
-            $('.computer_box_temp_03').html(pretty_number(computer_info['temp_03']));
+            for (i = 0, i < computer_info['temperature'].length, i++){
+                $('.computer_box_temp_0' + i).html(pretty_number(computer_info['temperature'][i]));
+            }
         }
     } catch(err) {
         console.log(err);
