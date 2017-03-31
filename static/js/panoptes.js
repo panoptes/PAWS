@@ -245,6 +245,32 @@ function update_environment(info){
             $('.current_mount').html(computer_info['current']['mount']);
             $('.current_main').html(computer_info['current']['main']);
             $('.current_cameras').html(computer_info['current']['cameras']);
+
+            if(computer_info['power']['fan'] == 1){
+                $('.current_fan').prev().removeClass('danger');
+            } else {
+                $('.current_fan').prev().addClass('danger');
+            }
+            if(computer_info['power']['cameras'] == 1){
+                $('.current_cameras').prev().removeClass('danger');
+            } else {
+                $('.current_cameras').prev().addClass('danger');
+            }
+            if(computer_info['power']['computer'] == 1){
+                $('.current_computers').prev().removeClass('danger');
+            } else {
+                $('.current_computers').prev().addClass('danger');
+            }
+            if(computer_info['power']['mount'] == 1){
+                $('.current_mount').prev().removeClass('danger');
+            } else {
+                $('.current_mount').prev().addClass('danger');
+            }            
+            if(computer_info['power']['weather'] == 1){
+                $('.current_weather').prev().removeClass('danger');
+            } else {
+                $('.current_weather').prev().addClass('danger');
+            }                        
         }
     } catch(err) {
         console.log(err);
