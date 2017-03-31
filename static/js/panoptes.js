@@ -228,6 +228,10 @@ function update_environment(info){
             var camera_info = info;
             $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
             $('.camera_box_temp_00').html(pretty_number(camera_info['temp_00']));
+            $('.position_x').html(pretty_number(camera_info['accelerometer']['x']));
+            $('.position_y').html(pretty_number(camera_info['accelerometer']['y']));
+            $('.position_z').html(pretty_number(camera_info['accelerometer']['z']));
+            $('.position_o').html(pretty_number(camera_info['accelerometer']['o']));
         }
     } catch(err) {
         console.log(err);
