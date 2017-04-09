@@ -44,8 +44,8 @@
         ws.send('park');
 
         $('#park_button').addClass('disabled');
-        $('#unpark_button').addClass('disabled');
         $('#polar_align_button').addClass('disabled');
+        $('#unpark_button').removeClass('disabled');
       });
 
       $('#unpark_button').on('click', function(){
