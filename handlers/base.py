@@ -38,7 +38,7 @@ class MainHandler(BaseHandler):
     def get(self):
         user_data = self.get_current_user()
 
-        self.render("main.hbs", user_data=user_data)
+        self.render("main.hbs", user_data=user_data, db=self.db)
 
 
 class ImagesHandler(BaseHandler):

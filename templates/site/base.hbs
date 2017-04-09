@@ -39,6 +39,22 @@
         $('#bot_chat').empty();
       });
 
+      $('#park_button').on('click', function(){
+        event.preventDefault();
+        ws.send('park');
+      });
+
+      $('#unpark_button').on('click', function(){
+        event.preventDefault();
+        ws.send('unpark');
+      });
+
+      $('#polar_align_button').on('click', function(){
+        event.preventDefault();
+        ws.send('polar_alignment');
+      });
+
+
       // Block for include js per page
       {% block bottom %}{% end %}
     });
