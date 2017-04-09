@@ -73,6 +73,14 @@ function WebSocketTest(server) {
                 case 'PEAS_SHELL':
                 case 'POCS_SHELL':
 
+                    if (msg.message == 'Now listening for commands from PAWS'){
+                        $('#polar_align_area').removeClass('hidden');
+                    }         
+
+                    if (msg.message == 'No longer listening to PAWS'){
+                        $('#polar_align_area').addClass('hidden');
+                    }                             
+
                     if (msg.message == 'Done with polar alignment test'){
                         $('#polar_align_button').removeClass('disabled');
                         $('#park_button').removeClass('disabled');
