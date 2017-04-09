@@ -39,11 +39,11 @@ class PanWebSocket(WebSocketHandler):
     def on_message(self, message):
         """ From the client """
         logging.debug("WS Sent: {}".format(message))
-        # cmd_publisher = self.settings['cmd_publisher']
-        # try:
-        # cmd_publisher.send_message('PAWS', message)
-        # except Exception as e:
-        # print("Problem sending message from PAWS", e)
+        cmd_publisher = self.settings['cmd_publisher']
+        try:
+            cmd_publisher.send_message('PAWS', message)
+        except Exception as e:
+            print("Problem sending message from PAWS", e)
 
     def on_close(self):
         """ When client closes """
