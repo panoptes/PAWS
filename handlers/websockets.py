@@ -41,7 +41,7 @@ class PanWebSocket(WebSocketHandler):
         logging.debug("WS Sent: {}".format(message))
         cmd_publisher = self.settings['cmd_publisher']
         try:
-            cmd_publisher.send_message('PAWS', message)
+            cmd_publisher.send_message('PAWS-CMD', message)
         except Exception as e:
             print("Problem sending message from PAWS", e)
 
