@@ -72,6 +72,18 @@ function WebSocketTest(server) {
                 case 'PANCHAT':
                 case 'PEAS_SHELL':
                 case 'POCS_SHELL':
+
+                    if (msg.message == 'Done with polar alignment test'){
+                        $('#polar_align_button').removeClass('disabled');
+                        $('#park_button').removeClass('disabled');
+                    }
+
+                    if (msg.message == 'Mount parked'){
+                        $('#polar_align_button').addClass('disabled');
+                        $('#park_button').addClass('disabled');
+                        $('#unpark_button').removeClass('disabled');
+                    }                    
+
                     add_chat_item(channel, msg.message, msg.timestamp);
                     break;
                 default:

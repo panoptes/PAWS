@@ -42,16 +42,28 @@
       $('#park_button').on('click', function(){
         event.preventDefault();
         ws.send('park');
+
+        $('#park_button').addClass('disabled');
+        $('#unpark_button').addClass('disabled');
+        $('#polar_align_button').addClass('disabled');
       });
 
       $('#unpark_button').on('click', function(){
         event.preventDefault();
         ws.send('unpark');
+
+        $('#park_button').removeClass('disabled');
+        $('#polar_align_button').removeClass('disabled');
+        $('#unpark_button').addClass('disabled');
       });
 
       $('#polar_align_button').on('click', function(){
         event.preventDefault();
         ws.send('polar_alignment');
+
+        $('#park_button').addClass('disabled');
+        $('#unpark_button').addClass('disabled');
+        $('#polar_align_button').addClass('disabled');
       });
 
 
