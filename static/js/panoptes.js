@@ -271,10 +271,10 @@ function update_environment(info){
                 $('.computer_box_temp_0' + (i + 1)).html(pretty_number(computer_info['temperature'][i]));
             }
 
-            $('.current_fan').html((computer_info['current']['fan'] / 1023) * fan_amps_mult);
-            $('.current_mount').html((computer_info['current']['mount'] / 1023) * mount_amps_mult);
-            $('.current_main').html((computer_info['current']['main'] / 1023) * main_amps_mult);
-            $('.current_cameras').html((computer_info['current']['cameras'] / 1023) * camera_amps_mult);
+            $('.current_fan').html(pretty_number((computer_info['current']['fan'] / 1023) * fan_amps_mult));
+            $('.current_mount').html(pretty_number((computer_info['current']['mount'] / 1023) * mount_amps_mult));
+            $('.current_main').html(pretty_number((computer_info['current']['main'] / 1023) * main_amps_mult));
+            $('.current_cameras').html(pretty_number((computer_info['current']['cameras'] / 1023) * camera_amps_mult));
 
             if(computer_info['power']['fan'] == 1){
                 $('.current_fan').prev().removeClass('danger');
