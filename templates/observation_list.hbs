@@ -1,10 +1,11 @@
-{% extends "site/panel.hbs" %}
-{% block title %} Observations {% end %}
-{% block panel %}
+{% extends "site/base.hbs" %}
+{% block content %}
   <dl id="observation_list" class="dl-horizontal">
-    {% for name, obs in observation_list.items() %}
-      <dt>{{ name }}</dt> 
-      <dd>{{ obs.exp_time }}</dd> 
+    {% for obs in observation_list %}
+      <dt>{{ obs['_id'] }}</dt> 
+      <dd>{{ obs['date'] }}</dd> 
+      <dd>Exposures: {{ obs['count'] }}</dd> 
+	  <dd>Time: {{ obs['exp_time'] / 60 }} min.</dd>      
     {% end %}
   </dl>
 {% end %}
