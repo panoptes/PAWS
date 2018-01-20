@@ -46,9 +46,12 @@ class MainHandler(BaseHandler):
 
 class ObservationsHistoryHandler(BaseHandler):
 
-    def get(self, sequence=None):
+    def get(self, days=None):
 
-        date = (current_time() - 7. * u.day).datetime
+        if days is None:
+            days = 1
+
+        date = (current_time() - days * u.day).datetime
 
         observations = self.db.observations.aggregate([
             {"$match": {"date": {"$gte": date}}},
