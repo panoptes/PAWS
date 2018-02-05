@@ -30,7 +30,7 @@ class WebAdmin(tornado.web.Application):
 
     def __init__(self, config={}):
 
-        db = database.PanMongo()
+        db = database.PanDB()
         msg_subscriber = PanMessaging.create_subscriber(6511)
         cmd_publisher = PanMessaging.create_publisher(6500)
 
