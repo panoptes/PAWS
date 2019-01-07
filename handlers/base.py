@@ -4,7 +4,8 @@ import tornado.web
 from astropy import units as u
 from astropy.time import Time
 
-from pocs.utils import current_time
+#from pocs.utils import current_time
+from Service.NTPTimeService import NTPTimeService
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -17,6 +18,7 @@ class BaseHandler(tornado.web.RequestHandler):
     def initialize(self):
         self.config = self.settings['config']
         self.db = self.settings['db']
+        self.serv_time = NTPTimeService()
 
     def get_current_user(self):
         """
@@ -51,7 +53,8 @@ class ObservationsHistoryHandler(BaseHandler):
         if days is None:
             days = 1
 
-        date = (current_time() - days * u.day).datetime
+        current_time = self.serv_time.getUTCFromNTP()
+        date = (current_time - days * u.day).datetime
 
         observations = self.db.observations.aggregate([
             {"$match": {"date": {"$gte": date}}},

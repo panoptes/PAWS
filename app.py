@@ -13,9 +13,12 @@ from handlers import base
 from handlers import websockets
 from ui import modules
 
-from pocs.utils import database
-from pocs.utils.config import load_config
-from pocs.utils.messaging import PanMessaging
+#from pocs.utils import database
+from utils import database 
+#from pocs.utils.config import load_config
+from utils.config import load_config
+#from pocs.utils.messaging import PanMessaging
+from utils.messaging import PanMessaging
 
 ioloop.install()
 
@@ -30,11 +33,13 @@ class WebAdmin(tornado.web.Application):
 
     def __init__(self, config={}):
 
-        db = database.PanDB()
+        db = database.FileDB()
         msg_subscriber = PanMessaging.create_subscriber(6511)
         cmd_publisher = PanMessaging.create_publisher(6500)
 
-        self._base_dir = '{}'.format(os.getenv('PAWS', default='/var/panoptes/PAWS'))
+        self._base_dir = '{}'.format(os.getenv('PAWS',
+                                               default='/home/gnthibault/projects/PAWS'))
+#                                               default='/var/RemoteObservatory/PAWS'))
         name = config.setdefault('name', 'PAWS')
         server = config.setdefault('server_url', '127.0.0.1')
 
