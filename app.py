@@ -24,7 +24,9 @@ ioloop.install()
 
 tornado.options.define("port", default=8888, help="port", type=int)
 tornado.options.define("debug", default=False, help="debug mode")
-# tornado.options.define('log_file_prefix', default='/var/panoptes/logs/paws.log')
+#TODO TN THIS DOES NOT WORK: Traceback (most recent call last):
+#tornado.options.Error: Option 'log-file-prefix' already defined in /[...]/lib/python3.6/site-packages/tornado/log.py
+#tornado.options.define('log_file_prefix', default='/var/RemoteObservatory/logs/paws.log')
 
 
 class WebAdmin(tornado.web.Application):
@@ -33,7 +35,7 @@ class WebAdmin(tornado.web.Application):
 
     def __init__(self, config={}):
 
-        db = database.FileDB()
+        db = database.FileDB(db_name='/var/RemoteObservatory/DB')
         msg_subscriber = PanMessaging.create_subscriber(6511)
         cmd_publisher = PanMessaging.create_publisher(6500)
 

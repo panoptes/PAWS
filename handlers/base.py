@@ -42,9 +42,7 @@ class MainHandler(BaseHandler):
 
     def get(self):
         user_data = self.get_current_user()
-
         self.render("main.hbs", user_data=user_data, db=self.db)
-
 
 class ObservationsHistoryHandler(BaseHandler):
 
@@ -56,17 +54,20 @@ class ObservationsHistoryHandler(BaseHandler):
         current_time = self.serv_time.getUTCFromNTP()
         date = (current_time - days * u.day).datetime
 
-        observations = self.db.observations.aggregate([
+        # TODO TN FileDB is for dummies
+        #observations = self.db.observations.aggregate([
+        observations = self.db.get_current('observations').aggregate([
             {"$match": {"date": {"$gte": date}}},
             {'$group':
                 {
                     "_id": "$data.field_name",
-                    "count": {"$sum": 1},
-                    "exp_time": {"$sum": "$data.exp_time"},
+                    "count": {"$sum": "$data.number_exposure"},
+                    "exp_time": {"$sum": "$data.time_per_exposure"},
                     "date": {"$max": "$date"}
                 }
              },
             {'$sort': {'date': 1}}
         ])
+        print('observations is {}'.format(observations))
 
         self.render('observation_list.hbs', observation_list=observations)
