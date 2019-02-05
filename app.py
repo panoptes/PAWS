@@ -31,7 +31,8 @@ class WebAdmin(tornado.web.Application):
     def __init__(self, config={}):
 
         db = database.PanDB()
-        msg_subscriber = PanMessaging.create_subscriber(6511)
+        # TODO: Fix the 'messaging' host below so not hard-coded
+        msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging')
         cmd_publisher = PanMessaging.create_publisher(6500)
 
         self._base_dir = '{}'.format(os.getenv('PAWS', default='/var/panoptes/PAWS'))
