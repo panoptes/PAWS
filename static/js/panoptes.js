@@ -244,7 +244,7 @@ function update_cameras(cameras){
 
 function update_environment(info){
     try {
-        if (info['name'] == 'camera_board'){
+        if (info['name'] == 'scope_controller'){
             var camera_info = info;
             $('.camera_box_humidity_00').html(pretty_number(camera_info['humidity']));
             $('.camera_box_temp_00').html(pretty_number(camera_info['temp_00']));
