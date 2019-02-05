@@ -1,7 +1,6 @@
 """ Collection of UI modules for the admin web interface
 
 """
-import dill
 import tornado
 
 
@@ -94,17 +93,6 @@ class PolarAlign(tornado.web.UIModule):
     def render(self):
 
         return self.render_string("polar_align.hbs")
-
-
-class ObservationList(tornado.web.UIModule):
-
-    """ UI modules for showing/editing current observations """
-
-    def render(self, db=None):
-
-        observation_list = dill.loads(db.get_current('fields')['data'])
-
-        return self.render_string("observation_list.hbs", observation_list=observation_list)
 
 
 class Webcam(tornado.web.UIModule):
