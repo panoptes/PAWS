@@ -8,8 +8,6 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 
-from zmq.eventloop import ioloop
-
 from handlers import base
 from handlers import websockets
 from ui import modules
@@ -20,8 +18,6 @@ from utils import database
 from utils.config import load_config
 #from pocs.utils.messaging import PanMessaging
 from utils.messaging import PanMessaging
-
-ioloop.install()
 
 tornado.options.define("port", default=8888, help="port", type=int)
 tornado.options.define("debug", default=True, help="debug mode")
@@ -81,4 +77,4 @@ if __name__ == '__main__':
     http_server = tornado.httpserver.HTTPServer(WebAdmin(load_config()))
     http_server.listen(tornado.options.options.port)
     print("Starting PAWS on port {}".format(tornado.options.options.port))
-    tornado.ioloop.IOLoop.instance().start()
+    tornado.ioloop.IOLoop.current().start()
