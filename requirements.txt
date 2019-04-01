@@ -1,2 +1,3 @@
-tornado
+panoptes_utils
 pyzmq >= 15.3.0
+tornado
