@@ -1,4 +1,5 @@
 FROM gcr.io/panoptes-survey/panoptes-utils
+MAINTAINER Developers for PANOPTES project<https://github.com/panoptes/POCS>
 
 ENV PANDIR /var/panoptes
 
