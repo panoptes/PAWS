@@ -1,7 +1,7 @@
 # PAWS
 PANOPTES Administrative Web Site
 
-A small web service that runs locally on a [PANOTPES](https://projectpanoptes.org) unit and is designed
+A small web service that runs locally on a [PANOPTES](https://projectpanoptes.org) unit and is designed
 to show status of running observations.
 
 ## Installing PAWS
