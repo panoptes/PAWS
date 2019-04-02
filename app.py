@@ -12,7 +12,7 @@ from handlers import websockets
 from ui import modules
 
 from panoptes_utils import database
-from panoptes_utils.config import load_config
+from panoptes_utils.config.client import get_config
 from panoptes_utils.messaging import PanMessaging
 
 tornado.options.define("port", default=8888, help="port", type=int)
@@ -65,7 +65,7 @@ class WebAdmin(tornado.web.Application):
 
 if __name__ == '__main__':
     tornado.options.parse_command_line()
-    http_server = tornado.httpserver.HTTPServer(WebAdmin(load_config()))
+    http_server = tornado.httpserver.HTTPServer(WebAdmin(get_config()))
     http_server.listen(tornado.options.options.port)
     print("Starting PAWS on port {}".format(tornado.options.options.port))
     tornado.ioloop.IOLoop.current().start()
