@@ -13,14 +13,9 @@ usage() {
 "
 }
 
-if [ $# -eq 0 ]; then
-    usage
-    exit 1
-fi
-
 # Explicit volume mapping handles symlinks better on ubuntu.
 docker run --rm -it --network host \
         -v /var/panoptes/images:/var/panoptes/images \
-       -v /var/panoptes/images/fields:/var/panoptes/images/fields \
+        -v /var/panoptes/images/fields:/var/panoptes/images/fields \
         --name paws \
         gcr.io/panoptes-survey/paws
