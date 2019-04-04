@@ -1,0 +1,22 @@
+version: '3.2'
+services:
+  paws:
+    image: gcr.io/panoptes-survey/paws
+    container_name: paws
+    depends_on:
+      - "config-server"        
+      - "messaging"
+    ports:
+      - target: 8888
+        published: 8888
+        protocol: tcp
+        mode: host            
+    volumes:
+      - pandir:/var/panoptes
+volumes:
+    pandir:
+      driver: local
+      driver_opts:
+        type: none
+        device: /var/panoptes
+        o: bind
