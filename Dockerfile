@@ -1,4 +1,5 @@
 FROM gcr.io/panoptes-survey/panoptes-utils
+MAINTAINER Developers for PANOPTES project<https://github.com/panoptes/POCS>
 
 ENV PANDIR /var/panoptes
 
@@ -8,6 +9,9 @@ RUN cd ${PANDIR}/PAWS && pip3 install --no-cache-dir -r requirements.txt
 
 # Web app
 EXPOSE 8888
+
+# Config server
+EXPOSE 6563
 
 # PanMessaging
 EXPOSE 6500
