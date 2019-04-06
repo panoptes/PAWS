@@ -3,6 +3,8 @@ services:
   paws:
     image: gcr.io/panoptes-survey/paws
     container_name: paws
+    env_file: 
+      - ${PANDIR}/env_file
     depends_on:
       - "config-server"        
       - "messaging"
