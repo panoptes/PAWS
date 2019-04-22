@@ -1,11 +1,13 @@
 FROM gcr.io/panoptes-survey/panoptes-utils
 MAINTAINER Developers for PANOPTES project<https://github.com/panoptes/POCS>
 
-ENV PANDIR /var/panoptes
+ARG pan_dir=/var/panoptes
+ENV PANDIR $pan_dir
 
 COPY . ${PANDIR}/PAWS
 WORKDIR ${PANDIR}/PAWS
-RUN cd ${PANDIR}/PAWS && pip3 install --no-cache-dir -r requirements.txt
+RUN cd ${PANDIR}/PAWS && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Web app
 EXPOSE 8888
@@ -17,6 +19,6 @@ EXPOSE 6563
 EXPOSE 6500
 EXPOSE 6511
 
-# Note that pocs-base has the default ubuntu environment, so
-# we need to specify python3 so we don't get python2
-CMD ["python3", "app.py"]
+# We assume the environment is installed properly.
+CMD ["opt/conda/envs/panoptes-env/bin/python3", "app.py"]
+
