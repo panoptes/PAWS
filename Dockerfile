@@ -1,8 +1,12 @@
-FROM gcr.io/panoptes-survey/panoptes-utils
+ARG arch=amd64
+
+FROM gcr.io/panoptes-survey/panoptes-utils:$arch
 MAINTAINER Developers for PANOPTES project<https://github.com/panoptes/POCS>
 
-ARG pan_dir=/var/panoptes
-ENV PANDIR $pan_dir
+ARG pandir=/var/panoptes
+
+ENV PANDIR $pandir
+ENV POCS ${PANDIR}/POCS
 
 COPY . ${PANDIR}/PAWS
 WORKDIR ${PANDIR}/PAWS
