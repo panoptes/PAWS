@@ -16,6 +16,7 @@ from panoptes_utils.config.client import get_config
 from panoptes_utils.messaging import PanMessaging
 
 tornado.options.define("port", default=8888, help="port", type=int)
+tornado.options.define("port", default=8888, help="port", type=int)
 tornado.options.define("debug", default=False, help="debug mode")
 # tornado.options.define('log_file_prefix', default='/var/panoptes/logs/paws.log')
 
@@ -28,7 +29,7 @@ class WebAdmin(tornado.web.Application):
 
         db = database.PanDB()
         # TODO: Fix the 'messaging' host below so not hard-coded
-        msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging')
+        msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging-hub')
         cmd_publisher = PanMessaging.create_publisher(6500)
 
         self._base_dir = '{}'.format(os.getenv('PAWS', default='/var/panoptes/PAWS'))
