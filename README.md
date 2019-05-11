@@ -15,9 +15,11 @@ docker pull gcr.io/panoptes-survey/paws
 
 ## Running PAWS
 
-There is a small convenience script that will run the PAWS image with appropriate settings. To
-start the default PAWS, simply
+The best way to run PAWS is from the `$POCS/scripts/pocs-docker.sh` file. See [POCS](https://github.com/panoptes/POCS) for details, but to start up PAWS you can run the
+following (which will also start the `config-server` and `messaging-hub` as `paws`
+relies on them):
 
 ```bash
-./start_paws.sh
+cd $POCS
+scripts/pocs-docker.sh up paws
 ```
