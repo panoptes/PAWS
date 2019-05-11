@@ -10,7 +10,8 @@ ENV POCS ${PANDIR}/POCS
 
 COPY . ${PANDIR}/PAWS
 WORKDIR ${PANDIR}/PAWS
-RUN /opt/conda/envs/panoptes-env/bin/pip install --no-cache-dir --no-deps -Ur requirements.txt
+RUN /opt/conda/bin/conda install -c rpi zeromq pyzmq tornado && \
+    /opt/conda/envs/panoptes-env/bin/pip install --no-cache-dir --no-deps -r requirements.txt
 
 # We assume the environment is installed properly.
 CMD ["/opt/conda/envs/panoptes-env/bin/python3", "app.py"]
