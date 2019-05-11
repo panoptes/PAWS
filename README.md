@@ -23,3 +23,13 @@ relies on them):
 cd $POCS
 scripts/pocs-docker.sh up paws
 ```
+
+The above script merely gives `docker-compose` the correct files. You can achieve
+the same as above with:
+
+```bash
+cd $PANDIR/PAWS
+docker-compose -f $PANDIR/panoptes-utils/docker/docker-compose.yaml \
+                -f $PANDIR/PAWS/docker/docker-compose.yaml \
+                up
+```
