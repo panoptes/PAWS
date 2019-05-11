@@ -66,7 +66,7 @@ class WebAdmin(tornado.web.Application):
 
 if __name__ == '__main__':
     tornado.options.parse_command_line()
-    http_server = tornado.httpserver.HTTPServer(WebAdmin(get_config(host='config-server')))
+    http_server = tornado.httpserver.HTTPServer(WebAdmin(get_config(host='0.0.0.0')))
     http_server.listen(tornado.options.options.port)
     print("Starting PAWS on port {}".format(tornado.options.options.port))
     tornado.ioloop.IOLoop.current().start()
