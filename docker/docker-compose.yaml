@@ -1,0 +1,20 @@
+version: '3.2'
+services:
+  paws:
+    image: gcr.io/panoptes-survey/paws
+    container_name: paws
+    privileged: true
+    network_mode: host
+    env_file: ${PANDIR}/env_file
+    depends_on:
+      - "config-server"        
+      - "messaging-hub"        
+    volumes:
+      - pandir:/var/panoptes
+volumes:
+    pandir:
+      driver: local
+      driver_opts:
+        type: none
+        device: /var/panoptes
+        o: bind
