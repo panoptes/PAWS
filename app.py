@@ -25,7 +25,6 @@ tornado.options.define("debug", default=True, help="debug mode")
 #tornado.options.Error: Option 'log-file-prefix' already defined in /[...]/lib/python3.6/site-packages/tornado/log.py
 #tornado.options.define('log_file_prefix', default='/var/RemoteObservatory/logs/paws.log')
 
-
 class WebAdmin(tornado.web.Application):
 
     """ The main Application entry for our PANOPTES admin interface """
@@ -74,7 +73,7 @@ class WebAdmin(tornado.web.Application):
 
 if __name__ == '__main__':
     tornado.options.parse_command_line()
-    http_server = tornado.httpserver.HTTPServer(WebAdmin(load_config()))
+    http_server = tornado.httpserver.HTTPServer(WebAdmin(get_config(host='0.0.0.0')))
     http_server.listen(tornado.options.options.port)
     print("Starting PAWS on port {}".format(tornado.options.options.port))
     tornado.ioloop.IOLoop.current().start()

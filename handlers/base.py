@@ -2,7 +2,6 @@ import tornado.escape
 import tornado.web
 
 from astropy import units as u
-from astropy.time import Time
 
 #from pocs.utils import current_time
 from Service.NTPTimeService import NTPTimeService
