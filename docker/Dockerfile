@@ -12,4 +12,7 @@ COPY . ${PANDIR}/PAWS
 WORKDIR ${PANDIR}/PAWS
 RUN pip install --no-cache-dir -Ur requirements.txt
 
+# Comes from base image
+ENTRYPOINT ["/var/panoptes/panoptes-utils/docker/entrypoint.sh"]
+
 CMD ["python", "app.py"]
