@@ -16,7 +16,6 @@ from panoptes.utils.config.client import get_config
 from panoptes.utils.messaging import PanMessaging
 
 tornado.options.define("port", default=8888, help="port", type=int)
-tornado.options.define("port", default=8888, help="port", type=int)
 tornado.options.define("debug", default=False, help="debug mode")
 # tornado.options.define('log_file_prefix', default='/var/panoptes/logs/paws.log')
 
