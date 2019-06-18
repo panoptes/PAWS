@@ -11,9 +11,9 @@ from handlers import base
 from handlers import websockets
 from ui import modules
 
-from panoptes_utils import database
-from panoptes_utils.config.client import get_config
-from panoptes_utils.messaging import PanMessaging
+from panoptes.utils import database
+from panoptes.utils.config.client import get_config
+from panoptes.utils.messaging import PanMessaging
 
 tornado.options.define("port", default=8888, help="port", type=int)
 tornado.options.define("port", default=8888, help="port", type=int)
