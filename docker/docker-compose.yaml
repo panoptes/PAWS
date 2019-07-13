@@ -9,6 +9,11 @@ services:
     depends_on:
       - "config-server"
       - "messaging-hub"
+    ports:
+      - target: 8888
+        published: 8888
+        protocol: tcp
+        mode: host
     volumes:
       - pandir:/var/panoptes
 volumes:

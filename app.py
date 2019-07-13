@@ -27,13 +27,12 @@ class WebAdmin(tornado.web.Application):
     def __init__(self, config={}):
 
         db = database.PanDB()
-        # TODO: Fix the 'messaging' host below so not hard-coded
-        msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging-hub')
+        msg_subscriber = PanMessaging.create_subscriber(6511, host='0.0.0.0')
         cmd_publisher = PanMessaging.create_publisher(6500)
 
         self._base_dir = '{}'.format(os.getenv('PAWS', default='/var/panoptes/PAWS'))
         name = config.setdefault('name', 'PAWS')
-        server = config.setdefault('server_url', '127.0.0.1')
+        server = config.setdefault('server_url', '0.0.0.0')
 
         server_url = '{}:{}'.format(server, tornado.options.options.port)
 
