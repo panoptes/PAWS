@@ -3,7 +3,7 @@ import tornado.web
 
 from astropy import units as u
 
-from panoptes_utils import current_time
+from panoptes.utils import current_time
 
 
 class BaseHandler(tornado.web.RequestHandler):

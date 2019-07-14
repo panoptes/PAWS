@@ -1,14 +1,19 @@
-version: '3.2'
+version: '3.7'
 services:
   paws:
     image: gcr.io/panoptes-survey/paws
     container_name: paws
     privileged: true
     network_mode: host
-    env_file: ${PANDIR}/env_file
+    env_file: "${PANDIR:-/var/panoptes}/env_file"
     depends_on:
-      - "config-server"        
-      - "messaging-hub"        
+      - "config-server"
+      - "messaging-hub"
+    ports:
+      - target: 8888
+        published: 8888
+        protocol: tcp
+        mode: host
     volumes:
       - pandir:/var/panoptes
 volumes:
