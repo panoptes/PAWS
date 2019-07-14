@@ -41,7 +41,7 @@ class WebAdmin(tornado.web.Application):
             default='/home/gnthibault/projects/PAWS'))
 #            default='/var/RemoteObservatory/PAWS'))
         name = config.setdefault('name', 'PAWS')
-        server = config.setdefault('server_url', '127.0.0.1')
+        server = config.setdefault('server_url', '0.0.0.0')
 
         server_url = '{}:{}'.format(server, tornado.options.options.port)
 

@@ -6,7 +6,6 @@ from astropy import units as u
 #from pocs.utils import current_time
 from Service.NTPTimeService import NTPTimeService
 
-
 class BaseHandler(tornado.web.RequestHandler):
 
     """
