@@ -5,6 +5,10 @@ from astropy import units as u
 
 #from pocs.utils import current_time
 from Service.NTPTimeService import NTPTimeService
+<<<<<<< 19880b35808066912de356a0c887775771406dc5
+=======
+
+>>>>>>> merged from upstream
 
 class BaseHandler(tornado.web.RequestHandler):
 

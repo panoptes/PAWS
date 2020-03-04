@@ -40,6 +40,7 @@ class WebAdmin(tornado.web.Application):
         self._base_dir = '{}'.format(os.getenv('PAWS',
             default='/home/gnthibault/projects/PAWS'))
 #            default='/var/RemoteObservatory/PAWS'))
+
         name = config.setdefault('name', 'PAWS')
         server = config.setdefault('server_url', '0.0.0.0')
 
