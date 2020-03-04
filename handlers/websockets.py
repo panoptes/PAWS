@@ -47,5 +47,8 @@ class PanWebSocket(WebSocketHandler):
 
     def on_close(self):
         """ When client closes """
-        clients.remove(self)
+        try:
+            clients.remove(self)
+        except:
+            pass
         logging.debug("WS Closed")
