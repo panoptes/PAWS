@@ -31,7 +31,8 @@ class WebAdmin(tornado.web.Application):
 
     def __init__(self, config={}):
 
-        db = database.FileDB(db_name='/var/RemoteObservatory/DB')
+        db = database.FileDB()
+        #db = database.FileDB(db_name='/var/RemoteObservatory/DB')
         msg_subscriber = PanMessaging.create_subscriber(6511)
         # TODO: Fix the 'messaging' host below so not hard-coded
         #msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging')
@@ -74,7 +75,7 @@ class WebAdmin(tornado.web.Application):
 
 if __name__ == '__main__':
     tornado.options.parse_command_line()
-    http_server = tornado.httpserver.HTTPServer(WebAdmin(get_config(host='0.0.0.0')))
+    http_server = tornado.httpserver.HTTPServer(WebAdmin(load_config()))
     http_server.listen(tornado.options.options.port)
     print("Starting PAWS on port {}".format(tornado.options.options.port))
     tornado.ioloop.IOLoop.current().start()
