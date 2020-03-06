@@ -315,7 +315,7 @@ function add_chat_item(name, msg, time){
     item = item + '    <a href="#" class="name">';
     item = item + name;
     item = item + '    </a>';
-    item = item + msg;
+    item = item + escape_html(msg);
     item = item + '  </span>';
     item = item + '</div>';
 
@@ -359,4 +359,13 @@ function trim_time(t){
 
 function pretty_number(num){
     return parseFloat(num).toFixed(2);
+}
+
+function escape_html(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
