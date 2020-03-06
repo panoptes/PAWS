@@ -38,6 +38,8 @@ class WebAdmin(tornado.web.Application):
 
         db = database.FileDB(db_name='/var/RemoteObservatory/DB')
         msg_subscriber = PanMessaging.create_subscriber(6511)
+        # TODO: Fix the 'messaging' host below so not hard-coded
+        #msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging')
         cmd_publisher = PanMessaging.create_publisher(6500)
 
         self._base_dir = '{}'.format(os.getenv('PAWS',
