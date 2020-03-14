@@ -20,7 +20,7 @@ from utils.config import load_config
 from utils.messaging import PanMessaging
 
 tornado.options.define("port", default=8888, help="port", type=int)
-tornado.options.define("debug", default=True, help="debug mode")
+#tornado.options.define("debug", default=True, help="debug mode")
 #TODO TN THIS DOES NOT WORK: Traceback (most recent call last):
 #tornado.options.Error: Option 'log-file-prefix' already defined in /[...]/lib/python3.6/site-packages/tornado/log.py
 #tornado.options.define('log_file_prefix', default='/var/RemoteObservatory/logs/paws.log')
@@ -67,7 +67,10 @@ class WebAdmin(tornado.web.Application):
             ui_modules=modules,
             port=tornado.options.options.port,
             compress_response=True,
-            debug=tornado.options.options.debug,
+            debug=True,
+            #debug=tornado.options.options.debug,
+            #log_to_stderr=True,
+            #log_file_prefix='/var/RemoteObservatory/logs/paws.log'
         )
 
         super().__init__(app_handlers, **settings)

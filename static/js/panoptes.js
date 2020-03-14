@@ -62,7 +62,6 @@ function WebSocketTest(server) {
                 case 'WEATHER':
                     update_info(msg['data']);
                     update_safety(msg['data']['safe']);
-
                     // $('#weather_panel .timer').timer('reset');
                     break;
                 case 'CAMERA':
