@@ -21,29 +21,29 @@ class PanWebSocket(WebSocketHandler):
 
             # Register the callback
             self.stream.on_recv(self.on_data)
-            logging.debug("WS opened for channel {}".format(channel))
+            logging.debug(f"WS opened for channel {channel}")
 
             # Add this client to our list
             clients.append(self)
         except Exception as e:
-            logging.warning("Problem establishing websocket for {}: {}".format(self, e))
+            logging.warning(f"Problem establishing websocket for {self}: {e}")
 
     def on_data(self, data):
         """ From the PANOPTES unit """
         msg = data[0].decode('UTF-8')
-        logging.debug("WS Received: {}".format(msg))
+        logging.debug(f"WS Received: {msg}")
 
         for client in clients:
             client.write_message(msg)
 
     def on_message(self, message):
         """ From the client """
-        logging.debug("WS Sent: {}".format(message))
+        logging.debug(f"WS Sent: {message}")
         cmd_publisher = self.settings['cmd_publisher']
         try:
             cmd_publisher.send_message('PAWS-CMD', message)
         except Exception as e:
-            print("Problem sending message from PAWS", e)
+            logging.warning(f"Problem sending message from PAWS {e}")
 
     def on_close(self):
         """ When client closes """
