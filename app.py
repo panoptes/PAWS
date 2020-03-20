@@ -49,14 +49,16 @@ class WebAdmin(tornado.web.Application):
 
         app_handlers = [
             (r"/", base.MainHandler),
+            (r"/login", base.LoginHandler),
             (r"/observations/(.*)", base.ObservationsHistoryHandler),
             (r"/ws/(.*)", websockets.PanWebSocket),
         ]
         settings = dict(
-            cookie_secret="PANOPTES_SUPER_DOOPER_SECRET",
             template_path=os.path.join(self._base_dir, "templates"),
             static_path=os.path.join(self._base_dir, "static"),
             xsrf_cookies=True,
+            cookie_secret="PANOPTES_SUPER_DOOPER_SECRET",
+            login_url="/login", # redirect() will go there
             db=db,
             msg_subscriber=msg_subscriber,
             cmd_publisher=cmd_publisher,

@@ -14,7 +14,7 @@ class PanWebSocket(WebSocketHandler):
         if channel is None:
             channel = self.settings['name']
 
-        logging.debug("Setting up subscriber for channel: {}".format(channel))
+        logging.debug(f"Setting up subscriber for channel: {channel}")
 
         try:
             self.stream = ZMQStream(self.settings['msg_subscriber'].socket)
