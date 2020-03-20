@@ -61,6 +61,56 @@ class MainHandler(BaseHandler):
         user_data = self.current_user
         self.render("main.hbs", user_data=user_data, db=self.db)
 
+def bokeh_weather_app(doc):
+    # Setup source for data
+    source = ColumnDataSource(dict(x=[], y=[]))
+    columns = [
+        TableColumn(field="x", title="X"),
+        TableColumn(field="y", title="Y"),
+    ]
+    data_table = DataTable(source=source, columns=columns)
+    user_str = doc.session_context.id
+    doc_by_user_str[user_str] = doc
+    source_by_user_str[user_str] = source
+    
+    # Now setup nice plot
+    #Graph configuration
+    p = figure(title="Title", title_location='above',
+               sizing_mode="scale_width", plot_width=800, plot_height=500)
+    #Add Y Grid line - Set color to none
+    p.ygrid.grid_line_color = None
+    #Add X axis label
+    p.xaxis.axis_label = "Date"
+    #https://docs.bokeh.org/en/latest/docs/reference/models/formatters.html#bokeh.models.formatters.DatetimeTickFormatter
+    p.xaxis.formatter=DatetimeTickFormatter()
+    #Add Y axis Label
+    p.yaxis.axis_label = "Value"
+    #Set Title configuration
+    p.title.text_color = "black"
+    p.title.text_font = "times"
+    p.title.text_font_style = "italic"
+    #Set background configuration
+    p.background_fill_color = "white"
+    p.background_fill_alpha = 0.5
+    #Change X axis orientation label
+    #p.xaxis.major_label_orientation = 1.2
+    #------------Hover configuration -----------------#
+    #https://docs.bokeh.org/en/latest/docs/user_guide/tools.html?highlight=hover#basic-tooltips
+    # Add the HoverTool to the figure for showing spectrum values
+    p.add_tools(HoverTool(tooltips=[
+                                    ("Date", "@x{%H:%M}"),
+                                    ("Value", "@y{0.00}")],
+                          formatters={'@x': 'datetime'},
+                          mode='vline'))
+    # Plot actual data
+    p.line('x', 'y',  source=source, legend_label='My variable of interest')
+    #Set legen configuration (position and show/hide)
+    p.legend.location = "top_left"
+    p.legend.click_policy="hide"
+
+    # Add to the doc
+    doc.add_root(p)
+
 class ObservationsHistoryHandler(BaseHandler):
 
     @tornado.gen.coroutine

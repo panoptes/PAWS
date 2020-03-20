@@ -1,12 +1,12 @@
+# Generic stuff
 import logging
 import os
 import os.path
 
-import tornado.escape
-import tornado.httpserver
-import tornado.ioloop
+# Web stuff stuff
+import tornado
 import tornado.options
-import tornado.web
+from bokeh.server.server import Server
 
 from handlers import base
 from handlers import websockets
@@ -79,8 +79,18 @@ class WebAdmin(tornado.web.Application):
 
 
 if __name__ == '__main__':
+    # First instantiate main tornado infrastructure
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(WebAdmin(load_config()))
     http_server.listen(tornado.options.options.port)
-    print(f"Starting PAWS on port {tornado.options.options.port}")
-    tornado.ioloop.IOLoop.current().start()
+    io_loop = tornado.ioloop.IOLoop.current()
+    
+    
+    # Now instantiate bokeh app
+    tornado_port = tornado.options.options.port
+    bokeh_server = Server({'/bokeh_weather': base.bokeh_weather_app},
+                          io_loop=io_loop,
+                          allow_websocket_origin=[f"localhost:{tornado_port}"])
+    # Launch the whole thing
+    print(f"Starting PAWS on port {tornado_port}")
+    io_loop.start()    
