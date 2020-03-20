@@ -19,6 +19,12 @@ def listify(obj):
     else:
         return obj if isinstance(obj, (list, type(None))) else [obj]
 
+class BokehPlot(tornado.web.UIModule):
+
+    """ Displays information about the mount """
+
+    def render(self, template_path):
+        return self.render_string(template_path)
 
 class MountInfo(tornado.web.UIModule):
 
@@ -73,7 +79,6 @@ class SensorStatus(tornado.web.UIModule):
     """ UI modules for the environmental sensors """
 
     def render(self):
-
         return self.render_string("sensor_status.hbs")
 
 
@@ -82,7 +87,6 @@ class BotChat(tornado.web.UIModule):
     """ UI modules for chatting with the bot """
 
     def render(self):
-
         return self.render_string("bot_chat.hbs")
 
 

@@ -7,6 +7,11 @@ from astropy import units as u
 # POCS stuff
 from Service.NTPTimeService import NTPTimeService
 
+
+# GLOBAL STUFF FOR THE APP
+weather_doc_by_user_str = dict()
+weather_source_by_user_str = dict()
+
 class BaseHandler(tornado.web.RequestHandler):
 
     """
@@ -61,22 +66,56 @@ class MainHandler(BaseHandler):
         user_data = self.current_user
         self.render("main.hbs", user_data=user_data, db=self.db)
 
+class WeatherFrameHandler(BaseHandler):
+    def get(self):
+        self.render("second_page_template.html")
+
+    @tornado.gen.coroutine
+    @tornado.web.authenticated
+    def post(self, *args, **kwargs):
+        user_str = tornado.escape.xhtml_escape(self.current_user)
+        print(f"SecondHandler str {user_str}")
+
+        data = {}
+        data['x'] = [datetime.now()]
+        data['y'] = [np.random.rand()]
+
+        data_by_user[user_str] = data
+        source = source_by_user_str[user_str]
+        @tornado.gen.coroutine
+        def update():
+            source.stream(data, rollover=32)
+        doc = doc_by_user_str[user_str]  # type: Document
+        doc.add_next_tick_callback(update)  
+        self.render('second_page_template.html')
 def bokeh_weather_app(doc):
     # Setup source for data
-    source = ColumnDataSource(dict(x=[], y=[]))
+    source = ColumnDataSource(dict(date=[],
+                                   safe=[],
+                                   WEATHER_TEMPERATURE=[],
+                                   WEATHER_WIND_SPEED=[],
+                                   WEATHER_WIND_GUST=[],
+                                   WEATHER_RAIN_HOUR=[]))
     columns = [
-        TableColumn(field="x", title="X"),
-        TableColumn(field="y", title="Y"),
+        TableColumn(field="date", title="date"),
+        TableColumn(field="safe", title="safe"),
+        TableColumn(field="WEATHER_TEMPERATURE", title="WEATHER_TEMPERATURE"),
+        TableColumn(field="WEATHER_WIND_SPEED", title="WEATHER_WIND_SPEED"),
+        TableColumn(field="WEATHER_WIND_GUST", title="WEATHER_WIND_GUST"),
+        TableColumn(field="WEATHER_RAIN_HOUR", title="WEATHER_RAIN_HOUR"),
     ]
     data_table = DataTable(source=source, columns=columns)
     user_str = doc.session_context.id
-    doc_by_user_str[user_str] = doc
-    source_by_user_str[user_str] = source
+    weather_doc_by_user_str[user_str] = doc
+    weather_source_by_user_str[user_str] = source
     
     # Now setup nice plot
     #Graph configuration
-    p = figure(title="Title", title_location='above',
-               sizing_mode="scale_width", plot_width=800, plot_height=500)
+    p = figure(title="Weather data",
+               title_location='above',
+               sizing_mode="scale_width",
+               plot_width=500,
+               plot_height=300)
     #Add Y Grid line - Set color to none
     p.ygrid.grid_line_color = None
     #Add X axis label
@@ -98,12 +137,15 @@ def bokeh_weather_app(doc):
     #https://docs.bokeh.org/en/latest/docs/user_guide/tools.html?highlight=hover#basic-tooltips
     # Add the HoverTool to the figure for showing spectrum values
     p.add_tools(HoverTool(tooltips=[
-                                    ("Date", "@x{%H:%M}"),
-                                    ("Value", "@y{0.00}")],
-                          formatters={'@x': 'datetime'},
+                                    ("Date", "@date{%H:%M}"),
+                                    ("Wind speed", "@WEATHER_WIND_SPEED{0.00}")],
+                          formatters={'@date': 'datetime'},
                           mode='vline'))
     # Plot actual data
-    p.line('x', 'y',  source=source, legend_label='My variable of interest')
+    p.line('date',
+           'WEATHER_WIND_SPEED',
+           source=source,
+           legend_label='Weather wind speed')
     #Set legen configuration (position and show/hide)
     p.legend.location = "top_left"
     p.legend.click_policy="hide"
