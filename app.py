@@ -90,7 +90,8 @@ if __name__ == '__main__':
     tornado_port = tornado.options.options.port
     bokeh_server = Server({'/bokeh_weather': base.bokeh_weather_app},
                           io_loop=io_loop,
-                          allow_websocket_origin=[f"localhost:{tornado_port}"])
+                          allow_websocket_origin=[f"localhost:{tornado_port}",
+                                                  f"localhost:5006"])
     # Launch the whole thing
     print(f"Starting PAWS on port {tornado_port}")
     io_loop.start()    

@@ -4,6 +4,13 @@ import tornado
 # Astro stuff
 from astropy import units as u
 
+# Bokeh stuff
+import bokeh
+from bokeh.models import ColumnDataSource, TableColumn, DateFormatter, DataTable, DatetimeTickFormatter
+from bokeh.plotting import figure
+from bokeh.models.tools import HoverTool
+
+
 # POCS stuff
 from Service.NTPTimeService import NTPTimeService
 
@@ -88,6 +95,7 @@ class WeatherFrameHandler(BaseHandler):
         doc = doc_by_user_str[user_str]  # type: Document
         doc.add_next_tick_callback(update)  
         self.render('second_page_template.html')
+
 def bokeh_weather_app(doc):
     # Setup source for data
     source = ColumnDataSource(dict(date=[],
