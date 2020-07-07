@@ -55,14 +55,11 @@ class PanWebSocket(WebSocketHandler):
             self.stream = ZMQStream(self.settings['msg_subscriber'].socket)
 
             # Register the callback
-            logging.error(f"AAAA")
             self.stream.on_recv(self.on_data)
             logging.debug(f"WS opened for channel {channel}")
-            logging.error(f"BBBB")
 
             # Add this client to our list
             clients.append(self)
-            logging.error(f"CCCC")
         except Exception as e:
             logging.warning(f"Problem establishing websocket for {self}: {e}")
 

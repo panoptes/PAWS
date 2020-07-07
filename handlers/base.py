@@ -70,25 +70,6 @@ class MainHandler(BaseHandler):
         user_data = self.current_user
         self.render("main.hbs", user_data=user_data, db=self.db)
 
-class WeatherFrameHandler(BaseHandler):
-    @tornado.gen.coroutine
-    @tornado.web.authenticated
-    def get(self):
-        user_str = tornado.escape.xhtml_escape(self.current_user)
-        print(f"SecondHandler str {user_str}")
-
-        data = {}
-        data['x'] = [datetime.now()]
-        data['y'] = [np.random.rand()]
-
-        source = source_by_user_str[user_str]
-        @tornado.gen.coroutine
-        def update():
-            source.stream(data, rollover=32)
-        doc = doc_by_user_str[user_str]  # type: Document
-        doc.add_next_tick_callback(update)  
-        self.render('second_page_template.html')
-
 def bokeh_weather_app(doc):
     # Setup source for data
     source = ColumnDataSource(dict(date=[],
