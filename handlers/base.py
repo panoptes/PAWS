@@ -7,6 +7,7 @@ from astropy import units as u
 # Bokeh stuff
 import bokeh
 from bokeh.models import ColumnDataSource, TableColumn, DateFormatter, DataTable, DatetimeTickFormatter
+from bokeh.palettes import Spectral11
 from bokeh.plotting import figure
 from bokeh.models.tools import HoverTool
 
@@ -95,9 +96,9 @@ def bokeh_weather_app(doc):
     #Graph configuration
     p = figure(title="Weather data",
                title_location='above',
-               sizing_mode="scale_width",
-               plot_width=500,
-               plot_height=300)
+               sizing_mode="scale_height",
+               plot_width=1600,
+               plot_height=900)
     #Add Y Grid line - Set color to none
     p.ygrid.grid_line_color = None
     #Add X axis label
@@ -115,19 +116,59 @@ def bokeh_weather_app(doc):
     p.background_fill_alpha = 0.5
     #Change X axis orientation label
     #p.xaxis.major_label_orientation = 1.2
+    palette = Spectral11[0:len(columns)-1]
+    lw=2   #line width
+    la=0.6 #line alpha
+    # Plot actual data
+    p.line(x='date',
+           y='WEATHER_RAIN_HOUR',
+           source=source,
+           legend_label='mm of rain per hour',
+           line_width=lw,
+           line_alpha=la,
+           line_color=palette[0])
+    p.line(x='date',
+           y='WEATHER_TEMPERATURE',
+           source=source,
+           legend_label='Temperature in C',
+           line_width=lw,
+           line_alpha=la,
+           line_color=palette[1])
+    p.line(x='date',
+           y='WEATHER_WIND_GUST',
+           source=source,
+           legend_label='Wind gusts in km/h',
+           line_width=lw,
+           line_alpha=la,
+           line_color=palette[2])
+    p.line(x='date',
+           y='WEATHER_WIND_SPEED',
+           source=source,
+           legend_label='Wind speed in km/h',
+           line_width=lw,
+           line_alpha=la,
+           line_color=palette[3])
+    safe_glyph=p.line(x='date',
+           y='safe',
+           source=source,
+           legend_label='Safe status',
+           line_width=lw,
+           line_alpha=la,
+           line_color=palette[4])
     #------------Hover configuration -----------------#
     #https://docs.bokeh.org/en/latest/docs/user_guide/tools.html?highlight=hover#basic-tooltips
-    # Add the HoverTool to the figure for showing spectrum values
     p.add_tools(HoverTool(tooltips=[
-                                    ("Date", "@date{%H:%M}"),
-                                    ("Wind speed", "@WEATHER_WIND_SPEED{0.00}")],
+                                    ("Time", "@date{%H:%M:%S}"),
+                                    ("Rain per hour", "@WEATHER_RAIN_HOUR{0.00}"),
+                                    ("Temperature in C", "@WEATHER_TEMPERATURE{0.00}"),
+                                    ("Wind gust in km/h", "@WEATHER_WIND_GUST{0.00}"),
+                                    ("Wind speed in km/h", "@WEATHER_WIND_SPEED{0.00}"),
+                                    ("Safe status", "@safe{0}")],
                           formatters={'@date': 'datetime'},
-                          mode='vline'))
-    # Plot actual data
-    p.line('date',
-           'WEATHER_WIND_SPEED',
-           source=source,
-           legend_label='Weather wind speed')
+                          mode='vline',
+                          point_policy='follow_mouse',
+                          line_policy='nearest',
+                          renderers=[safe_glyph]))
     #Set legen configuration (position and show/hide)
     p.legend.location = "top_left"
     p.legend.click_policy="hide"
