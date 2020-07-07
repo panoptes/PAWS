@@ -4,11 +4,11 @@
         <div class="col-xs-12 col-sm-12 col-md-4">
             {% module WeatherInfo() %}
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 img_refresh">
-            {% module BokehPlot("bokeh_weather.hbs") %}
-        </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
             {% module SystemInfo() %}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 img_refresh">
+            {% module StateInfo() %}
         </div>
     </div>
     <div class="row equal">
@@ -19,7 +19,7 @@
             {% module ObservationInfo() %}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 img_refresh">
-            {% module StateInfo() %}
+            {% module GuidePlot("guiding.hbs") %}
         </div>
     </div>
     <div class="row equal">

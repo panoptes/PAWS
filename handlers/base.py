@@ -10,14 +10,11 @@ from bokeh.models import ColumnDataSource, TableColumn, DateFormatter, DataTable
 from bokeh.plotting import figure
 from bokeh.models.tools import HoverTool
 
-
 # POCS stuff
 from Service.NTPTimeService import NTPTimeService
 
-
-# GLOBAL STUFF FOR THE APP
-weather_doc_by_user_str = dict()
-weather_source_by_user_str = dict()
+# Local stuff
+from handlers import users_info as users_info
 
 class BaseHandler(tornado.web.RequestHandler):
 
@@ -74,12 +71,9 @@ class MainHandler(BaseHandler):
         self.render("main.hbs", user_data=user_data, db=self.db)
 
 class WeatherFrameHandler(BaseHandler):
-    def get(self):
-        self.render("second_page_template.html")
-
     @tornado.gen.coroutine
     @tornado.web.authenticated
-    def post(self, *args, **kwargs):
+    def get(self):
         user_str = tornado.escape.xhtml_escape(self.current_user)
         print(f"SecondHandler str {user_str}")
 
@@ -87,7 +81,6 @@ class WeatherFrameHandler(BaseHandler):
         data['x'] = [datetime.now()]
         data['y'] = [np.random.rand()]
 
-        data_by_user[user_str] = data
         source = source_by_user_str[user_str]
         @tornado.gen.coroutine
         def update():
@@ -114,8 +107,8 @@ def bokeh_weather_app(doc):
     ]
     data_table = DataTable(source=source, columns=columns)
     user_str = doc.session_context.id
-    weather_doc_by_user_str[user_str] = doc
-    weather_source_by_user_str[user_str] = source
+    users_info.weather_doc_by_user_str[user_str] = doc
+    users_info.weather_source_by_user_str[user_str] = source
     
     # Now setup nice plot
     #Graph configuration
@@ -160,6 +153,7 @@ def bokeh_weather_app(doc):
 
     # Add to the doc
     doc.add_root(p)
+#<iframe id="modal_iframe" src="http://localhost:5006/bokeh_weather" frameborder="0" scrolling="yes" seamless="seamless" style="display:block; width:100%; height:85vh;"></iframe>></iframe>
 
 class ObservationsHistoryHandler(BaseHandler):
 

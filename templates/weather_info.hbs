@@ -9,4 +9,19 @@
     <dt>Gust:</dt> <dd> <span class="WEATHER_WIND_GUST">N/A</span> <small>km/h</small></dd>
     <dt>Rain:</dt> <dd> <span class="WEATHER_RAIN_HOUR">N/A</span> <small>mm/h</small></dd>
 </dl>
+    <a href="#" class="thumbnail" data-toggle="modal" data-target="#plots_modal"> Goto plots
+    </a>
+    <div class="modal fade" id="plots_modal" tabindex="-1" role="dialog" aria-labelledby="weather_modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+          {% raw script %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>    
+        
 {% end %}
