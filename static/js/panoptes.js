@@ -20,44 +20,21 @@ function WebSocketTest(server) {
                 case 'STATE':
                     change_state(msg['state']);
                     break;
-                case 'OBSERVER':
-                    update_info(msg['observer']);
-                    break;
                 case 'FIELD':
                     update_info(msg['field']);
                     break;
                 case 'STATUS':
-                    change_state(msg['state']);
-
+                    var state = msg['state'];
                     var observer = msg['observatory']['observer'];
                     var observation = msg['observatory']['observation'];
-
-                    observer['local_evening_astro_time'] = trim_time(observer['local_evening_astro_time']);
-                    observer['local_morning_astro_time'] = trim_time(observer['local_morning_astro_time']);
-
-                    observer['local_moon_illumination'] = pretty_number(observer['local_moon_illumination'] * 100);
-                    observer['local_moon_alt'] = pretty_number(observer['local_moon_alt']);
-
-                    // Update parts of the page
-
-                    if (observation){
-                        update_info(observation);
-                        if (observation['current_exp'] != exp_num){
-                            // $('#observation_info .timer').timer('reset');
-                            exp_num = observation['current_exp'];
-                        }
-                    }
-                   
-                    update_info(observer);
-                    // $('#system_panel .timer').timer('reset');
-
-                    update_info(msg['observatory']['mount']);
-                    // $('#mount_panel .timer').timer('reset');
-
+                    var scope_controller = msg['observatory']['observatory']['scope'];
+                    var mount = msg['observatory']['mount'];
+                    change_state(state);
+                    update_observer(observer);
+                    exp_num = update_observation(observation);
+                    update_info(scope_controller)
+                    update_info(mount);
                     refresh_images();
-                    break;
-                case 'ENVIRONMENT':
-                    update_environment(msg['data']);
                     break;
                 case 'WEATHER':
                     update_info(msg['data']);
@@ -67,6 +44,8 @@ function WebSocketTest(server) {
                 case 'CAMERA':
                     update_cameras(msg);
                     break;
+                case 'GUIDING':
+                    update_guiding(msg['data'])
                 case 'PANBOT':
                 case 'PANCHAT':
                 case 'PEAS_SHELL':
@@ -116,6 +95,19 @@ function update_safety(is_safe){
         $('.safe_condition').html('Unsafe').removeClass('text-success').addClass('text-danger');
         toggle_status('unsafe');
     }
+}
+
+function update_observer(observer){
+    observer['local_evening_astro_time'] = trim_time(observer['local_evening_astro_time']);
+    observer['local_morning_astro_time'] = trim_time(observer['local_morning_astro_time']);
+    observer['local_moon_illumination'] = pretty_number(observer['local_moon_illumination'] * 100);
+    observer['local_moon_alt'] = pretty_number(observer['local_moon_alt']);
+    update_info(observer);
+}
+
+function update_observation(observation){
+    update_info(observation);
+    return observation['current_exp'];
 }
 
 function toggle_status(status){
@@ -189,6 +181,14 @@ function update_info(status){
     });
 }
 
+function update_guiding(info){
+    try {
+        $('.guiding_state').html(info['state']);
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 function update_cameras(cameras){
     $.each(cameras, function(cam_name, props){
         $.each(props, function(prop, val){
@@ -239,67 +239,6 @@ function update_cameras(cameras){
 
     });
 
-}
-
-function update_environment(info){
-    try {
-        if (info['name'] == 'scope_controller'){
-            var controller_info = info;
-            $('.controller_scope_dustcap_status').html(pretty_number(controller_info['humidity']));
-            $('.controller_scope_dewheater_status').html(pretty_number(controller_info['temp_00']));
-        }
-    } catch(err) {
-        console.log(err);
-    }
-
-    var main_amps_mult = 2.8;
-    var fan_amps_mult = 1.8;
-    var mount_amps_mult = 1.8;
-    var camera_amps_mult = 1.0;    
-
-    try {
-        if (info['name'] == 'telemetry_board'){
-            var computer_info = info;
-            $('.computer_box_humidity_00').html(pretty_number(computer_info['humidity']));
-            $('.computer_box_temp_00').html(pretty_number(computer_info['temp_00']));
-            for (i = 0; i < computer_info['temperature'].length; i++){
-                $('.computer_box_temp_0' + (i + 1)).html(pretty_number(computer_info['temperature'][i]));
-            }
-
-            $('.current_fan').html(pretty_number((computer_info['current']['fan'] / 1023) * fan_amps_mult));
-            $('.current_mount').html(pretty_number((computer_info['current']['mount'] / 1023) * mount_amps_mult));
-            $('.current_main').html(pretty_number((computer_info['current']['main'] / 1023) * main_amps_mult));
-            $('.current_cameras').html(pretty_number((computer_info['current']['cameras'] / 1023) * camera_amps_mult));
-
-            if(computer_info['power']['fan'] == 1){
-                $('.current_fan').prev().removeClass('danger');
-            } else {
-                $('.current_fan').prev().addClass('danger');
-            }
-            if(computer_info['power']['cameras'] == 1){
-                $('.current_cameras').prev().removeClass('danger');
-            } else {
-                $('.current_cameras').prev().addClass('danger');
-            }
-            if(computer_info['power']['computer'] == 1){
-                $('.current_computers').prev().removeClass('danger');
-            } else {
-                $('.current_computers').prev().addClass('danger');
-            }
-            if(computer_info['power']['mount'] == 1){
-                $('.current_mount').prev().removeClass('danger');
-            } else {
-                $('.current_mount').prev().addClass('danger');
-            }            
-            if(computer_info['power']['weather'] == 1){
-                $('.current_weather').prev().removeClass('danger');
-            } else {
-                $('.current_weather').prev().addClass('danger');
-            }                        
-        }
-    } catch(err) {
-        console.log(err);
-    }
 }
 
 function add_chat_item(name, msg, time){

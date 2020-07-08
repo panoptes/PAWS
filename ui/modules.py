@@ -90,11 +90,11 @@ class WeatherInfo(BaseUIModule):
 
     """ Displays information about the mount """
 
-    def render(self):
+    def render(self, template_path):
         user_str = tornado.escape.xhtml_escape(self.current_user)
         script = bokeh.embed.server_session(session_id=user_str,
             url='http://localhost:5006/bokeh_weather')
-        return self.render_string("weather_info.hbs", script=script)
+        return self.render_string(template_path, script=script)
 
 
 class CameraInfo(tornado.web.UIModule):

@@ -1,0 +1,23 @@
+{% extends "site/panel.hbs" %}
+{% block title %}
+    Guiding
+{% end %}
+{% block panel %}
+    <dl id="guiding_info" class="dl-horizontal">
+        <dt>Guiding state:</dt> <dd> <span class="guiding_state">N/A</span></dd>
+    </dl>
+    <a href="#" class="thumbnail" data-toggle="modal" data-target="#modal_guiding_plot"> Goto plots
+    </a>
+    <div class="modal fade" id="modal_guiding_plot" tabindex="-1" role="dialog" aria-labelledby="guiding_modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+           {% raw script %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% end %}

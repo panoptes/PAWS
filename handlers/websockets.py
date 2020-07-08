@@ -102,7 +102,18 @@ class PanWebSocket(WebSocketHandler):
         doc.add_next_tick_callback(update_callback)  
         
     def update_guiding_bokeh(self, user_key, data):
-        pass
+        update = {}
+        update['date'] = [datetime.now()]
+        update['state'] = [data['state']]
+        update['DRIFT_RA'] = [data['DRIFT_RA']]
+        update['DRIFT_DEC'] = [data['DRIFT_DEC']]
+
+        source = users_info.guiding_source_by_user_str[user_key]
+        @tornado.gen.coroutine
+        def update_callback():
+            source.stream(update, rollover=64)
+        doc = users_info.guiding_doc_by_user_str[user_key]  # type: Document
+        doc.add_next_tick_callback(update_callback)  
 
     def on_message(self, message):
         """ From the client """
