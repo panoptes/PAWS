@@ -177,6 +177,83 @@ def bokeh_weather_app(doc):
     doc.add_root(p)
 #<iframe id="modal_iframe" src="http://localhost:5006/bokeh_weather" frameborder="0" scrolling="yes" seamless="seamless" style="display:block; width:100%; height:85vh;"></iframe>></iframe>
 
+def bokeh_guiding_app(doc):
+    # Setup source for data
+    source = ColumnDataSource(dict(date=[],
+                                   state=[],
+                                   DRIFT_RA=[],
+                                   DRIFT_DEC=[]))
+    columns = [
+        TableColumn(field="date", title="date"),
+        TableColumn(field="state", title="state"),
+        TableColumn(field="DRIFT_RA", title="DRIFT_RA"),
+        TableColumn(field="DRIFT_DEC", title="DRIFT_DEC"),
+    ]
+    data_table = DataTable(source=source, columns=columns)
+    user_str = doc.session_context.id
+    users_info.guiding_doc_by_user_str[user_str] = doc
+    users_info.guiding_source_by_user_str[user_str] = source
+    
+    # Now setup nice plot
+    #Graph configuration
+    p = figure(title="Guiding data",
+               title_location='above',
+               sizing_mode="scale_height",
+               plot_width=1600,
+               plot_height=900)
+    #Add Y Grid line - Set color to none
+    p.ygrid.grid_line_color = None
+    #Add X axis label
+    p.xaxis.axis_label = "Date"
+    #https://docs.bokeh.org/en/latest/docs/reference/models/formatters.html#bokeh.models.formatters.DatetimeTickFormatter
+    p.xaxis.formatter=DatetimeTickFormatter()
+    #Add Y axis Label
+    p.yaxis.axis_label = "Value"
+    #Set Title configuration
+    p.title.text_color = "black"
+    p.title.text_font = "times"
+    p.title.text_font_style = "italic"
+    #Set background configuration
+    p.background_fill_color = "white"
+    p.background_fill_alpha = 0.5
+    #Change X axis orientation label
+    #p.xaxis.major_label_orientation = 1.2
+    palette = Spectral11[0:len(columns)-1]
+    lw=2   #line width
+    la=0.6 #line alpha
+    # Plot actual data
+    p.line(x='date',
+           y='DRIFT_RA',
+           source=source,
+           legend_label='Drift RA in arcsec',
+           line_width=lw,
+           line_alpha=la,
+           line_color=palette[0])
+    dec_glyph = p.line(x='date',
+           y='DRIFT_DEC',
+           source=source,
+           legend_label='Drift DEC in arcsec',
+           line_width=lw,
+           line_alpha=la,
+           line_color=palette[1])
+    #------------Hover configuration -----------------#
+    #https://docs.bokeh.org/en/latest/docs/user_guide/tools.html?highlight=hover#basic-tooltips
+    p.add_tools(HoverTool(tooltips=[
+                                    ("Time", "@date{%H:%M:%S}"),
+                                    ("Drift RA in arcsec", "@DRIFT_RA{0.00}"),
+                                    ("Drift DEC in arcsec", "@DRIFT_DEC{0.00}")],
+                          formatters={'@date': 'datetime'},
+                          mode='vline',
+                          point_policy='follow_mouse',
+                          line_policy='nearest',
+                          renderers=[dec_glyph]))
+    #Set legen configuration (position and show/hide)
+    p.legend.location = "top_left"
+    p.legend.click_policy="hide"
+
+    # Add to the doc
+    doc.add_root(p)
+
 class ObservationsHistoryHandler(BaseHandler):
 
     @tornado.gen.coroutine

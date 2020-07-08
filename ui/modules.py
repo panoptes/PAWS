@@ -52,14 +52,17 @@ class BaseUIModule(tornado.web.UIModule):
 
         return user_data
 
-class GuidePlot(tornado.web.UIModule):
+class GuideInfo(BaseUIModule):
 
     """ Displays information about the mount """
 
     def render(self, template_path):
-        return self.render_string(template_path)
+        user_str = tornado.escape.xhtml_escape(self.current_user)
+        script = bokeh.embed.server_session(session_id=user_str,
+            url='http://localhost:5006/bokeh_guiding')
+        return self.render_string("guiding_info.hbs", script=script)
 
-class FocusPlot(tornado.web.UIModule):
+class FocusInfo(tornado.web.UIModule):
 
     """ Displays information about the last focus """
 

@@ -1,5 +1,6 @@
 #Generic stuff
 from datetime import datetime
+import json
 import logging
 
 #Web stuff
@@ -72,22 +73,36 @@ class PanWebSocket(WebSocketHandler):
             client.write_message(msg)
 
         # Bokeh part
-        user_str = tornado.escape.xhtml_escape(self.current_user)
-        data = {}
-        data['date'] = [datetime.now()]
-        data['safe'] = [np.random.rand()>0.5]
-        data['WEATHER_RAIN_HOUR'] = [np.random.rand()]
-        data['WEATHER_TEMPERATURE'] = [np.random.rand()]
-        data['WEATHER_WIND_GUST'] = [np.random.rand()]
-        data['WEATHER_WIND_SPEED'] = [np.random.rand()]
+        self.update_bokeh(msg)
 
-        source = users_info.weather_source_by_user_str[user_str]
+    def update_bokeh(self, msg):
+        user_key = tornado.escape.xhtml_escape(self.current_user)
+        channel =  msg.split(' ',1)[0]
+        if channel == "WEATHER":
+            msg = json.loads(msg.split(' ',1)[1])['data']
+            self.update_weather_bokeh(user_key, msg)
+        if channel == "GUIDING":
+            msg = json.loads(msg.split(' ',1)[1])['data']
+            self.update_guiding_bokeh(user_key, msg)
 
+    def update_weather_bokeh(self, user_key, data):
+        update = {}
+        update['date'] = [datetime.now()]
+        update['safe'] = [data['safe']]
+        update['WEATHER_RAIN_HOUR'] = [data['WEATHER_RAIN_HOUR']]
+        update['WEATHER_TEMPERATURE'] = [data['WEATHER_TEMPERATURE']]
+        update['WEATHER_WIND_GUST'] = [data['WEATHER_WIND_GUST']]
+        update['WEATHER_WIND_SPEED'] = [data['WEATHER_WIND_SPEED']]
+
+        source = users_info.weather_source_by_user_str[user_key]
         @tornado.gen.coroutine
-        def update():
-            source.stream(data, rollover=32)
-        doc = users_info.weather_doc_by_user_str[user_str]  # type: Document
-        doc.add_next_tick_callback(update)  
+        def update_callback():
+            source.stream(update, rollover=64)
+        doc = users_info.weather_doc_by_user_str[user_key]  # type: Document
+        doc.add_next_tick_callback(update_callback)  
+        
+    def update_guiding_bokeh(self, user_key, data):
+        pass
 
     def on_message(self, message):
         """ From the client """
