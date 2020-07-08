@@ -31,7 +31,14 @@ function WebSocketTest(server) {
                     var mount = msg['observatory']['mount'];
                     change_state(state);
                     update_observer(observer);
-                    exp_num = update_observation(observation);
+                    update_info(observation);
+                    if (observation){
+                        update_info(observation);
+                        if (observation['current_exp'] != exp_num){
+                        // $('#observation_info .timer').timer('reset');
+                          exp_num = observation['current_exp'];
+                        }
+                    }
                     update_info(scope_controller)
                     update_info(mount);
                     refresh_images();
@@ -105,11 +112,6 @@ function update_observer(observer){
     update_info(observer);
 }
 
-function update_observation(observation){
-    update_info(observation);
-    return observation['current_exp'];
-}
-
 function toggle_status(status){
     var safety_cls, border_cls;
 
@@ -176,7 +178,7 @@ function change_state(state){
 function update_info(status){
     $.each(status, function(key, val){
         $('.' + key).each(function(idx, elem){
-            $(elem).html(val);
+            $(elem).html(String(val));
         })
     });
 }
