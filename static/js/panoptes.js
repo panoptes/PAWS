@@ -52,6 +52,7 @@ function WebSocketTest(server) {
                     update_cameras(msg);
                     break;
                 case 'GUIDING':
+                    break;
                 case 'GUIDING_STATUS':
                     update_guiding_status(msg['data'])
                     break;
@@ -185,9 +186,9 @@ function update_info(status){
     });
 }
 
-function update_guiding_status(info){
+function update_guiding_status(status){
     try {
-        $('.guiding_state').html(info['state']);
+        $('.guiding_state').html(status['state']);
     } catch(err) {
         console.log(err);
     }

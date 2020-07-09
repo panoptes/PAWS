@@ -180,12 +180,10 @@ def bokeh_weather_app(doc):
 def bokeh_guiding_app(doc):
     # Setup source for data
     source = ColumnDataSource(dict(date=[],
-                                   state=[],
                                    dx=[],
                                    dy=[]))
     columns = [
         TableColumn(field="date", title="date"),
-        TableColumn(field="state", title="state"),
         TableColumn(field="dx", title="dx"),
         TableColumn(field="dy", title="dy"),
     ]

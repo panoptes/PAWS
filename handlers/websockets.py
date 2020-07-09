@@ -104,7 +104,6 @@ class PanWebSocket(WebSocketHandler):
     def update_guiding_bokeh(self, user_key, data):
         update = {}
         update['date'] = [datetime.now()]
-        update['state'] = [data['state']]
         update['dx'] = [data['dx']]
         update['dy'] = [data['dy']]
 
