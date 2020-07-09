@@ -181,13 +181,13 @@ def bokeh_guiding_app(doc):
     # Setup source for data
     source = ColumnDataSource(dict(date=[],
                                    state=[],
-                                   DRIFT_RA=[],
-                                   DRIFT_DEC=[]))
+                                   dx=[],
+                                   dy=[]))
     columns = [
         TableColumn(field="date", title="date"),
         TableColumn(field="state", title="state"),
-        TableColumn(field="DRIFT_RA", title="DRIFT_RA"),
-        TableColumn(field="DRIFT_DEC", title="DRIFT_DEC"),
+        TableColumn(field="dx", title="dx"),
+        TableColumn(field="dy", title="dy"),
     ]
     data_table = DataTable(source=source, columns=columns)
     user_str = doc.session_context.id
@@ -223,14 +223,14 @@ def bokeh_guiding_app(doc):
     la=0.6 #line alpha
     # Plot actual data
     p.line(x='date',
-           y='DRIFT_RA',
+           y='dx',
            source=source,
            legend_label='Drift RA in arcsec',
            line_width=lw,
            line_alpha=la,
            line_color=palette[0])
     dec_glyph = p.line(x='date',
-           y='DRIFT_DEC',
+           y='dy',
            source=source,
            legend_label='Drift DEC in arcsec',
            line_width=lw,
@@ -240,8 +240,8 @@ def bokeh_guiding_app(doc):
     #https://docs.bokeh.org/en/latest/docs/user_guide/tools.html?highlight=hover#basic-tooltips
     p.add_tools(HoverTool(tooltips=[
                                     ("Time", "@date{%H:%M:%S}"),
-                                    ("Drift RA in arcsec", "@DRIFT_RA{0.00}"),
-                                    ("Drift DEC in arcsec", "@DRIFT_DEC{0.00}")],
+                                    ("Drift RA in arcsec", "@dx{0.00}"),
+                                    ("Drift DEC in arcsec", "@dy{0.00}")],
                           formatters={'@date': 'datetime'},
                           mode='vline',
                           point_policy='follow_mouse',

@@ -52,7 +52,9 @@ function WebSocketTest(server) {
                     update_cameras(msg);
                     break;
                 case 'GUIDING':
-                    update_guiding(msg['data'])
+                case 'GUIDING_STATUS':
+                    update_guiding_status(msg['data'])
+                    break;
                 case 'PANBOT':
                 case 'PANCHAT':
                 case 'PEAS_SHELL':
@@ -183,7 +185,7 @@ function update_info(status){
     });
 }
 
-function update_guiding(info){
+function update_guiding_status(info){
     try {
         $('.guiding_state').html(info['state']);
     } catch(err) {

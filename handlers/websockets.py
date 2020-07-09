@@ -105,8 +105,8 @@ class PanWebSocket(WebSocketHandler):
         update = {}
         update['date'] = [datetime.now()]
         update['state'] = [data['state']]
-        update['DRIFT_RA'] = [data['DRIFT_RA']]
-        update['DRIFT_DEC'] = [data['DRIFT_DEC']]
+        update['dx'] = [data['dx']]
+        update['dy'] = [data['dy']]
 
         source = users_info.guiding_source_by_user_str[user_key]
         @tornado.gen.coroutine
