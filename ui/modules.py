@@ -170,5 +170,4 @@ class ImageList(tornado.web.UIModule):
     """ UI modules for listing the current images """
 
     def render(self, images=[]):
-
         return self.render_string("image_list.hbs", images=images)
