@@ -38,14 +38,12 @@ class WebAdmin(tornado.web.Application):
         #msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging')
         cmd_publisher = PanMessaging.create_publisher(6500)
 
-        self._base_dir = '{}'.format(os.getenv('PAWS',
-            default='/home/gnthibault/projects/PAWS'))
-#            default='/var/RemoteObservatory/PAWS'))
+        self._base_dir = f"{os.getenv('PAWS', default='/home/gnthibault/projects/PAWS')}"
 
         name = config.setdefault('name', 'PAWS')
         server = config.setdefault('server_url', '0.0.0.0')
 
-        server_url = '{}:{}'.format(server, tornado.options.options.port)
+        server_url = f"{server}:{tornado.options.options.port}"
 
         app_handlers = [
             (r"/", base.MainHandler),

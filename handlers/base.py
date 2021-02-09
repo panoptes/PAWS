@@ -89,6 +89,7 @@ def bokeh_weather_app(doc):
     ]
     data_table = DataTable(source=source, columns=columns)
     user_str = doc.session_context.id
+    user_str = users_info.default_user
     users_info.weather_doc_by_user_str[user_str] = doc
     users_info.weather_source_by_user_str[user_str] = source
     
@@ -104,7 +105,12 @@ def bokeh_weather_app(doc):
     #Add X axis label
     p.xaxis.axis_label = "Date"
     #https://docs.bokeh.org/en/latest/docs/reference/models/formatters.html#bokeh.models.formatters.DatetimeTickFormatter
-    p.xaxis.formatter=DatetimeTickFormatter()
+    p.xaxis.formatter = DatetimeTickFormatter(days="%m/%d %H:%M",
+                                              hours="%H:%M:%S",
+                                              hourmin="%H:%M:%S",
+                                              minutes="%H:%M:%S",
+                                              minsec="%H:%M:%S",
+                                              seconds="%H:%M:%S",)
     #Add Y axis Label
     p.yaxis.axis_label = "Value"
     #Set Title configuration
@@ -117,8 +123,8 @@ def bokeh_weather_app(doc):
     #Change X axis orientation label
     #p.xaxis.major_label_orientation = 1.2
     palette = Spectral11[0:len(columns)-1]
-    lw=2   #line width
-    la=0.6 #line alpha
+    lw = 2   #line width
+    la = 0.6 #line alpha
     # Plot actual data
     p.line(x='date',
            y='WEATHER_RAIN_HOUR',
@@ -148,13 +154,13 @@ def bokeh_weather_app(doc):
            line_width=lw,
            line_alpha=la,
            line_color=palette[3])
-    safe_glyph=p.line(x='date',
-           y='safe',
-           source=source,
-           legend_label='Safe status',
-           line_width=lw,
-           line_alpha=la,
-           line_color=palette[4])
+    safe_glyph = p.line(x='date',
+                        y='safe',
+                        source=source,
+                        legend_label='Safe status',
+                        line_width=lw,
+                        line_alpha=la,
+                        line_color=palette[4])
     #------------Hover configuration -----------------#
     #https://docs.bokeh.org/en/latest/docs/user_guide/tools.html?highlight=hover#basic-tooltips
     p.add_tools(HoverTool(tooltips=[
@@ -171,7 +177,7 @@ def bokeh_weather_app(doc):
                           renderers=[safe_glyph]))
     #Set legen configuration (position and show/hide)
     p.legend.location = "top_left"
-    p.legend.click_policy="hide"
+    p.legend.click_policy = "hide"
 
     # Add to the doc
     doc.add_root(p)
@@ -189,6 +195,7 @@ def bokeh_guiding_app(doc):
     ]
     data_table = DataTable(source=source, columns=columns)
     user_str = doc.session_context.id
+    user_str = users_info.default_user
     users_info.guiding_doc_by_user_str[user_str] = doc
     users_info.guiding_source_by_user_str[user_str] = source
     
@@ -204,7 +211,12 @@ def bokeh_guiding_app(doc):
     #Add X axis label
     p.xaxis.axis_label = "Date"
     #https://docs.bokeh.org/en/latest/docs/reference/models/formatters.html#bokeh.models.formatters.DatetimeTickFormatter
-    p.xaxis.formatter=DatetimeTickFormatter()
+    p.xaxis.formatter = DatetimeTickFormatter(days="%m/%d %H:%M",
+                                              hours="%H:%M:%S",
+                                              hourmin="%H:%M:%S",
+                                              minutes="%H:%M:%S",
+                                              minsec="%H:%M:%S",
+                                              seconds="%H:%M:%S",)
     #Add Y axis Label
     p.yaxis.axis_label = "Value"
     #Set Title configuration
@@ -217,8 +229,8 @@ def bokeh_guiding_app(doc):
     #Change X axis orientation label
     #p.xaxis.major_label_orientation = 1.2
     palette = Spectral11[0:len(columns)-1]
-    lw=2   #line width
-    la=0.6 #line alpha
+    lw = 2   #line width
+    la = 0.6 #line alpha
     # Plot actual data
     p.line(x='date',
            y='dx',
@@ -228,12 +240,12 @@ def bokeh_guiding_app(doc):
            line_alpha=la,
            line_color=palette[0])
     dec_glyph = p.line(x='date',
-           y='dy',
-           source=source,
-           legend_label='Drift DEC in arcsec',
-           line_width=lw,
-           line_alpha=la,
-           line_color=palette[1])
+                       y='dy',
+                       source=source,
+                       legend_label='Drift DEC in arcsec',
+                       line_width=lw,
+                       line_alpha=la,
+                       line_color=palette[1])
     #------------Hover configuration -----------------#
     #https://docs.bokeh.org/en/latest/docs/user_guide/tools.html?highlight=hover#basic-tooltips
     p.add_tools(HoverTool(tooltips=[
@@ -257,7 +269,6 @@ class ObservationsHistoryHandler(BaseHandler):
     @tornado.gen.coroutine
     @tornado.web.authenticated
     def get(self, days=None):
-
         if days is None:
             days = 1
 

@@ -1,6 +1,8 @@
 static/images
 static/weather_plots
 temp/*
+.idea/
+venv/
 
 # Compiled files
 *.py[co]

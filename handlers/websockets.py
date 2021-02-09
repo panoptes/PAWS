@@ -20,29 +20,30 @@ clients = []
 
 class PanWebSocket(WebSocketHandler):
 
-    def get_current_user(self):
-        """
-        Looks for a cookie that shows we have been logged in. If cookie
-        is found, attempt to look up user info in the database
-        """
-        user_data = None
-        try:
-            user_data = tornado.escape.xhtml_escape(
-                self.get_secure_cookie("user"))
-        except TypeError as e:
-            pass
-
-        # Get email from cookie
-        #email = tornado.escape.to_unicode(self.get_secure_cookie("email"))
-        #if not email:
-        #    return None
-
-        # Look up user data
-        #user_data = self.db.admin.find_one({'username': email})
-        #if user_data is None:
-        #    return None
-
-        return user_data
+    # This does not make sense
+    # def get_current_user(self):
+    #     """
+    #     Looks for a cookie that shows we have been logged in. If cookie
+    #     is found, attempt to look up user info in the database
+    #     """
+    #     user_data = None
+    #     try:
+    #         user_data = tornado.escape.xhtml_escape(
+    #             self.get_secure_cookie("user"))
+    #     except TypeError as e:
+    #         pass
+    #
+    #     # Get email from cookie
+    #     #email = tornado.escape.to_unicode(self.get_secure_cookie("email"))
+    #     #if not email:
+    #     #    return None
+    #
+    #     # Look up user data
+    #     #user_data = self.db.admin.find_one({'username': email})
+    #     #if user_data is None:
+    #     #    return None
+    #
+    #     return user_data
 
     def open(self, channel):
         """ Client opening connection to unit """
@@ -76,13 +77,15 @@ class PanWebSocket(WebSocketHandler):
         self.update_bokeh(msg)
 
     def update_bokeh(self, msg):
-        user_key = tornado.escape.xhtml_escape(self.current_user)
-        channel =  msg.split(' ',1)[0]
+        #user does not makes sense in websocket
+        #user_key = tornado.escape.xhtml_escape(self.current_user)
+        channel = msg.split(' ',1)[0]
+        user_key = users_info.default_user
         if channel == "WEATHER":
-            msg = json.loads(msg.split(' ',1)[1])['data']
+            msg = json.loads(msg.split(' ', 1)[1])['data']
             self.update_weather_bokeh(user_key, msg)
         if channel == "GUIDING":
-            msg = json.loads(msg.split(' ',1)[1])['data']
+            msg = json.loads(msg.split(' ', 1)[1])['data']
             self.update_guiding_bokeh(user_key, msg)
 
     def update_weather_bokeh(self, user_key, data):
