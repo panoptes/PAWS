@@ -16,10 +16,18 @@
             {% module MountInfo() %}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
+            {% module GuideInfo("guiding_info.hbs") %}
+        </div>
+    </div>
+    <div class="row equal">
+        <div class="col-xs-12 col-sm-12 col-md-4">
             {% module ObservationInfo() %}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 img_refresh">
-            {% module GuideInfo("guiding_info.hbs") %}
+            {% module Image('/static/images/latest_pointing.jpg', 'latest_pointing', 'Latest pointing') %}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 img_refresh">
+            {% module AladinInfo() %}
         </div>
     </div>
     <div class="row equal">

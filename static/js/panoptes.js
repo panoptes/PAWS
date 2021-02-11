@@ -42,6 +42,7 @@ function WebSocketTest(server) {
                     update_info(scope_controller)
                     update_info(mount);
                     refresh_images();
+                    update_aladin();
                     break;
                 case 'WEATHER':
                     update_info(msg['data']);
@@ -244,6 +245,11 @@ function update_cameras(cameras){
 
     });
 
+}
+
+function update_aladin(){
+    //aladin_content
+    //$('#aladin-lite-div').prepend(aladin_content);
 }
 
 function add_chat_item(name, msg, time){

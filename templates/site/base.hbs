@@ -29,7 +29,11 @@
       // Image refresh timer
       second = 1000;
 
+      // Websocket
       ws = WebSocketTest(window.location.host);
+
+      // Aladin embed
+      var aladin = A.aladin('#aladin-lite-div', {fov:1, target: 'M81'});
 
       // Refresh images
       setInterval(refresh_images, 60 * second);
