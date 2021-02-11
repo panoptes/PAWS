@@ -153,6 +153,13 @@ class Webcam(tornado.web.UIModule):
     def render(self, webcam):
         return self.render_string("webcams.hbs", webcam=webcam)
 
+class AladinInfo(BaseUIModule):
+
+    """ Displays information about the target with aladin """
+
+    def render(self, template_path):
+        return self.render_string("aladin_info.hbs", script=script)
+
 
 class Image(tornado.web.UIModule):
 
