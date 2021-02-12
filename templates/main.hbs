@@ -2,13 +2,18 @@
 {% block content %}
     <div class="row equal">
         <div class="col-xs-12 col-sm-12 col-md-4">
+            {% module SystemInfo() %}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 img_refresh">
+            {% module StateInfo() %}
+        </div>
+    </div>
+    <div class="row equal">
+        <div class="col-xs-12 col-sm-12 col-md-4">
             {% module WeatherInfo("weather_info.hbs") %}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
-            {% module SystemInfo() %}
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 img_refresh">
-            {% module StateInfo() %}
+            {% module Webcam("http://localhost:8080/webcam.ogg") %}
         </div>
     </div>
     <div class="row equal">
@@ -16,7 +21,7 @@
             {% module MountInfo() %}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
-            {% module GuideInfo("guiding_info.hbs") %}
+            {% module GuideInfo() %}
         </div>
     </div>
     <div class="row equal">

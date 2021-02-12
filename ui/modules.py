@@ -56,7 +56,7 @@ class GuideInfo(BaseUIModule):
 
     """ Displays information about the mount """
 
-    def render(self, template_path):
+    def render(self):
         user_str = tornado.escape.xhtml_escape(self.current_user)
         script = bokeh.embed.server_session(session_id=user_str,
             url='http://localhost:5006/bokeh_guiding')
@@ -142,16 +142,16 @@ class PolarAlign(tornado.web.UIModule):
     """ UI modules for chatting with the bot """
 
     def render(self):
-
         return self.render_string("polar_align.hbs")
 
 
 class Webcam(tornado.web.UIModule):
 
-    """ A module for showing the webcam """
+    """ A module for showing the webcam
+    """
 
-    def render(self, webcam):
-        return self.render_string("webcams.hbs", webcam=webcam)
+    def render(self, mp4_stream_url):
+        return self.render_string("webcam.hbs", mp4_stream_url=f'src="{mp4_stream_url}"')
 
 class AladinInfo(tornado.web.UIModule):
 

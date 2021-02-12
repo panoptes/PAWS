@@ -14,7 +14,7 @@
 </head>
 <body>
   {% include 'nav.hbs' %}
-  <div class="container">
+  <div class="container-fluid">
       {% block content %}{% end %}
   </div>
   {% include 'footer.hbs' %}
@@ -33,7 +33,8 @@
       ws = WebSocketTest(window.location.host);
 
       // Aladin embed
-      var aladin = A.aladin('#aladin-lite-div', {fov:1, target: 'M81'});
+      //var aladin = A.aladin('#aladin-lite-div');
+      var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:60});
 
       // Refresh images
       setInterval(refresh_images, 60 * second);

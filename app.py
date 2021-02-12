@@ -38,6 +38,12 @@ class WebAdmin(tornado.web.Application):
         #msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging')
         cmd_publisher = PanMessaging.create_publisher(6500)
 
+        #FIXME: find the right place to put that
+        cmd= (f"cvlc -v rtsp://user:password@192.168.0.16 "
+              f"--sout='#transcode{{vcodec=theo,vb=800,acodec=vorb,ab=128,channels=2,samplerate=44100,scodedec=none}}"
+              f":http{{dst=:8080/webcam.ogg}}'")
+        os.system(cmd+" &")
+
         self._base_dir = f"{os.getenv('PAWS', default='/home/gnthibault/projects/PAWS')}"
 
         name = config.setdefault('name', 'PAWS')
