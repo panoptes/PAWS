@@ -35,6 +35,7 @@
       // Aladin embed
       //var aladin = A.aladin('#aladin-lite-div');
       var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:60});
+      aladin.displayFITS("http://localhost:8000/static/images/latest_pointing.fits");
 
       // Refresh images
       setInterval(refresh_images, 60 * second);

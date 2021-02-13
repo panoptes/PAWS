@@ -3,7 +3,10 @@
 {% block panel %}
     <!-- include Aladin Lite CSS file in the head section of your page -->
     <link rel="stylesheet" href="https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.css" />
-    <div id='aladin-lite-div' style='width: 100%; height:85%;'></div>
+
+    <div class="embed-responsive embed-responsive-4by3">
+        <div id='aladin-lite-div' style='width: 100%; height:85%;'></div>
+    </div>
 
     <!-- Jquery is already included in static/js/jquery.min.js, and included from base.hbs -->
     <script src="/static/js/jquery.min.js"></script>

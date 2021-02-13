@@ -61,7 +61,6 @@ function WebSocketTest(server) {
                 case 'PANCHAT':
                 case 'PEAS_SHELL':
                 case 'POCS_SHELL':
-
                     if (msg.message == 'Now listening for commands from PAWS'){
                         $('#polar_align_area').removeClass('hidden');
                     }         

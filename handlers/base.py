@@ -97,9 +97,7 @@ def bokeh_weather_app(doc):
     #Graph configuration
     p = figure(title="Weather data",
                title_location='above',
-               sizing_mode="scale_height",
-               plot_width=1600,
-               plot_height=900)
+               sizing_mode="stretch_both")
     #Add Y Grid line - Set color to none
     p.ygrid.grid_line_color = None
     #Add X axis label
@@ -203,9 +201,7 @@ def bokeh_guiding_app(doc):
     #Graph configuration
     p = figure(title="Guiding data",
                title_location='above',
-               sizing_mode="scale_height",
-               plot_width=1600,
-               plot_height=900)
+               sizing_mode="stretch_both")
     #Add Y Grid line - Set color to none
     p.ygrid.grid_line_color = None
     #Add X axis label
