@@ -1,3 +1,4 @@
 bokeh==2.2.3
+python-vlc==3.0.11115
 pyzmq==22.0.2
 tornado==6.1

@@ -34,8 +34,26 @@
 
       // Aladin embed
       //var aladin = A.aladin('#aladin-lite-div');
-      var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:60});
-      aladin.displayFITS("http://localhost:8000/static/images/latest_pointing.fits");
+      //var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:60});
+//       aladin.displayFITS("http://localhost:8000/static/images/latest_pointing.fits");
+//         File "/data/boch/cgi/fits2HiPS/fits2HiPS.py", line 214, in <module>
+//         r = requests.get(url, verify=False)
+//         File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 75, in get
+//         return request('get', url, params=params, **kwargs)
+//         File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 60, in request
+//         return session.request(method=method, url=url, **kwargs)
+//         File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 533, in request
+//         resp = self.send(prep, **send_kwargs)
+//         File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 646, in send
+//         r = adapter.send(request, **kwargs)
+//         File "/usr/local/lib/python2.7/dist-packages/requests/adapters.py", line 516, in send
+//         raise ConnectionError(e, request=request)
+//    ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /static/images/latest_pointing.fits (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f5daff77350>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+//    aladin.addCatalog(A.catalogHiPS("http://localhost:8000/static/images/HIPS/"))
+//    var bil = aladin.getBaseImageLayer()
+//    bil.getColorMap() on an ImageLayer object to retrieve its color map.
+//    bil.update("rainbow")
 
       // Refresh images
       setInterval(refresh_images, 60 * second);

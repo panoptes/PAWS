@@ -2,16 +2,22 @@
 import logging
 import os
 import os.path
+import subprocess
 
 # Web stuff stuff
 import tornado
 import tornado.options
 from bokeh.server.server import Server
 
+# Video webstream related
+import vlc
+
+# Local web stuff
 from handlers import base
 from handlers import websockets
 from ui import modules
 
+# Main POCS code
 #from pocs.utils import database
 from utils import database 
 #from pocs.utils.config import load_config
@@ -39,10 +45,23 @@ class WebAdmin(tornado.web.Application):
         cmd_publisher = PanMessaging.create_publisher(6500)
 
         #FIXME: find the right place to put that
-        cmd= (f"cvlc -v rtsp://user:password@192.168.0.16 "
-              f"--sout='#transcode{{vcodec=theo,vb=800,acodec=vorb,ab=128,channels=2,samplerate=44100,scodedec=none}}"
-              f":http{{dst=:8080/webcam.ogg}}'")
-        os.system(cmd+" &")
+        #cmd= ["cvlc", "-v", f"rtsp://user:password@192.168.0.16",
+        #      f"--sout='#transcode{{vcodec=theo,vb=800,acodec=vorb,ab=128,channels=2,samplerate=44100,scodedec=none}}:http{{dst=:8080/webcam.ogg}}'"]
+        #subprocess.Popen(cmd, close_fds=True)
+        instance = vlc.Instance()
+        stream_name = "webcam".encode()
+        ret = vlc.libvlc_vlm_add_broadcast(
+            p_instance=instance,
+            psz_name=stream_name,
+            psz_input=f"rtsp://user:password@192.168.0.16".encode(),
+            psz_output=f"#transcode{{vcodec=theo,vb=800,acodec=vorb,ab=128,channels=2,samplerate=44100,scodedec=none}}:http{{dst=:8080/webcam.ogg}}".encode(),
+            i_options=0,
+            ppsz_options=[],
+            b_enabled=True,
+            b_loop=False
+        )
+        assert(ret == 0)
+        vlc.libvlc_vlm_play_media(instance, stream_name)
 
         self._base_dir = f"{os.getenv('PAWS', default='/home/gnthibault/projects/PAWS')}"
 
