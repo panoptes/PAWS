@@ -2,15 +2,14 @@
 import logging
 import os
 import os.path
-import subprocess
 
-# Web stuff stuff
+# Web stuff
 import tornado
 import tornado.options
 from bokeh.server.server import Server
 
-# Video webstream related
-import vlc
+# Local video webstream related
+from WebcamStreamer import WebcamStreamer
 
 # Local web stuff
 from handlers import base
@@ -31,6 +30,7 @@ tornado.options.define("port", default=8000, help="port", type=int)
 #tornado.options.Error: Option 'log-file-prefix' already defined in /[...]/lib/python3.6/site-packages/tornado/log.py
 #tornado.options.define('log_file_prefix', default='/var/RemoteObservatory/logs/paws.log')
 
+
 class WebAdmin(tornado.web.Application):
 
     """ The main Application entry for our PANOPTES admin interface """
@@ -44,24 +44,9 @@ class WebAdmin(tornado.web.Application):
         #msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging')
         cmd_publisher = PanMessaging.create_publisher(6500)
 
-        #FIXME: find the right place to put that
-        #cmd= ["cvlc", "-v", f"rtsp://user:password@192.168.0.16",
-        #      f"--sout='#transcode{{vcodec=theo,vb=800,acodec=vorb,ab=128,channels=2,samplerate=44100,scodedec=none}}:http{{dst=:8080/webcam.ogg}}'"]
-        #subprocess.Popen(cmd, close_fds=True)
-        instance = vlc.Instance()
-        stream_name = "webcam".encode()
-        ret = vlc.libvlc_vlm_add_broadcast(
-            p_instance=instance,
-            psz_name=stream_name,
-            psz_input=f"rtsp://user:password@192.168.0.16".encode(),
-            psz_output=f"#transcode{{vcodec=theo,vb=800,acodec=vorb,ab=128,channels=2,samplerate=44100,scodedec=none}}:http{{dst=:8080/webcam.ogg}}".encode(),
-            i_options=0,
-            ppsz_options=[],
-            b_enabled=True,
-            b_loop=False
-        )
-        assert(ret == 0)
-        vlc.libvlc_vlm_play_media(instance, stream_name)
+        if "webcam" in config["observatory"]:
+            wc = WebcamStreamer(config["observatory"]["webcam"])
+            wc.launch_webcam_stream_converter()
 
         self._base_dir = f"{os.getenv('PAWS', default='/home/gnthibault/projects/PAWS')}"
 
@@ -107,7 +92,6 @@ if __name__ == '__main__':
     http_server = tornado.httpserver.HTTPServer(WebAdmin(load_config()))
     http_server.listen(tornado.options.options.port)
     io_loop = tornado.ioloop.IOLoop.current()
-    
     
     # Now instantiate bokeh app
     tornado_port = tornado.options.options.port

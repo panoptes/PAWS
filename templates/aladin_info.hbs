@@ -4,7 +4,16 @@
 
     <!-- 4:3 aspect ratio -->
     <div class="embed-responsive embed-responsive-4by3">
-      <iframe class="embed-responsive-item" src="http://localhost:8000/static/images/HIPS/index.html"></iframe>
+      <iframe class="embed-responsive-item" id="aladin_iframe_id" src="http://localhost:8000/static/images/HIPS/index.html" onload="onLoadHandler();"></iframe>
+      <script type="text/javascript">
+        function onLoadHandler() {
+          var aladin = document.getElementById("aladin_iframe_id").contentWindow.aladin;
+          var aladin_bil = aladin.getBaseImageLayer();
+          var aladin_initial_color_map = aladin_bil.getColorMap();
+          aladin_initial_color_map.update("rainbow");
+          aladin.toggleFullscreen(aladin.options.realFullscreen);
+        }
+      </script>
     </div>
 
 {% end %}
