@@ -35,12 +35,12 @@ function updateAladin() {
 }
 
 $( document ).keyup(function(e) {
-  console.log("KEY IS PRESSED "+String.fromCharCode(e.which));
   if (String.fromCharCode(e.which).toLocaleLowerCase() == "t") {
     if (Aladin.aladin != null) {
       if (Aladin.aladin.getBaseImageLayer().id == Aladin.my_fits_bil_id) {
         Aladin.aladin.setBaseImageLayer(Aladin.reference_bil_id)
       } else {
+        Aladin.reference_bil_id = Aladin.aladin.getBaseImageLayer().id;
         Aladin.aladin.setBaseImageLayer(Aladin.my_fits_bil_id)
       }
     }
