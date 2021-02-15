@@ -100,7 +100,7 @@ class PanWebSocket(WebSocketHandler):
         source = users_info.weather_source_by_user_str[user_key]
         @tornado.gen.coroutine
         def update_callback():
-            source.stream(update, rollover=64)
+            source.stream(update, rollover=7200)
         doc = users_info.weather_doc_by_user_str[user_key]  # type: Document
         doc.add_next_tick_callback(update_callback)  
         
@@ -113,7 +113,7 @@ class PanWebSocket(WebSocketHandler):
         source = users_info.guiding_source_by_user_str[user_key]
         @tornado.gen.coroutine
         def update_callback():
-            source.stream(update, rollover=64)
+            source.stream(update, rollover=7200)
         doc = users_info.guiding_doc_by_user_str[user_key]  # type: Document
         doc.add_next_tick_callback(update_callback)  
 

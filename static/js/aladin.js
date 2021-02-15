@@ -6,11 +6,16 @@ function onAladinLoadHandler() {
 
   // Initialize nice looking options
   Aladin.aladin.toggleFullscreen(Aladin.aladin.options.realFullscreen);
+
   // Debug stuff to be removed
   //var aladin_bil = aladin.getBaseImageLayer();
   //var aladin_initial_color_map = aladin_bil.getColorMap();
   //aladin_initial_color_map.update("rainbow");
   updateAladin()
+
+  // Show iframe
+  console.log("AFTER ALADIN UPDATE< ABOUT TO DISPLAY")
+  document.getElementById("aladin_iframe_id").style["display"]="block";
 }
 
 function updateAladin() {
@@ -46,3 +51,20 @@ $( document ).keyup(function(e) {
     }
   }
 });
+
+$('#modal_aladin_info').on('shown.bs.modal', function () {
+  console.log("ON SHOWN BS MODAL")
+  document.getElementById("aladin_iframe_id").style["display"]="none";
+  document.getElementById("actual_embed_div").appendChild(document.getElementById("aladin_iframe_id"));
+  document.getElementById("aladin_iframe_id").style["width"]="100%";
+  document.getElementById("aladin_iframe_id").style["height"]="80vh";
+});
+
+$('#modal_aladin_info').on('hidden.bs.modal', function () {
+  console.log("ON HIDDEN BS MODAL")
+  document.getElementById("aladin_iframe_id").style["display"]="none";
+  document.getElementById("aladin_embedding_overview_id").appendChild(document.getElementById("aladin_iframe_id"));
+  document.getElementById("aladin_iframe_id").style.removeProperty("width")
+  document.getElementById("aladin_iframe_id").style.removeProperty("height")
+});
+
