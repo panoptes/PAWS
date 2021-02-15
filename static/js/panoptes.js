@@ -21,8 +21,7 @@ function WebSocketTest(server) {
                     change_state(msg['state']);
                     break;
                 case 'FIELD':
-                    update_info(msg['field']);
-                    update_aladin();
+                    updateAladinFromDisk();
                     break;
                 case 'STATUS':
                     var state = msg['state'];
