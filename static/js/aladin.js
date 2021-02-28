@@ -2,7 +2,7 @@ function onAladinLoadHandler() {
   // Init stuff
   Aladin.aladin = document.getElementById("aladin_iframe_id").contentWindow.aladin;
   Aladin.my_fits_bil_id = Aladin.aladin.getBaseImageLayer().id;
-  Aladin.reference_bil_id = "DSS color";
+  Aladin.reference_bil_id = "DSS color"; //"PanSTARRS DR1 color";
 
   // Initialize nice looking options
   Aladin.aladin.toggleFullscreen(Aladin.aladin.options.realFullscreen);

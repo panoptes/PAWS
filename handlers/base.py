@@ -262,8 +262,8 @@ def bokeh_guiding_app(doc):
 
 class ObservationsHistoryHandler(BaseHandler):
 
-    @tornado.gen.coroutine
-    @tornado.web.authenticated
+    #@tornado.gen.coroutine
+    #@tornado.web.authenticated
     def get(self, days=None):
         if days is None:
             days = 1
