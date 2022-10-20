@@ -17,12 +17,9 @@ from handlers import websockets
 from ui import modules
 
 # Main POCS code
-#from pocs.utils import database
 from utils import database 
-#from pocs.utils.config import load_config
 from utils.config import load_config
-#from pocs.utils.messaging import PanMessaging
-from utils.messaging import PanMessaging
+from Service.PanMessagingZMQ import PanMessagingZMQ
 
 tornado.options.define("port", default=8000, help="port", type=int)
 #tornado.options.define("debug", default=True, help="debug mode")
@@ -36,13 +33,12 @@ class WebAdmin(tornado.web.Application):
     """ The main Application entry for our PANOPTES admin interface """
 
     def __init__(self, config={}):
-
         db = database.FileDB()
         #db = database.FileDB(db_name='/var/RemoteObservatory/DB')
-        msg_subscriber = PanMessaging.create_subscriber(6511)
+        msg_subscriber = PanMessagingZMQ.create_subscriber(6511)
         # TODO: Fix the 'messaging' host below so not hard-coded
         #msg_subscriber = PanMessaging.create_subscriber(6511, host='messaging')
-        cmd_publisher = PanMessaging.create_publisher(6500)
+        cmd_publisher = PanMessagingZMQ.create_publisher(6500)
 
         if "webcam" in config["observatory"]:
             wc = WebcamStreamer(config["observatory"]["webcam"])
