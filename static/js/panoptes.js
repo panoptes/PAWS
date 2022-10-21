@@ -57,7 +57,7 @@ function WebSocketTest(server) {
                     update_guiding_status(msg['data'])
                     break;
                 case 'PANBOT':
-                case 'PANCHAT':
+                case 'CHAT':
                 case 'PEAS_SHELL':
                 case 'POCS_SHELL':
                     if (msg.message == 'Now listening for commands from PAWS'){
@@ -78,7 +78,7 @@ function WebSocketTest(server) {
                         $('#park_button').addClass('disabled');
                         $('#unpark_button').removeClass('disabled');
                     }                    
-
+                    console.log("RCV channel "+channel+" msg_pl "+msg.message+" msg_tmsp "+msg.timestamp);
                     add_chat_item(channel, msg.message, msg.timestamp);
                     break;
                 default:
