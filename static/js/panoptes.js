@@ -78,7 +78,6 @@ function WebSocketTest(server) {
                         $('#park_button').addClass('disabled');
                         $('#unpark_button').removeClass('disabled');
                     }                    
-                    console.log("RCV channel "+channel+" msg_pl "+msg.message+" msg_tmsp "+msg.timestamp);
                     add_chat_item(channel, msg.message, msg.timestamp);
                     break;
                 default:
