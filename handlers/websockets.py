@@ -1,14 +1,12 @@
 #Generic stuff
 from datetime import datetime
 import json
-import logging
 
 #Web stuff
+import asyncio
 import tornado
+from tornado.log import app_log as app_log
 from tornado.websocket import WebSocketHandler
-
-# Websocket
-from zmq.eventloop.zmqstream import ZMQStream
 
 #Numerical stuff
 import numpy as np
@@ -50,29 +48,28 @@ class PanWebSocket(WebSocketHandler):
 
         if channel is None:
             channel = self.settings['name']
-
-        logging.debug(f"Setting up subscriber for channel: {channel}")
-
+        app_log.debug(f"Setting up subscriber for channel: {channel}")
         try:
-            self.stream = ZMQStream(self.settings['msg_subscriber'].socket)
-
             # Register the callback
-            self.stream.on_recv(self.on_data)
-            logging.debug(f"WS opened for channel {channel}")
+            self.ioloop = asyncio.get_event_loop()
+            self.settings['msg_subscriber'].register_callback(callback=self.on_data)
+            app_log.debug(f"WS opened for channel {channel}")
 
             # Add this client to our list
             clients.append(self)
         except Exception as e:
-            logging.warning(f"Problem establishing websocket for {self}: {e}")
+            app_log.error(f"Problem establishing websocket for {self}: {e}")
 
     def on_data(self, data):
-        """ From the PANOPTES unit """
+        """ Info message received from the obs controller, to be sent to the client web browser """
+        app_log.debug(f"WS Received: {data}")
         msg = data[0].decode('UTF-8')
-        logging.debug(f"WS Received: {msg}")
 
-        for client in clients:
+        async def write_message():
             client.write_message(msg)
 
+        for client in clients:
+            asyncio.run_coroutine_threadsafe(write_message(), self.ioloop)
         # Bokeh part
         self.update_bokeh(msg)
 
@@ -118,13 +115,13 @@ class PanWebSocket(WebSocketHandler):
         doc.add_next_tick_callback(update_callback)  
 
     def on_message(self, message):
-        """ From the client """
-        logging.debug(f"WS Sent: {message}")
+        """ Command received from the client, to be sent to the obs controller """
+        app_log.debug(f"WS Sent: {message}")
         cmd_publisher = self.settings['cmd_publisher']
         try:
             cmd_publisher.send_message('PAWS-CMD', message)
         except Exception as e:
-            logging.warning(f"Problem sending message from PAWS {e}")
+            app_log.error(f"Problem sending message from PAWS {e}")
 
     def on_close(self):
         """ When client closes """
@@ -132,4 +129,4 @@ class PanWebSocket(WebSocketHandler):
             clients.remove(self)
         except:
             pass
-        logging.debug("WS Closed")
+        app_log.debug("WS Closed")
